@@ -1,6 +1,6 @@
 Jarvis
 ======
 
-A benchmarking framework to evaluate information extraction quality
+A benchmarking framework to evaluate information extraction quality.
 
-See [http://whiskeysierra.github.com/jarvis] for details.
+See the [official documentation](http://whiskeysierra.github.com/jarvis) for details.
