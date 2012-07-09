@@ -1,4 +1,6 @@
-ie-benchmark
-============
+Jarvis
+======
 
-A benchmark system for information extraction systems.
+A benchmarking framework to evaluate information extraction quality
+
+See [http://whiskeysierra.github.com/jarvis] for details.
