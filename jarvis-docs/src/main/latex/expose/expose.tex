@@ -12,8 +12,8 @@
 \usepackage{booktabs}
 
 \bibliography{expose}
-\title{Planung und Entwicklung einer Benchmark-Plattform für Informationsextraktionssysteme}
-\author{Willi Schönborn (774190)}
+\title{Design and Implementation of a Benchmarking Framework to Evaluate Information Extraction Quality}
+\author{Willi Schönborn}
 \date{\today}
 \begin{document}
 
@@ -23,13 +23,14 @@
 \maketitle
 \end{figure}
 
-Motivation (MIA, ...)
-Jar-Upload
-Ausführzeit, Latenz, Speicherverbrauch,
-Extraction measure, F-Score, Recall, Preceision, Alternativen
-Qualitätsmetriken für IE
-Standard definieren, diskutieren?
-Technologien (Java, OSGI, Framework, Web-UI, ...)
+Benchmark-Plattform
+modular, erweiterbar (OSGi)
+frei nutzbar (offener Quellcode, einsetzbar als Library)
+inkl. Web-UI zum Upload und Ausführen von IE-Programmen
+Sammeln von Messwerten (Schwerpunkt Ausführzeit, Latenz, Speicherverbrauch)
+Bewertung der Ergebnisqualität (F-Score)
+Definition eines Standards zum Vergleich verschiedener Extraktoren
+Generieren von Statistiken und Darstellung der Ergebnisse (Diagramme, etc.)
 
 \newpage
 \nocite{*}
