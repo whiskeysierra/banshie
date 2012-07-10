@@ -1,19 +1,25 @@
- \documentclass[a4paper,12pt]{article}
+\documentclass[a4paper]{article}
 \usepackage[utf8]{inputenc}
-\usepackage{fullpage}
+\usepackage[english]{babel}
 \usepackage{csquotes}
-\usepackage[ngerman]{babel}
 \usepackage{biblatex}
 \usepackage{float}
 \usepackage{graphicx}
+\usepackage{epstopdf}
 \usepackage{subfigure}
-\usepackage[format=plain,labelfont=bf,up]{caption}
-\usepackage{hyperref}
+\usepackage{array}
 \usepackage{booktabs}
-
+\usepackage[format=plain,labelfont=bf,up]{caption}
+\makeatletter
+\renewcommand\@ptsize{13}
+\makeatother
+\usepackage{extsizes}
+\setcounter{secnumdepth}{-1} 
+\usepackage{hyperref}
+\usepackage{nameref}
 \bibliography{expose}
-\title{Design and Implementation of a Benchmarking Framework to Evaluate Information Extraction Quality}
-\author{Willi Schönborn}
+\title{\textbf{Exposé} \\ Design and Implementation of a \\ Benchmarking Framework to \\ Evaluate Information Extraction Quality}
+\author{Willi Schönborn, 774190 \\ Advisor: Prof. Dr. Stefan Edlich}
 \date{\today}
 \begin{document}
 
@@ -23,16 +29,36 @@
 \maketitle
 \end{figure}
 
-Benchmark-Plattform
-modular, erweiterbar (OSGi)
-frei nutzbar (offener Quellcode, einsetzbar als Library)
-inkl. Web-UI zum Upload und Ausführen von IE-Programmen
-Sammeln von Messwerten (Schwerpunkt Ausführzeit, Latenz, Speicherverbrauch)
-Bewertung der Ergebnisqualität (F-Score)
-Definition eines Standards zum Vergleich verschiedener Extraktoren
-Generieren von Statistiken und Darstellung der Ergebnisse (Diagramme, etc.)
+\section{Motivation}
+Information extraction (IE) in general and natural language processing (NLP), as a field of computer science, in particular have been around for more than half a century already and a lot of scientific research has been done. With the rapid growth of the world wide web in the last years, the task to let machines extract information from unstructured documents written by and for human beings has got a lot of attention lately.  What's missing in the current ecosystem, consisting of crawlers, indexers, search engines, data stores and natural language processing systems, is a tool to evaluate and compare the performance and quality of information extractors. \\
 
-\newpage
+\section{Requirements}
+The goal of this work is to define a set of gold standards, very much like the Star Schema Benchmark\cite{SSB} and TCP-H\cite{TCPH} provides them for data warehousing systems, as well as to design and implement a platform that provides the tools necessary to analyze and compare the performance and quality of information extraction systems in a programmatic manner. \\
+
+\subsection{Functional requirements}
+\begin{enumerate}
+	\item Monitored execution \\
+		Thiry party programs, in the form of simple jar files, will be executed in a contained environment. This includes the definition and documentation of a standard command line interface for those third party binaries, which may include names and ordering of optional parameters as well as return codes and supported formats of produced results.
+	\item Measuring \\
+		The monitored executions will utilize built-in tools of the Java platform, e.g. the Java Management Extensions (JMX), to measure execution time, latency and memory consumption.
+	\item Computing scores \\
+		After successful executions, the produced results will be analyzed and compared to an expected, predefined set of solutions. The result of this step will be the calculation of the F-score.
+	\item Statistics \\
+		Statistical functions will be applied to the figures collected during the monitored execution. The results will be key performance indicators like the average memory consumption or the F-score in relation to the execution time.
+	\item Web UI \\
+		The platform will include a web based user interface which provides HTTP uploads for IE programs, monitoring execution progress as well as statistics and scores in form of  diagrams.
+\end{enumerate}
+
+\subsection{Technical requirements}
+\begin{enumerate}
+	\item Modularity \\
+		The technical main goal is to provide a highly modularized platform based on current best practices in enterprise architecture. To achieve this, the software will be developed using the OSGi\cite{OSGI} Service Platform. Different modules will be defined as OSGi bundles with explicit bundle interfaces.
+	\item Embeddability \\
+		The diffierent OSGi bundles of the platform may themselves be used as a third party libraries in other projects. The API of all bundles must therefore be well documented and tested.
+\end{enumerate}
+
+The platform will be developed in an open-source fashion. That includes the source code being hosted on a public website, e.g. github.com, as well as being released under a corporate-friendly open source license.
+
 \nocite{*}
 \printbibliography
 
