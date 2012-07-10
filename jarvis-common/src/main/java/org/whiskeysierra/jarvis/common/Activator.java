@@ -1,9 +1,9 @@
-package org.whiskeysierra.jarvis;
+package org.whiskeysierra.jarvis.common;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 
-public class Activator implements BundleActivator {
+public final class Activator implements BundleActivator {
 
     @Override
     public void start(BundleContext context) throws Exception {
