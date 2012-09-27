@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="banshie">
+
+    <target name="build">
+        <exec executable="mvn" dir="${basedir}/${bundle}">
+            <arg value="${phases}"/>
+        </exec>
+    </target>
+
+    <target name="compile">
+        <antcall target="build">
+            <param name="bundle" value="banshie-parent"/>
+            <param name="phases" value="compile"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-common"/>
+            <param name="phases" value="compile"/>
+        </antcall>
+    </target>
+
+</project>
