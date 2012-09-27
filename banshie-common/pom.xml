@@ -4,14 +4,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>org.whiskeysierra.jarvis</groupId>
-        <artifactId>jarvis-parent</artifactId>
+        <groupId>org.whiskeysierra.banshie</groupId>
+        <artifactId>banshie-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
-        <relativePath>../jarvis-parent</relativePath>
+        <relativePath>../banshie-parent</relativePath>
     </parent>
 
-    <groupId>org.whiskeysierra.jarvis</groupId>
-    <artifactId>jarvis-common</artifactId>
+    <groupId>org.whiskeysierra.banshie</groupId>
+    <artifactId>banshie-common</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
 
@@ -30,7 +30,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>org.whiskeysierra.jarvis.common.Activator</Bundle-Activator>
+                        <Bundle-Activator>org.whiskeysierra.banshie.common.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>

@@ -1,4 +1,4 @@
-package org.whiskeysierra.jarvis.common;
+package org.whiskeysierra.banshie.common;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
