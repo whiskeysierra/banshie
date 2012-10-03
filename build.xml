@@ -7,14 +7,30 @@
         </exec>
     </target>
 
-    <target name="compile">
+    <target name="build-all">
         <antcall target="build">
             <param name="bundle" value="banshie-parent"/>
-            <param name="phases" value="compile"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-common"/>
+        </antcall>
+    </target>
+
+    <target name="clean">
+        <antcall target="build-all">
+            <param name="phases" value="clean"/>
+        </antcall>
+    </target>
+
+    <target name="compile">
+        <antcall target="build-all">
             <param name="phases" value="compile"/>
+        </antcall>
+    </target>
+
+    <target name="test" depends="compile">
+        <antcall target="build-all">
+            <param name="phases" value="test"/>
         </antcall>
     </target>
 
