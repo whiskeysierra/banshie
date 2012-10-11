@@ -2,8 +2,8 @@
 <project name="banshie">
 
     <target name="build">
-        <exec executable="mvn" dir="${basedir}/${bundle}">
-            <arg value="${phases}"/>
+        <exec executable="mvn" dir="${basedir}/${bundle}" failonerror="true">
+            <arg value="${phase}"/>
         </exec>
     </target>
 
@@ -21,19 +21,25 @@
 
     <target name="clean">
         <antcall target="build-all">
-            <param name="phases" value="clean"/>
+            <param name="phase" value="clean"/>
         </antcall>
     </target>
 
     <target name="compile">
         <antcall target="build-all">
-            <param name="phases" value="compile"/>
+            <param name="phase" value="compile"/>
         </antcall>
     </target>
 
     <target name="test" depends="compile">
         <antcall target="build-all">
-            <param name="phases" value="test"/>
+            <param name="phase" value="test"/>
+        </antcall>
+    </target>
+
+    <target name="install" depends="compile">
+        <antcall target="build-all">
+            <param name="phase" value="install"/>
         </antcall>
     </target>
 
