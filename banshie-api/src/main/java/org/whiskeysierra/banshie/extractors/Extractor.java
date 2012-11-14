@@ -1,4 +1,4 @@
-package org.whiskeysierra.banshie;
+package org.whiskeysierra.banshie.extractors;
 
 import java.io.File;
 import java.util.UUID;

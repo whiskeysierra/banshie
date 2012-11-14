@@ -8,6 +8,7 @@ import org.whiskeysierra.banshie.evaluation.QualityEvaluator;
 import org.whiskeysierra.banshie.evaluation.Value;
 import org.whiskeysierra.banshie.execution.Engine;
 import org.whiskeysierra.banshie.execution.ExecutionResult;
+import org.whiskeysierra.banshie.extractors.Extractor;
 
 import java.util.Map;
 
