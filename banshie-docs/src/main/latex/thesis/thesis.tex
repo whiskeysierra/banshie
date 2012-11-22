@@ -1,4 +1,4 @@
-\documentclass[a4paper,12pt]{article}
+\documentclass[a4paper,12pt,final]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[english]{babel}
 \usepackage{csquotes}
@@ -11,45 +11,39 @@
 \usepackage{booktabs}
 \usepackage[format=plain,labelfont=bf,up]{caption}
 \usepackage{extsizes}
-\setcounter{secnumdepth}{-1} 
 \usepackage{hyperref}
 \usepackage{nameref}
+
+% every section starts on a new page
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
 \usepackage{minted}
 \usemintedstyle{friendly}
+\usepackage{fixme}
 \bibliography{thesis}
 \title{Design and Implementation of a \\ Benchmarking Framework to \\ Evaluate Information Extraction Quality}
 \author{Willi Schönborn, 774190 \\ Advisor: Prof. Dr. Stefan Edlich}
 \date{\today}
 \begin{document}
 
-\begin{figure}[H]
-\centering
-\includegraphics[width=0.5\textwidth]{beuth.eps}
-\maketitle
-\end{figure}
+\include{title}
+
+\newpage
+\listoffixmes
+
+\include{abstract}
 
 \newpage
 \tableofcontents
 
-\newpage
+\include{introduction}
+\include{related}
+\include{design}
+\include{analysis}
+\include{conclusion}
 
-\newpage
-\addcontentsline{toc}{section}{References}
-\nocite{*}
-\printbibliography
-
-\newpage
-\addcontentsline{toc}{section}{List of Figures}
-\listoffigures
-
-\newpage
-\addcontentsline{toc}{section}{List of Tables}
-\listoftables
-
-\newpage
-\addcontentsline{toc}{section}{List of Listings}
-\renewcommand\listoflistingscaption{List of Listings}
-\listoflistings
+\include{appendix}
 
 \end{document}
 
