@@ -1,16 +1,81 @@
 \section{Evaluation Methodology}
+\label{sec:evaluation-methodology}
+
 \fxfatal{Evaluation Methodology}
-\fxfatal{More subsections}
 
 \subsection{Performance measures}
 Core (Precision, Recall, F-Measure) and additional...
 
-\subsubsection{Precision}
-\subsubsection{Recall}
-\subsubsection{F-Measure}
-\subsubsection{Accuracy and Error Rate}
-\subsubsection{Slot Error Rate}
+\begin{table}[H]
+\centering
+\begin{tabular}{cccc}
+	& & \multicolumn{2}{c}{\textbf{Prediction}} \\
+	& & + & - \\
+	\multirow{2}{*}{\textbf{Answer}} & + & true positive & false negative \\
+	 & - & false positive & true negative \\
+\end{tabular}
+\caption{Confusion matrix}
+\end{table}
 
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{rl}
+	\toprule
+	\textbf{Symbol} & \textbf{Description} \\
+	\midrule
+	C & the number of slots filled correctly \\
+	M & the number of fills attempted \\
+	N & the number of possible correct fills  \\
+	S & substitution errors \\
+	D & deletion errors \\
+	I & insertion errors \\
+	\bottomrule
+\end{tabular*}
+\caption{...}
+\fxwarning{Table caption}
+\end{table}
+
+\subsubsection{Precision}
+The \textit{precision} (\ensuremath{\pi} or P) ...
+
+\begin{displaymath}
+	\pi = \frac{C}{M} = \frac{C}{C+S+I}
+\end{displaymath}
+
+\subsubsection{Recall}
+The \textit{recall} (\ensuremath{\rho} or R) ...
+
+\begin{displaymath}
+	\rho = \frac{C}{N} = \frac{C}{C+S+D}
+\end{displaymath}
+
+\subsubsection{F-measure}
+The \textit{F-measure} (F) ...
+
+\begin{displaymath}
+	F = \frac{PR}{(1-\alpha)P + {\alpha}R}, 0\le\alpha{\le}1
+\end{displaymath}
+
+\subsubsection{Error measure}
+The \textit{error measure} (E) corresponds to the F-measure \cite{Feilmayr:2012}.
+
+\begin{displaymath}
+	E = 1-F = \frac{S+(1-\alpha)D+{\alpha}I}{C+S+(1-\alpha)D+{\alpha}I}, 0\le\alpha{\le}1
+\end{displaymath}
+
+\subsubsection{Error Rate}
+The \textit{Error Rate} (ERR) ...
+
+\begin{displaymath}
+	ERR = \frac{S+D+I}{C+S+D+I}
+\end{displaymath}
+
+\subsubsection{Slot Error Rate}
+The \textit{Slot Error Rate} (SER) ... 
+
+\begin{displaymath}
+	SER = \frac{S+D+I}{N} = \frac{S+D+I}{C+S+D}
+\end{displaymath}
 
 \subsection{Discussion}
 

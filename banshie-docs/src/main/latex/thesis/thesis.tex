@@ -3,12 +3,14 @@
 \usepackage[english,ngerman]{babel}
 \usepackage{biblatex}
 \usepackage{csquotes}
+\usepackage{mathtools}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{epstopdf}
 \usepackage{subfigure}
 \usepackage{array}
 \usepackage{booktabs}
+\usepackage{multirow}
 \usepackage[format=plain,labelfont=bf,up]{caption}
 \usepackage{extsizes}
 \usepackage{hyperref}
@@ -16,9 +18,11 @@
 \usepackage[acronym,toc,xindy,shortcuts]{glossaries}
 
 \makeglossaries
+
 \newacronym{IE}{IE}{Information Extraction}
 \newacronym{ANNALIST}{ANNALIST}{Annotation Alignment and Scoring Tool}
 \newacronym{GATE}{GATE}{General Architecture for Text Engineering}
+\newacronym{OSGi}{OSGi}{Open Services Gateway initiative}
 
 % every section starts on a new page
 \let\stdsection\section
@@ -46,6 +50,7 @@
 \include{sections/introduction}
 \include{sections/information-extraction}
 \include{sections/evaluation-methodology}
+\include{sections/modularity}
 \include{sections/related}
 \include{sections/design}
 \include{sections/analysis}
@@ -54,4 +59,3 @@
 \include{sections/appendix}
 
 \end{document}
-
