@@ -1,8 +1,8 @@
-\documentclass[a4paper,12pt,final]{article}
+\documentclass[a4paper,12pt]{article}
 \usepackage[utf8]{inputenc}
-\usepackage[english]{babel}
-\usepackage{csquotes}
+\usepackage[english,ngerman]{babel}
 \usepackage{biblatex}
+\usepackage{csquotes}
 \usepackage{float}
 \usepackage{graphicx}
 \usepackage{epstopdf}
@@ -13,6 +13,12 @@
 \usepackage{extsizes}
 \usepackage{hyperref}
 \usepackage{nameref}
+\usepackage[acronym,toc,xindy]{glossaries}
+
+\makeglossaries
+\newacronym{IE}{IE}{Information Extraction}
+\newacronym{ANNALIST}{ANNALIST}{Annotation Alignment and Scoring Tool}
+\newacronym{GATE}{GATE}{General Architecture for Text Engineering}
 
 % every section starts on a new page
 \let\stdsection\section
@@ -20,30 +26,32 @@
 
 \usepackage{minted}
 \usemintedstyle{friendly}
-\usepackage{fixme}
+\usepackage[draft]{fixme}
 \bibliography{thesis}
 \title{Design and Implementation of a \\ Benchmarking Framework to \\ Evaluate Information Extraction Quality}
 \author{Willi Schönborn, 774190 \\ Advisor: Prof. Dr. Stefan Edlich}
 \date{\today}
 \begin{document}
 
-\include{title}
+\include{sections/title}
 
 \newpage
 \listoffixmes
 
-\include{abstract}
+\include{sections/abstract}
 
 \newpage
 \tableofcontents
 
-\include{introduction}
-\include{related}
-\include{design}
-\include{analysis}
-\include{conclusion}
+\include{sections/introduction}
+\include{sections/information-extraction}
+\include{sections/evaluation-methodology}
+\include{sections/related}
+\include{sections/design}
+\include{sections/analysis}
+\include{sections/conclusion}
 
-\include{appendix}
+\include{sections/appendix}
 
 \end{document}
 

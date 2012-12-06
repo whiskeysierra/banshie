@@ -38,23 +38,33 @@ release.properties
 pom.xml.releaseBackup
 /*/target
 
-/*/src/main/latex/*/*-blx.bib
+/*/src/main/latex/*/*.acn
+/*/src/main/latex/*/*.acr
+/*/src/main/latex/*/*.alg
+/*/src/main/latex/*/*.aux
 /*/src/main/latex/*/*.aux
 /*/src/main/latex/*/*.bbl
 /*/src/main/latex/*/*.blg
+/*/src/main/latex/*/*-blx.bib
 /*/src/main/latex/*/*.fdb_latexmk
+/*/src/main/latex/*/*.glg
+/*/src/main/latex/*/*.glo
+/*/src/main/latex/*/*.gls
+/*/src/main/latex/*/*.ist
 /*/src/main/latex/*/*.lof
 /*/src/main/latex/*/*.lol
 /*/src/main/latex/*/*.lot
+/*/src/main/latex/*/*.lox
 /*/src/main/latex/*/*.mp
 /*/src/main/latex/*/*.out
 /*/src/main/latex/*/*.pdf
 /*/src/main/latex/*/*.pyg
+/*/src/main/latex/*/*.run.xml
+/*/src/main/latex/*/*.synctex.gz
 /*/src/main/latex/*/*.tmp
 /*/src/main/latex/*/*.toc
 /*/src/main/latex/*/*.top
 /*/src/main/latex/*/*.tui
 /*/src/main/latex/*/*.tuo
-/*/src/main/latex/*/*.run.xml
-/*/src/main/latex/*/*.synctex.gz
+/*/src/main/latex/*/*.xdy
 
