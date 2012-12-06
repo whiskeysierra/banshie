@@ -68,3 +68,5 @@ pom.xml.releaseBackup
 /*/src/main/latex/*/*.tuo
 /*/src/main/latex/*/*.xdy
 
+/*/src/main/latex/*/*/*.aux
+
