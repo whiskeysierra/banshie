@@ -17,6 +17,15 @@
         <antcall target="build">
             <param name="bundle" value="banshie-api"/>
         </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-echo"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-execution"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-extractors"/>
+        </antcall>
     </target>
 
     <target name="clean">
