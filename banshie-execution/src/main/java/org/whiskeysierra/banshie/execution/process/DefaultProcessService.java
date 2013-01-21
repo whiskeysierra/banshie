@@ -5,7 +5,7 @@ import com.google.common.collect.Lists;
 
 import java.io.File;
 
-public final class DefaultProcessService implements ProcessService {
+final class DefaultProcessService implements ProcessService {
 
     private String[] toString(Object... arguments) {
         final String[] array = new String[arguments.length];

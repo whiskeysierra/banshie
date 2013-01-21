@@ -21,6 +21,10 @@
             <artifactId>org.osgi.core</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.ops4j</groupId>
+            <artifactId>peaberry</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.google.guava</groupId>
             <artifactId>guava</artifactId>
             <version>11.0.1</version>
@@ -40,7 +44,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>org.whiskeysierra.banshie.execution.Activator</Bundle-Activator>
+                        <Bundle-Module>org.whiskeysierra.banshie.execution.ExecutionModule</Bundle-Module>
                     </instructions>
                 </configuration>
             </plugin>
