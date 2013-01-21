@@ -36,7 +36,7 @@ final class DefaultEngine implements Engine {
         directory.mkdirs();
 
         final File input = corpus.getInput();
-        final File output = new File(directory, "stdout.txt");
+        final File output = new File(directory, "output.txt");
         final File logFile = new File(directory, "events.log");
 
         // TODO generate random port or keep track of ports in use?!

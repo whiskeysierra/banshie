@@ -2,6 +2,8 @@ package org.whiskeysierra.banshie.execution.logging;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
+import com.google.inject.Inject;
+import org.whiskeysierra.banshie.execution.io.EventWriter;
 
 import javax.management.JMX;
 import javax.management.MBeanServerConnection;
@@ -18,14 +20,23 @@ import java.util.Date;
 
 final class DefaultEventLogger implements EventLogger {
 
+    private final EventWriter writer;
+
     // TODO make these final and move initialization to constructor
     private MBeanServerConnection connection;
     private MemoryMXBean memory;
     private ThreadMXBean threading;
 
+    @Inject
+    DefaultEventLogger(EventWriter writer) {
+        this.writer = writer;
+    }
+
     @Override
     public void start(MBeanServerConnection connection, File logFile) throws IOException {
         Preconditions.checkState(this.connection == null, "Already connected");
+
+        writer.start(logFile);
 
         this.connection = connection;
 
@@ -65,21 +76,19 @@ final class DefaultEventLogger implements EventLogger {
         }
     }
 
-    private void log(String key, long value) {
+    private void log(String key, long value) throws IOException {
         final Event event = new Event();
 
         event.setDate(new Date());
         event.setKey(key);
         event.setValue(value);
 
-        // TODO save event
-
-        System.out.println(event.getKey() + ": " + event.getValue());
+        writer.write(event);
     }
 
     @Override
     public void finish() {
-
+        writer.finish();
     }
 
 }

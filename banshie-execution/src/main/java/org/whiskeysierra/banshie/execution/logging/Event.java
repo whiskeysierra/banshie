@@ -2,7 +2,7 @@ package org.whiskeysierra.banshie.execution.logging;
 
 import java.util.Date;
 
-final class Event {
+public final class Event {
 
     private Date date;
     private String key;

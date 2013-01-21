@@ -6,6 +6,7 @@ import com.google.inject.Provider;
 import org.easymock.EasyMock;
 import org.junit.Test;
 import org.whiskeysierra.banshie.corpora.Corpus;
+import org.whiskeysierra.banshie.execution.io.IoModule;
 import org.whiskeysierra.banshie.execution.logging.LoggingModule;
 import org.whiskeysierra.banshie.execution.monitor.MonitorModule;
 import org.whiskeysierra.banshie.execution.monitor.ProcessMonitor;
@@ -20,7 +21,10 @@ public final class DefaultEngineTest {
 
     @Test
     public void test() {
-        final Injector injector = Guice.createInjector(new LoggingModule(), new MonitorModule(), new ProcessModule());
+        final Injector injector = Guice.createInjector(
+            new IoModule(), new LoggingModule(),
+            new MonitorModule(), new ProcessModule());
+
         final ProcessService service = injector.getInstance(ProcessService.class);
         final Provider<ProcessMonitor> provider = injector.getProvider(ProcessMonitor.class);
         final Engine unit = new DefaultEngine(service, provider);
