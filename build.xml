@@ -34,19 +34,7 @@
         </antcall>
     </target>
 
-    <target name="compile">
-        <antcall target="build-all">
-            <param name="phase" value="compile"/>
-        </antcall>
-    </target>
-
-    <target name="test" depends="compile">
-        <antcall target="build-all">
-            <param name="phase" value="test"/>
-        </antcall>
-    </target>
-
-    <target name="install" depends="compile">
+    <target name="test">
         <antcall target="build-all">
             <param name="phase" value="install"/>
         </antcall>
