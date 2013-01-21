@@ -48,7 +48,7 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
         logger.start(connector.getMBeanServerConnection(), logFile);
 
         // TODO make configurable
-        executor.scheduleAtFixedRate(this, 0L, 100L, TimeUnit.MILLISECONDS);
+        executor.scheduleAtFixedRate(this, 0L, 1L, TimeUnit.SECONDS);
     }
 
     @Override
