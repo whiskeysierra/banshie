@@ -19,6 +19,7 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
     private final Provider<EventLogger> provider;
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
+    // TODO make final and move initialization to constructor
     private JMXConnector connector;
     private EventLogger logger;
 
