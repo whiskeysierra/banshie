@@ -39,7 +39,7 @@ final class DefaultEngine implements Engine {
         final File output = new File(directory, "stdout.txt");
         final File logFile = new File(directory, "events.log");
 
-        // TODO generate randomPort or keep track of ports in use?!
+        // TODO generate random port or keep track of ports in use?!
         final int port = 9600;
 
         // TODO allow extractors to define specific jvm options?

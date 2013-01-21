@@ -1,28 +1,85 @@
 package org.whiskeysierra.banshie.execution.logging;
 
-import javax.management.JMException;
+import com.google.common.base.Preconditions;
+import com.google.common.base.Throwables;
+
+import javax.management.JMX;
 import javax.management.MBeanServerConnection;
+import javax.management.MalformedObjectNameException;
 import javax.management.ObjectName;
-import javax.management.openmbean.CompositeData;
+import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.ThreadMXBean;
+import java.lang.reflect.UndeclaredThrowableException;
+import java.net.ConnectException;
+import java.util.Date;
 
 final class DefaultEventLogger implements EventLogger {
 
+    // TODO make these final and move initialization to constructor
+    private MBeanServerConnection connection;
+    private MemoryMXBean memory;
+    private ThreadMXBean threading;
+
     @Override
-    public void log(MBeanServerConnection connection) throws IOException {
+    public void start(MBeanServerConnection connection, File logFile) throws IOException {
+        Preconditions.checkState(this.connection == null, "Already connected");
+
+        this.connection = connection;
+
+        this.memory = proxy(ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
+        this.threading = proxy(ManagementFactory.THREAD_MXBEAN_NAME, ThreadMXBean.class);
+    }
+
+    private <T> T proxy(String name, Class<T> type) throws IOException {
         try {
-            tryLog(connection);
-        } catch (JMException e) {
+            return JMX.newMXBeanProxy(connection, new ObjectName(name), type);
+        } catch (MalformedObjectNameException e) {
             throw new IOException(e);
         }
     }
 
-    private void tryLog(MBeanServerConnection connection) throws JMException, IOException {
-        final ObjectName memory = new ObjectName("java.lang:type=Memory");
+    @Override
+    public void log() throws IOException {
+        Preconditions.checkState(connection != null, "Not connected");
 
-        final CompositeData memoryUsage = (CompositeData) connection.getAttribute(memory, "HeapMemoryUsage");
+        try {
+            log("HeapMemoryUsage/committed", memory.getHeapMemoryUsage().getCommitted());
+            log("HeapMemoryUsage/used", memory.getHeapMemoryUsage().getUsed());
 
-        System.out.println("HeamMemoryUsage committed: " + memoryUsage.get("committed"));
+            log("NonHeapMemoryUsage/committed", memory.getNonHeapMemoryUsage().getCommitted());
+            log("NonHeapMemoryUsage/used", memory.getNonHeapMemoryUsage().getUsed());
+
+            log("CurrentThreadCpuTime", threading.getCurrentThreadCpuTime());
+            log("CurrentThreadUserTime", threading.getCurrentThreadUserTime());
+            log("ThreadCount", threading.getThreadCount());
+        } catch (UndeclaredThrowableException e) {
+            if (Throwables.getRootCause(e) instanceof ConnectException) {
+                // discard, as the jmx connection might have been closed in the meantime
+                // TODO add log statement
+            } else {
+                throw e;
+            }
+        }
+    }
+
+    private void log(String key, long value) {
+        final Event event = new Event();
+
+        event.setDate(new Date());
+        event.setKey(key);
+        event.setValue(value);
+
+        // TODO save event
+
+        System.out.println(event.getKey() + ": " + event.getValue());
+    }
+
+    @Override
+    public void finish() {
+
     }
 
 }

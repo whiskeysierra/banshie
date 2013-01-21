@@ -2,9 +2,9 @@ package org.whiskeysierra.banshie.execution.monitor;
 
 import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 import org.whiskeysierra.banshie.execution.logging.EventLogger;
 
-import javax.management.MBeanServerConnection;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
@@ -16,14 +16,15 @@ import java.util.concurrent.TimeUnit;
 
 final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
 
-    private final EventLogger logger;
+    private final Provider<EventLogger> provider;
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
     private JMXConnector connector;
+    private EventLogger logger;
 
     @Inject
-    DefaultProcessMonitor(EventLogger logger) {
-        this.logger = logger;
+    DefaultProcessMonitor(Provider<EventLogger> provider) {
+        this.provider = provider;
     }
 
     @Override
@@ -42,6 +43,9 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
         final JMXServiceURL serviceUrl = new JMXServiceURL(url);
         connector = JMXConnectorFactory.connect(serviceUrl, null);
 
+        logger = provider.get();
+        logger.start(connector.getMBeanServerConnection(), logFile);
+
         // TODO make configurable
         executor.scheduleAtFixedRate(this, 0L, 100L, TimeUnit.MILLISECONDS);
     }
@@ -51,8 +55,9 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
         Preconditions.checkState(connector != null, "Not connected to jmx server");
 
         try {
-            logger.log(connector.getMBeanServerConnection());
-        } catch (IOException e) {
+            logger.log();
+        } catch (Exception e) {
+            e.printStackTrace();
             throw new IllegalStateException(e);
         }
     }
@@ -61,14 +66,19 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
     public void stop() {
         executor.shutdown();
 
-        if (connector == null) return;
+        if (connector != null) {
+            try {
+                connector.close();
+            } catch (IOException e) {
+                // TODO handle (log) or ignore?
+            } finally {
+                connector = null;
+            }
+        }
 
-        try {
-            connector.close();
-        } catch (IOException e) {
-            // TODO handle (log) or ignore?
-        } finally {
-            connector = null;
+        if (logger != null) {
+            logger.finish();
+            logger = null;
         }
     }
 
