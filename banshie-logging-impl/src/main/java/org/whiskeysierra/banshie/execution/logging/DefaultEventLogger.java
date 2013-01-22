@@ -30,7 +30,7 @@ final class DefaultEventLogger implements EventLogger {
     }
 
     @Override
-    public void finish() {
+    public void stop() {
         Closeables.closeQuietly(writer);
     }
 

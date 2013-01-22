@@ -80,8 +80,8 @@ final class DefaultEventProducer implements EventProducer {
     }
 
     @Override
-    public void finish() {
-        logger.finish();
+    public void stop() {
+        logger.stop();
     }
 
 }

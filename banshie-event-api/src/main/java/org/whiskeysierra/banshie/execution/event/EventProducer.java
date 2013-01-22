@@ -6,5 +6,5 @@ public interface EventProducer {
 
     void log() throws IOException;
 
-    void finish();
+    void stop();
 }

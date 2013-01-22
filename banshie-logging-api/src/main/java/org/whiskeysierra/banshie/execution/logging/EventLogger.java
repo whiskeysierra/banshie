@@ -8,6 +8,6 @@ public interface EventLogger {
 
     void write(Event event) throws IOException;
 
-    void finish();
+    void stop();
 
 }
