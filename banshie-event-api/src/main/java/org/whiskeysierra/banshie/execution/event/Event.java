@@ -2,12 +2,34 @@ package org.whiskeysierra.banshie.execution.event;
 
 import java.util.Date;
 
-public interface Event {
+public final class Event {
 
-    Date getDate();
+    private Date date;
+    private String key;
+    private long value;
 
-    String getKey();
+    public Date getDate() {
+        return date;
+    }
 
-    long getValue();
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public long getValue() {
+        return value;
+    }
+
+    public void setValue(long value) {
+        this.value = value;
+    }
 
 }

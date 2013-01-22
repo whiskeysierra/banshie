@@ -17,12 +17,30 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-event-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.osgi</groupId>
             <artifactId>org.osgi.core</artifactId>
         </dependency>
         <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.ops4j</groupId>
+            <artifactId>peaberry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.2</version>
         </dependency>
     </dependencies>
     <build>

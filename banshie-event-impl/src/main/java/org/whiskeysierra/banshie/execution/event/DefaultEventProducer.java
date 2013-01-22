@@ -70,7 +70,7 @@ final class DefaultEventProducer implements EventProducer {
     }
 
     private void log(String key, long value) throws IOException {
-        final DefaultEvent event = new DefaultEvent();
+        final Event event = new Event();
 
         event.setDate(new Date());
         event.setKey(key);
