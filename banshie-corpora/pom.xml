@@ -8,17 +8,12 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>banshie-process-impl</artifactId>
+    <artifactId>banshie-corpora</artifactId>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.whiskeysierra.banshie</groupId>
-            <artifactId>banshie-process-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -33,6 +28,15 @@
             <groupId>org.ops4j</groupId>
             <artifactId>peaberry</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.hibernate.javax.persistence</groupId>
+            <artifactId>hibernate-jpa-2.0-api</artifactId>
+            <version>1.0.0.Final</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -42,7 +46,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Module>org.whiskeysierra.banshie.execution.process.ProcessModule</Bundle-Module>
+                        <Bundle-Module>org.whiskeysierra.banshie.corpora.CorpusModule</Bundle-Module>
                     </instructions>
                 </configuration>
             </plugin>

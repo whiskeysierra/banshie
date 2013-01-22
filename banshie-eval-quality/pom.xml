@@ -8,17 +8,12 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
-    <artifactId>banshie-process-impl</artifactId>
+    <artifactId>banshie-eval-quality</artifactId>
     <packaging>bundle</packaging>
     <dependencies>
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-api</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.whiskeysierra.banshie</groupId>
-            <artifactId>banshie-process-api</artifactId>
             <version>${project.version}</version>
         </dependency>
         <dependency>
@@ -29,10 +24,6 @@
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>
-        <dependency>
-            <groupId>org.ops4j</groupId>
-            <artifactId>peaberry</artifactId>
-        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -42,7 +33,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Module>org.whiskeysierra.banshie.execution.process.ProcessModule</Bundle-Module>
+                        <Bundle-Module>org.whiskeysierra.banshie.evaluation.QualityEvaluationModule</Bundle-Module>
                     </instructions>
                 </configuration>
             </plugin>

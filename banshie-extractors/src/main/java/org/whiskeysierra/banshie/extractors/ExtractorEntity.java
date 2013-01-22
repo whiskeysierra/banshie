@@ -6,7 +6,7 @@ import java.io.File;
 import java.util.UUID;
 
 @Entity
-final class ExtractorEntity implements Extractor {
+class ExtractorEntity implements Extractor {
 
     @Id
     private UUID uuid;

@@ -51,6 +51,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Module>org.whiskeysierra.banshie.execution.monitor.MonitorModule</Bundle-Module>
                     </instructions>
                 </configuration>
             </plugin>

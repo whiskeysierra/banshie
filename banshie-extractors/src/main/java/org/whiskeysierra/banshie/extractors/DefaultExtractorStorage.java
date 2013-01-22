@@ -1,17 +1,21 @@
 package org.whiskeysierra.banshie.extractors;
 
+import com.google.common.collect.Lists;
+import com.google.inject.Inject;
+
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
 final class DefaultExtractorStorage implements ExtractorStorage {
 
+    // TODO @PersistenceContext? JPA in OSGi?
     private EntityManager manager;
 
+    @Inject
     DefaultExtractorStorage(EntityManager manager) {
         this.manager = manager;
     }
@@ -32,7 +36,7 @@ final class DefaultExtractorStorage implements ExtractorStorage {
         final CriteriaQuery<ExtractorEntity> query = builder.createQuery(ExtractorEntity.class);
         final TypedQuery<ExtractorEntity> typedQuery = manager.createQuery(query);
 
-        return new ArrayList<Extractor>(typedQuery.getResultList());
+        return Lists.<Extractor>newArrayList(typedQuery.getResultList());
     }
 
 }

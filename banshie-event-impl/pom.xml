@@ -55,6 +55,7 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                        <Bundle-Module>org.whiskeysierra.banshie.execution.event.EventModule</Bundle-Module>
                     </instructions>
                 </configuration>
             </plugin>
