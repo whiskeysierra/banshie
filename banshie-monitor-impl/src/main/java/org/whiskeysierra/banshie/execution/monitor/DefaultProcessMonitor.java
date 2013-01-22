@@ -11,8 +11,10 @@ import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
 import java.io.File;
 import java.io.IOException;
+import java.lang.Thread.UncaughtExceptionHandler;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.TimeUnit;
 
 final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
@@ -21,15 +23,31 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
     private final JMXConnector connector;
 
     // TODO inject
-    // TODO log uncaught exceptions
-    private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor(
+        new ThreadFactory() {
+
+            @Override
+            public Thread newThread(Runnable runnable) {
+                final Thread thread = new Thread(runnable);
+
+                thread.setUncaughtExceptionHandler(new UncaughtExceptionHandler() {
+                    @Override
+                    public void uncaughtException(Thread thread, Throwable throwable) {
+                        // TODO log exception
+                    }
+                });
+
+                return thread;
+            }
+
+        });
 
     @Inject
     DefaultProcessMonitor(EventProducerFactory factory,
         @Assisted int port, @Assisted File logFile) throws IOException {
 
         try {
-            // TODO find a better way to wait for the jvm to start?!
+            // TODO find a better way to wait for the jvm to start!
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new IllegalStateException(e);
