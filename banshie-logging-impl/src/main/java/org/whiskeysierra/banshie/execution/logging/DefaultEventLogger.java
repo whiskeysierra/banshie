@@ -3,9 +3,9 @@ package org.whiskeysierra.banshie.execution.logging;
 import com.google.common.base.Charsets;
 import com.google.common.io.Closeables;
 import com.google.common.io.Files;
-import com.google.gson.Gson;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.whiskeysierra.banshie.execution.event.Event;
 
 import java.io.BufferedWriter;
@@ -15,18 +15,18 @@ import java.io.IOException;
 
 final class DefaultEventLogger implements EventLogger {
 
-    private final Gson gson;
+    private final ObjectMapper mapper;
     private final BufferedWriter writer;
 
     @Inject
-    DefaultEventLogger(Gson gson, @Assisted File output) throws FileNotFoundException {
-        this.gson = gson;
+    DefaultEventLogger(ObjectMapper mapper, @Assisted File output) throws FileNotFoundException {
+        this.mapper = mapper;
         this.writer = Files.newWriter(output, Charsets.UTF_8);
     }
 
     @Override
     public void write(Event event) throws IOException {
-        writer.append(gson.toJson(event) + "\n");
+        writer.append(mapper.writeValueAsString(event) + "\n");
     }
 
     @Override

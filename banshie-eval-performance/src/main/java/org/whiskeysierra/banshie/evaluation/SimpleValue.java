@@ -2,14 +2,14 @@ package org.whiskeysierra.banshie.evaluation;
 
 final class SimpleValue implements Value {
 
-    private final float value;
+    private final double value;
 
-    SimpleValue(float value) {
+    SimpleValue(double value) {
         this.value = value;
     }
 
     @Override
-    public float getValue() {
+    public double getValue() {
         return value;
     }
 

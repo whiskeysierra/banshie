@@ -1,35 +1,28 @@
 package org.whiskeysierra.banshie.execution.event;
 
-import java.util.Date;
+import org.codehaus.jackson.annotate.JsonSubTypes;
+import org.codehaus.jackson.annotate.JsonSubTypes.Type;
+import org.codehaus.jackson.annotate.JsonTypeInfo;
+import org.codehaus.jackson.annotate.JsonTypeInfo.As;
+import org.codehaus.jackson.annotate.JsonTypeInfo.Id;
 
-public final class Event {
+@JsonTypeInfo(
+    use = Id.NAME,
+    include = As.PROPERTY,
+    property = "type"
+)
+@JsonSubTypes({
+    @Type(value = CpuTimeEvent.class, name = "cpu"),
+    @Type(value = MemoryUsageEvent.class, name = "memory")
+})
+public interface Event {
 
-    private Date date;
-    private String key;
-    private long value;
+    long getTime();
 
-    public Date getDate() {
-        return date;
-    }
+    void setTime(long time);
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
+    long getValue();
 
-    public String getKey() {
-        return key;
-    }
-
-    public void setKey(String key) {
-        this.key = key;
-    }
-
-    public long getValue() {
-        return value;
-    }
-
-    public void setValue(long value) {
-        this.value = value;
-    }
+    void setValue(long value);
 
 }

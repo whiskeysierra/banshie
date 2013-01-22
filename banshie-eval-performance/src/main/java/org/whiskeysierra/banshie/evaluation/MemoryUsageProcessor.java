@@ -1,17 +1,26 @@
 package org.whiskeysierra.banshie.evaluation;
 
 import org.whiskeysierra.banshie.execution.event.Event;
+import org.whiskeysierra.banshie.execution.event.MemoryUsageEvent;
 
 public final class MemoryUsageProcessor implements Processor {
 
-    @Override
-    public void process(Event event) {
+    private long used;
+    private long count;
 
+    @Override
+    public void process(Event e) {
+        if (e instanceof MemoryUsageEvent) {
+            final MemoryUsageEvent event = MemoryUsageEvent.class.cast(e);
+
+            used += event.getValue();
+            count++;
+        }
     }
 
     @Override
     public Value getResult() {
-        return null;
+        return new SimpleValue(used / count);
     }
 
 }

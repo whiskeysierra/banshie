@@ -4,6 +4,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
+import com.sun.management.OperatingSystemMXBean;
 import org.whiskeysierra.banshie.execution.logging.EventLogger;
 import org.whiskeysierra.banshie.execution.logging.EventLoggerFactory;
 
@@ -15,17 +16,16 @@ import java.io.File;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
-import java.lang.management.ThreadMXBean;
+import java.lang.management.MemoryUsage;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.ConnectException;
-import java.util.Date;
 
 final class DefaultEventProducer implements EventProducer {
 
     // TODO make these final and move initialization to constructor
     private final MBeanServerConnection connection;
     private final MemoryMXBean memory;
-    private final ThreadMXBean threading;
+    private final OperatingSystemMXBean os;
 
     private final EventLogger logger;
 
@@ -35,7 +35,7 @@ final class DefaultEventProducer implements EventProducer {
 
         this.connection = connection;
         this.memory = proxy(ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
-        this.threading = proxy(ManagementFactory.THREAD_MXBEAN_NAME, ThreadMXBean.class);
+        this.os = proxy(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
 
         this.logger = factory.newLogger(logFile);
     }
@@ -50,15 +50,8 @@ final class DefaultEventProducer implements EventProducer {
         Preconditions.checkState(connection != null, "Not connected");
 
         try {
-            log("HeapMemoryUsage/committed", memory.getHeapMemoryUsage().getCommitted());
-            log("HeapMemoryUsage/used", memory.getHeapMemoryUsage().getUsed());
-
-            log("NonHeapMemoryUsage/committed", memory.getNonHeapMemoryUsage().getCommitted());
-            log("NonHeapMemoryUsage/used", memory.getNonHeapMemoryUsage().getUsed());
-
-            log("CurrentThreadCpuTime", threading.getCurrentThreadCpuTime());
-            log("CurrentThreadUserTime", threading.getCurrentThreadUserTime());
-            log("ThreadCount", threading.getThreadCount());
+            logCpuTime();
+            logMemoryUsage();
         } catch (UndeclaredThrowableException e) {
             if (Throwables.getRootCause(e) instanceof ConnectException) {
                 // discard, as the jmx connection might have been closed in the meantime
@@ -69,12 +62,25 @@ final class DefaultEventProducer implements EventProducer {
         }
     }
 
-    private void log(String key, long value) throws IOException {
-        final Event event = new Event();
+    private void logCpuTime() throws IOException {
+        final CpuTimeEvent event = new CpuTimeEvent();
 
-        event.setDate(new Date());
-        event.setKey(key);
-        event.setValue(value);
+        event.setTime(System.currentTimeMillis());
+        event.setValue(os.getProcessCpuTime());
+        // TODO is it correct to use this (!) system's nano time
+        event.setSystemTime(System.nanoTime());
+        event.setAvailableProcessors(os.getAvailableProcessors());
+
+        logger.write(event);
+    }
+
+    private void logMemoryUsage() throws IOException {
+        final MemoryUsageEvent event = new MemoryUsageEvent();
+
+        event.setTime(System.currentTimeMillis());
+        final MemoryUsage heap = memory.getHeapMemoryUsage();
+        final MemoryUsage nonHeap = memory.getNonHeapMemoryUsage();
+        event.setValue(heap.getUsed() + nonHeap.getUsed());
 
         logger.write(event);
     }
