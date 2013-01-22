@@ -20,6 +20,7 @@ final class DefaultEngine implements Engine {
     private final ProcessService service;
     private final ProcessMonitorFactory factory;
 
+    // TODO make configurable
     private File basePath = new File("extractors");
 
     @Inject
@@ -60,7 +61,6 @@ final class DefaultEngine implements Engine {
 
         try {
             final RunningProcess process = managed.call();
-
             final ProcessMonitor monitor = factory.newMonitor(port, logFile);
 
             try {
