@@ -2,14 +2,13 @@ package org.whiskeysierra.banshie.execution;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 import org.easymock.EasyMock;
 import org.junit.Test;
 import org.whiskeysierra.banshie.corpora.Corpus;
-import org.whiskeysierra.banshie.execution.io.IoModule;
+import org.whiskeysierra.banshie.execution.event.EventModule;
 import org.whiskeysierra.banshie.execution.logging.LoggingModule;
 import org.whiskeysierra.banshie.execution.monitor.MonitorModule;
-import org.whiskeysierra.banshie.execution.monitor.ProcessMonitor;
+import org.whiskeysierra.banshie.execution.monitor.ProcessMonitorFactory;
 import org.whiskeysierra.banshie.execution.process.ProcessModule;
 import org.whiskeysierra.banshie.execution.process.ProcessService;
 import org.whiskeysierra.banshie.extractors.Extractor;
@@ -22,12 +21,12 @@ public final class DefaultEngineTest {
     @Test
     public void test() {
         final Injector injector = Guice.createInjector(
-            new IoModule(), new LoggingModule(),
+            new LoggingModule(), new EventModule(),
             new MonitorModule(), new ProcessModule());
 
         final ProcessService service = injector.getInstance(ProcessService.class);
-        final Provider<ProcessMonitor> provider = injector.getProvider(ProcessMonitor.class);
-        final Engine unit = new DefaultEngine(service, provider);
+        final ProcessMonitorFactory factory = injector.getInstance(ProcessMonitorFactory.class);
+        final Engine unit = new DefaultEngine(service, factory);
 
         final Extractor extractor = EasyMock.createMock(Extractor.class);
         final Corpus corpus = EasyMock.createMock(Corpus.class);

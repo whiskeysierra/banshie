@@ -1,13 +1,14 @@
-package org.whiskeysierra.banshie.execution.logging;
+package org.whiskeysierra.banshie.execution.event;
 
 import java.util.Date;
 
-public final class Event {
+final class DefaultEvent implements Event {
 
     private Date date;
     private String key;
     private long value;
 
+    @Override
     public Date getDate() {
         return date;
     }
@@ -16,6 +17,7 @@ public final class Event {
         this.date = date;
     }
 
+    @Override
     public String getKey() {
         return key;
     }
@@ -24,6 +26,7 @@ public final class Event {
         this.key = key;
     }
 
+    @Override
     public long getValue() {
         return value;
     }

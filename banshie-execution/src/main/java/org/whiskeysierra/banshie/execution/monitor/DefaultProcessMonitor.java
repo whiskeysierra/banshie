@@ -1,10 +1,11 @@
 package org.whiskeysierra.banshie.execution.monitor;
 
-import com.google.common.base.Preconditions;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import org.whiskeysierra.banshie.execution.logging.EventLogger;
+import com.google.inject.assistedinject.Assisted;
+import org.whiskeysierra.banshie.execution.event.EventProducer;
+import org.whiskeysierra.banshie.execution.event.EventProducerFactory;
 
+import javax.management.MBeanServerConnection;
 import javax.management.remote.JMXConnector;
 import javax.management.remote.JMXConnectorFactory;
 import javax.management.remote.JMXServiceURL;
@@ -16,21 +17,16 @@ import java.util.concurrent.TimeUnit;
 
 final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
 
-    private final Provider<EventLogger> provider;
+    private final EventProducer producer;
+    private final JMXConnector connector;
+
+    // TODO inject
+    // TODO log uncaught exceptions
     private final ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
 
-    // TODO make final and move initialization to constructor
-    private JMXConnector connector;
-    private EventLogger logger;
-
     @Inject
-    DefaultProcessMonitor(Provider<EventLogger> provider) {
-        this.provider = provider;
-    }
-
-    @Override
-    public void start(int port, File logFile) throws IOException {
-        Preconditions.checkState(connector == null, "Already connected");
+    DefaultProcessMonitor(EventProducerFactory factory,
+        @Assisted int port, @Assisted File logFile) throws IOException {
 
         try {
             // TODO find a better way to wait for the jvm to start?!
@@ -42,10 +38,10 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
         // TODO handle a certain amount of retry errors gracefully
         final String url = "service:jmx:rmi:///jndi/rmi://localhost:" + port + "/jmxrmi";
         final JMXServiceURL serviceUrl = new JMXServiceURL(url);
-        connector = JMXConnectorFactory.connect(serviceUrl, null);
+        this.connector = JMXConnectorFactory.connect(serviceUrl, null);
 
-        logger = provider.get();
-        logger.start(connector.getMBeanServerConnection(), logFile);
+        final MBeanServerConnection connection = connector.getMBeanServerConnection();
+        this.producer = factory.newProducer(connection, logFile);
 
         // TODO make configurable
         executor.scheduleAtFixedRate(this, 0L, 1L, TimeUnit.SECONDS);
@@ -53,12 +49,9 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
 
     @Override
     public void run() {
-        Preconditions.checkState(connector != null, "Not connected to jmx server");
-
         try {
-            logger.log();
+            producer.log();
         } catch (Exception e) {
-            e.printStackTrace();
             throw new IllegalStateException(e);
         }
     }
@@ -66,20 +59,12 @@ final class DefaultProcessMonitor implements ProcessMonitor, Runnable {
     @Override
     public void stop() {
         executor.shutdown();
+        producer.finish();
 
-        if (connector != null) {
-            try {
-                connector.close();
-            } catch (IOException e) {
-                // TODO handle (log) or ignore?
-            } finally {
-                connector = null;
-            }
-        }
-
-        if (logger != null) {
-            logger.finish();
-            logger = null;
+        try {
+            connector.close();
+        } catch (IOException e) {
+            // TODO handle (log) or ignore?
         }
     }
 

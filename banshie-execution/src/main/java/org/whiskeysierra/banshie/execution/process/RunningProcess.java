@@ -1,6 +1,5 @@
 package org.whiskeysierra.banshie.execution.process;
 
-import com.google.common.base.Function;
 import com.google.common.io.InputSupplier;
 import com.google.common.io.OutputSupplier;
 

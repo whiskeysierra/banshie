@@ -2,9 +2,9 @@ package org.whiskeysierra.banshie.execution;
 
 import com.google.common.io.Files;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.execution.monitor.ProcessMonitor;
+import org.whiskeysierra.banshie.execution.monitor.ProcessMonitorFactory;
 import org.whiskeysierra.banshie.execution.process.ManagedProcess;
 import org.whiskeysierra.banshie.execution.process.ProcessService;
 import org.whiskeysierra.banshie.execution.process.RunningProcess;
@@ -17,14 +17,14 @@ import java.util.UUID;
 final class DefaultEngine implements Engine {
 
     private final ProcessService service;
-    private final Provider<ProcessMonitor> provider;
+    private final ProcessMonitorFactory factory;
 
     private File basePath = new File("extractors");
 
     @Inject
-    DefaultEngine(ProcessService service, Provider<ProcessMonitor> provider) {
+    DefaultEngine(ProcessService service, ProcessMonitorFactory factory) {
         this.service = service;
-        this.provider = provider;
+        this.factory = factory;
     }
 
     @Override
@@ -52,21 +52,22 @@ final class DefaultEngine implements Engine {
             "-jar", extractor.getPath()
         );
 
-        final ProcessMonitor monitor = provider.get();
 
         try {
             final RunningProcess process = managed.call();
 
-            monitor.start(port, logFile);
+            final ProcessMonitor monitor = factory.newMonitor(port, logFile);
 
-            Files.copy(input, process);
-            Files.copy(process, output);
+            try {
+                Files.copy(input, process);
+                Files.copy(process, output);
 
-            process.await();
+                process.await();
+            } finally {
+                monitor.stop();
+            }
         } catch (IOException e) {
             throw new IllegalStateException(e);
-        } finally {
-            monitor.stop();
         }
 
         return new DefaultExecutionResult(uuid, logFile, output);
