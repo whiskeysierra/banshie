@@ -2,6 +2,7 @@ package org.whiskeysierra.banshie.execution;
 
 import com.google.common.io.Files;
 import com.google.inject.Inject;
+import org.ops4j.peaberry.activation.Start;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.execution.monitor.ProcessMonitor;
 import org.whiskeysierra.banshie.execution.monitor.ProcessMonitorFactory;
@@ -25,6 +26,11 @@ final class DefaultEngine implements Engine {
     DefaultEngine(ProcessService service, ProcessMonitorFactory factory) {
         this.service = service;
         this.factory = factory;
+    }
+
+    @Start
+    public void onStart() {
+        basePath.mkdirs();
     }
 
     @Override
@@ -51,7 +57,6 @@ final class DefaultEngine implements Engine {
             "-Dcom.sun.management.jmxremote.ssl=false",
             "-jar", extractor.getPath()
         );
-
 
         try {
             final RunningProcess process = managed.call();
