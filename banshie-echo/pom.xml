@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Echo Tool</name>
+    <description>
+        A simple command line tool used by banshie-monitor-impl to test process monitoring.
+    </description>
     <artifactId>banshie-echo</artifactId>
     <packaging>jar</packaging>
     <build>

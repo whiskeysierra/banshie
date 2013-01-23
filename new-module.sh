@@ -20,6 +20,10 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
         <version>1.0-SNAPSHOT</version>
         <relativePath>../banshie-parent</relativePath>
     </parent>
+    <name>Banshie </name>
+    <description>
+
+    </description>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>${name}</artifactId>
     <packaging>bundle</packaging>

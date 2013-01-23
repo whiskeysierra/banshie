@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Event API</name>
+    <description>
+        An internal API providing a common interface to loggable statistic events like cpu time and memory usage.
+    </description>
     <artifactId>banshie-event-api</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Corpora Implementation</name>
+    <description>
+        The default implementation of the org.whiskeysierra.banshie.corpora package specification.
+    </description>
     <artifactId>banshie-corpora</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

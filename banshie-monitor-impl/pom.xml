@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Process Monitor Implementation</name>
+    <description>
+        The default implementation of the org.whiskeysierra.banshie.execution.monitor package specification.
+    </description>
     <artifactId>banshie-monitor-impl</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

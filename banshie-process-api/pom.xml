@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Process Management API</name>
+    <description>
+        An internal API providing a common interface to process management services.
+    </description>
     <artifactId>banshie-process-api</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

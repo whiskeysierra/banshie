@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Event Implementation</name>
+    <description>
+        The default implementation of the org.whiskeysierra.banshie.execution.event package specification.
+    </description>
     <artifactId>banshie-event-impl</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

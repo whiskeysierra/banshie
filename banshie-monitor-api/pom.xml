@@ -8,6 +8,11 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Process Monitor API</name>
+    <description>
+        An internal API providing a common interface to process monitoring services,
+        most commonly the Java Management Extensions (JMX).
+    </description>
     <artifactId>banshie-monitor-api</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

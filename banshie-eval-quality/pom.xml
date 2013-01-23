@@ -8,6 +8,10 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Quality Evaluation Implementation</name>
+    <description>
+        The default implementation of the org.whiskeysierra.banshie.evaluation quality specification.
+    </description>
     <artifactId>banshie-eval-quality</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

@@ -8,6 +8,8 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Commons</name>
+    <description>Utilities commonly re-used by other bundles.</description>
     <artifactId>banshie-common</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

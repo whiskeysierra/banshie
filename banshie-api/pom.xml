@@ -9,6 +9,8 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie API</name>
+    <description>The public Banshie framework programming interface.</description>
     <artifactId>banshie-api</artifactId>
     <packaging>bundle</packaging>
     <dependencies>

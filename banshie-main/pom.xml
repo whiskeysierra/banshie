@@ -8,6 +8,12 @@
         <relativePath>../banshie-parent</relativePath>
     </parent>
     <modelVersion>4.0.0</modelVersion>
+    <name>Banshie Main</name>
+    <description>
+        The main module, containing a runnable Apache Felix OSGi installation as well
+        as tools to collect all required bundles to start Banshie in an OSGi
+        environment.
+    </description>
     <artifactId>banshie-main</artifactId>
     <packaging>jar</packaging>
     <dependencies>
