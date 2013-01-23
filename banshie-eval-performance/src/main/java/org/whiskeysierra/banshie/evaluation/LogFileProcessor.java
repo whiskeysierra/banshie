@@ -10,14 +10,14 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Map.Entry;
 
-class MapLineProcessor implements LineProcessor<Map<Dimension, Value>> {
+class LogFileProcessor implements LineProcessor<Map<Dimension, Value>> {
 
-    private final Map<Dimension, Processor> processors;
+    private final Map<Dimension, Calculator> calculators;
     private final ObjectMapper mapper;
 
     @Inject
-    public MapLineProcessor(Map<Dimension, Processor> processors, ObjectMapper mapper) {
-        this.processors = processors;
+    public LogFileProcessor(Map<Dimension, Calculator> calculators, ObjectMapper mapper) {
+        this.calculators = calculators;
         this.mapper = mapper;
     }
 
@@ -25,8 +25,8 @@ class MapLineProcessor implements LineProcessor<Map<Dimension, Value>> {
     public boolean processLine(String line) throws IOException {
         final Event event = mapper.readValue(line, Event.class);
 
-        for (Processor processor : processors.values()) {
-            processor.process(event);
+        for (Calculator calculator : calculators.values()) {
+            calculator.process(event);
         }
 
         return true;
@@ -36,7 +36,7 @@ class MapLineProcessor implements LineProcessor<Map<Dimension, Value>> {
     public Map<Dimension, Value> getResult() {
         final Map<Dimension, Value> results = Maps.newHashMap();
 
-        for (Entry<Dimension, Processor> entry : processors.entrySet()) {
+        for (Entry<Dimension, Calculator> entry : calculators.entrySet()) {
             results.put(entry.getKey(), entry.getValue().getResult());
         }
 

@@ -11,11 +11,12 @@ public final class PerformanceEvaluationModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        final MapBinder<Dimension, Processor> binder = MapBinder.newMapBinder(binder(),
-            Dimension.class, Processor.class);
+        final MapBinder<Dimension, Calculator> binder = MapBinder.newMapBinder(binder(),
+            Dimension.class, Calculator.class);
 
-        binder.addBinding(Dimension.CPU_USAGE).to(CpuUsageProcessor.class);
-        binder.addBinding(Dimension.MEMORY_USAGE).to(MemoryUsageProcessor.class);
+        binder.addBinding(Dimension.CPU_USAGE).to(CpuUsageCalculator.class);
+        binder.addBinding(Dimension.MEMORY_USAGE).to(MemoryUsageCalculator.class);
+        binder.addBinding(Dimension.TIME).to(TimeProcessorCalculator.class);
 
         bind(PerformanceEvaluator.class).to(DefaultPerformanceEvaluator.class).in(Singleton.class);
         bind(export(PerformanceEvaluator.class)).toProvider(service(DefaultPerformanceEvaluator.class).export());

@@ -3,7 +3,7 @@ package org.whiskeysierra.banshie.evaluation;
 import org.whiskeysierra.banshie.execution.event.Event;
 import org.whiskeysierra.banshie.execution.event.MemoryUsageEvent;
 
-public final class MemoryUsageProcessor implements Processor {
+final class MemoryUsageCalculator implements Calculator {
 
     private long used;
     private long count;

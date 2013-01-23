@@ -2,7 +2,7 @@ package org.whiskeysierra.banshie.evaluation;
 
 import org.whiskeysierra.banshie.execution.event.Event;
 
-interface Processor {
+interface Calculator {
 
     void process(Event event);
 

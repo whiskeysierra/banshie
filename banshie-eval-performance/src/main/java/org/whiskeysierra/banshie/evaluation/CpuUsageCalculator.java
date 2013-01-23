@@ -3,7 +3,7 @@ package org.whiskeysierra.banshie.evaluation;
 import org.whiskeysierra.banshie.execution.event.CpuTimeEvent;
 import org.whiskeysierra.banshie.execution.event.Event;
 
-public final class CpuUsageProcessor implements Processor {
+final class CpuUsageCalculator implements Calculator {
 
     private int availableProcessors;
 

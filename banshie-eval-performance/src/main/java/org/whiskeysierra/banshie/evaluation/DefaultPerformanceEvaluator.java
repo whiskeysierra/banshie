@@ -11,10 +11,10 @@ import java.util.Map;
 
 final class DefaultPerformanceEvaluator implements PerformanceEvaluator {
 
-    private final Provider<MapLineProcessor> provider;
+    private final Provider<LogFileProcessor> provider;
 
     @Inject
-    DefaultPerformanceEvaluator(Provider<MapLineProcessor> provider) {
+    DefaultPerformanceEvaluator(Provider<LogFileProcessor> provider) {
         this.provider = provider;
     }
 
