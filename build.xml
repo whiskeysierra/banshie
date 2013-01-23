@@ -18,7 +18,16 @@
             <param name="bundle" value="banshie-api"/>
         </antcall>
         <antcall target="build">
+            <param name="bundle" value="banshie-corpora"/>
+        </antcall>
+        <antcall target="build">
             <param name="bundle" value="banshie-echo"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-eval-performance"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-eval-quality"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-event-api"/>
