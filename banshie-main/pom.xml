@@ -92,7 +92,7 @@
                         <configuration>
                             <outputDirectory>${project.basedir}/bundle</outputDirectory>
                             <overWriteReleases>false</overWriteReleases>
-                            <overWriteSnapshots>false</overWriteSnapshots>
+                            <overWriteSnapshots>true</overWriteSnapshots>
                             <overWriteIfNewer>true</overWriteIfNewer>
                             <includeScope>runtime</includeScope>
                             <excludeScope>provided</excludeScope>
