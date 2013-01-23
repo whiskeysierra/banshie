@@ -30,7 +30,6 @@
                 <configuration>
                     <instructions>
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
-                        <Bundle-Activator>org.whiskeysierra.banshie.common.Activator</Bundle-Activator>
                     </instructions>
                 </configuration>
             </plugin>
