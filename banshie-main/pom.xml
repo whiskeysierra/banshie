@@ -112,6 +112,17 @@
         	<artifactId>org.apache.servicemix.bundles.javax-inject</artifactId>
         	<version>1_2</version>
         </dependency>
+        <!-- Slf4j -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+            <version>1.7.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>osgi-over-slf4j</artifactId>
+            <version>1.7.2</version>
+        </dependency>
         <!-- Banshie -->
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
@@ -131,6 +142,36 @@
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-event-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-logging-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-monitor-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-monitor-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-process-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-process-impl</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-execution</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

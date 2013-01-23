@@ -30,10 +30,6 @@ echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>
             <version>\${project.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.osgi</groupId>
-            <artifactId>org.osgi.core</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.google.inject</groupId>
             <artifactId>guice</artifactId>
         </dependency>

@@ -11,7 +11,7 @@ public final class ExtractorModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(ExtractorStorage.class).to(DefaultExtractorStorage.class).in(Singleton.class);
-        bind(export(ExtractorStorage.class)).toProvider(service(DefaultExtractorStorage.class).export());
+        bind(export(ExtractorStorage.class)).toProvider(service(ExtractorStorage.class).export());
     }
 
 }

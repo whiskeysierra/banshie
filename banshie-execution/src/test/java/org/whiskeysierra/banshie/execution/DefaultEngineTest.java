@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.easymock.EasyMock;
 import org.junit.Test;
+import org.whiskeysierra.banshie.common.InstallMode;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.execution.event.EventModule;
 import org.whiskeysierra.banshie.execution.logging.LoggingModule;
@@ -21,8 +22,10 @@ public final class DefaultEngineTest {
     @Test
     public void test() {
         final Injector injector = Guice.createInjector(
-            new LoggingModule(), new EventModule(),
-            new MonitorModule(), new ProcessModule());
+            new LoggingModule(),
+            new EventModule(InstallMode.STANDALONE),
+            new MonitorModule(InstallMode.STANDALONE),
+            new ProcessModule());
 
         final ProcessService service = injector.getInstance(ProcessService.class);
         final ProcessMonitorFactory factory = injector.getInstance(ProcessMonitorFactory.class);

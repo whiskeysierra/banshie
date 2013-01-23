@@ -36,13 +36,13 @@
             <param name="bundle" value="banshie-logging-api"/>
         </antcall>
         <antcall target="build">
-            <param name="bundle" value="banshie-monitor-api"/>
-        </antcall>
-        <antcall target="build">
             <param name="bundle" value="banshie-event-impl"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-logging-impl"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-monitor-api"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-monitor-impl"/>
@@ -59,6 +59,9 @@
         <antcall target="build">
             <param name="bundle" value="banshie-extractors"/>
         </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-main"/>
+        </antcall>
     </target>
 
     <target name="clean">
@@ -67,10 +70,15 @@
         </antcall>
     </target>
 
-    <target name="test">
+    <target name="install">
         <antcall target="build-all">
             <param name="phase" value="install"/>
         </antcall>
     </target>
+
+    <!-- just run install, because
+        a) we need dependent modules to be installed anyway and
+        b) does install include the test phase -->
+    <target name="test" depends="install"/>
 
 </project>

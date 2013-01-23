@@ -19,7 +19,7 @@ public final class PerformanceEvaluationModule extends AbstractModule {
         binder.addBinding(Dimension.TIME).to(TimeProcessorCalculator.class);
 
         bind(PerformanceEvaluator.class).to(DefaultPerformanceEvaluator.class).in(Singleton.class);
-        bind(export(PerformanceEvaluator.class)).toProvider(service(DefaultPerformanceEvaluator.class).export());
+        bind(export(PerformanceEvaluator.class)).toProvider(service(PerformanceEvaluator.class).export());
     }
 
 }

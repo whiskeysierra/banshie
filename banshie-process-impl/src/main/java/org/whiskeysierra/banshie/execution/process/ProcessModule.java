@@ -11,7 +11,7 @@ public final class ProcessModule extends AbstractModule {
     @Override
     protected void configure() {
         bind(ProcessService.class).to(DefaultProcessService.class).in(Singleton.class);
-        bind(export(ProcessService.class)).toProvider(service(DefaultProcessService.class).export());
+        bind(export(ProcessService.class)).toProvider(service(ProcessService.class).export());
     }
 
 }
