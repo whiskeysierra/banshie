@@ -117,6 +117,7 @@
                         <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                         <Export-Package/>
                         <Bundle-Module>org.whiskeysierra.banshie.persistence.PersistenceModule</Bundle-Module>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                     </instructions>
                 </configuration>
             </plugin>

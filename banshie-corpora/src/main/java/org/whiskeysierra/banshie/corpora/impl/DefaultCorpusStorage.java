@@ -2,6 +2,8 @@ package org.whiskeysierra.banshie.corpora.impl;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
+import com.google.inject.persist.Transactional;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.corpora.CorpusStorage;
 
@@ -12,31 +14,37 @@ import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 import java.util.UUID;
 
-final class DefaultCorpusStorage implements CorpusStorage {
+public class DefaultCorpusStorage implements CorpusStorage {
 
-    // TODO @PersistenceContext? JPA in OSGi?
-    private EntityManager manager;
+    private Provider<EntityManager> provider;
 
     @Inject
-    DefaultCorpusStorage(EntityManager manager) {
-        this.manager = manager;
+    public DefaultCorpusStorage(Provider<EntityManager> provider) {
+        this.provider = provider;
     }
 
+    private EntityManager manager() {
+        return provider.get();
+    }
+
+    @Transactional
     @Override
     public void save(Corpus corpus) {
-        manager.persist(CorpusEntity.copyOf(corpus));
+        manager().persist(CorpusEntity.copyOf(corpus));
     }
 
+    @Transactional
     @Override
     public Corpus get(UUID uuid) {
-        return manager.find(CorpusEntity.class, uuid);
+        return manager().find(CorpusEntity.class, uuid);
     }
 
+    @Transactional
     @Override
     public List<Corpus> listAll() {
-        final CriteriaBuilder builder = manager.getCriteriaBuilder();
+        final CriteriaBuilder builder = manager().getCriteriaBuilder();
         final CriteriaQuery<CorpusEntity> query = builder.createQuery(CorpusEntity.class);
-        final TypedQuery<CorpusEntity> typedQuery = manager.createQuery(query);
+        final TypedQuery<CorpusEntity> typedQuery = manager().createQuery(query);
 
         return Lists.<Corpus>newArrayList(typedQuery.getResultList());
     }
