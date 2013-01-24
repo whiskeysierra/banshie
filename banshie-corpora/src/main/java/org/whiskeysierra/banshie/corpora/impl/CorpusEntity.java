@@ -1,4 +1,6 @@
-package org.whiskeysierra.banshie.corpora;
+package org.whiskeysierra.banshie.corpora.impl;
+
+import org.whiskeysierra.banshie.corpora.Corpus;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

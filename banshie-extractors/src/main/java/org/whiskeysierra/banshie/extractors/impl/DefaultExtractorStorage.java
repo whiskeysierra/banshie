@@ -1,7 +1,9 @@
-package org.whiskeysierra.banshie.extractors;
+package org.whiskeysierra.banshie.extractors.impl;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import org.whiskeysierra.banshie.extractors.Extractor;
+import org.whiskeysierra.banshie.extractors.ExtractorStorage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

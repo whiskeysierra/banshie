@@ -1,7 +1,9 @@
-package org.whiskeysierra.banshie.corpora;
+package org.whiskeysierra.banshie.corpora.impl;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import org.whiskeysierra.banshie.corpora.Corpus;
+import org.whiskeysierra.banshie.corpora.CorpusStorage;
 
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;

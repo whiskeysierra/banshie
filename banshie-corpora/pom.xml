@@ -45,7 +45,8 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Module>org.whiskeysierra.banshie.corpora.CorpusModule</Bundle-Module>
+                        <Bundle-Module>org.whiskeysierra.banshie.corpora.impl.CorpusModule</Bundle-Module>
+                        <Private-Package>org.whiskeysierra.banshie.corpora.impl</Private-Package>
                         <Export-Package/>
                         <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                     </instructions>

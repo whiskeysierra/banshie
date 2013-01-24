@@ -45,8 +45,10 @@
                 <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
                     <instructions>
-                        <Bundle-Module>org.whiskeysierra.banshie.extractors.ExtractorModule</Bundle-Module>
+                        <Bundle-Module>org.whiskeysierra.banshie.extractors.impl.ExtractorModule</Bundle-Module>
+                        <Private-Package>org.whiskeysierra.banshie.extractors.impl</Private-Package>
                         <Export-Package/>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                     </instructions>
                 </configuration>
             </plugin>

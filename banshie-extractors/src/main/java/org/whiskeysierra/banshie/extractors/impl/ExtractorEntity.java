@@ -1,4 +1,6 @@
-package org.whiskeysierra.banshie.extractors;
+package org.whiskeysierra.banshie.extractors.impl;
+
+import org.whiskeysierra.banshie.extractors.Extractor;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
