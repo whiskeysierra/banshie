@@ -137,6 +137,21 @@
         </dependency>
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-persistence</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-corpora</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-extractors</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-event-api</artifactId>
             <version>${project.version}</version>
         </dependency>
@@ -178,11 +193,6 @@
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-execution</artifactId>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.whiskeysierra.banshie</groupId>
-            <artifactId>banshie-persistence</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

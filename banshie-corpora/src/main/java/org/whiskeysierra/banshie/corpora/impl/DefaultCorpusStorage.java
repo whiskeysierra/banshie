@@ -40,4 +40,5 @@ final class DefaultCorpusStorage implements CorpusStorage {
 
         return Lists.<Corpus>newArrayList(typedQuery.getResultList());
     }
+
 }
