@@ -3,9 +3,7 @@ package org.whiskeysierra.banshie.extractors.impl;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
-import com.google.inject.persist.PersistService;
 import com.google.inject.persist.Transactional;
-import com.google.inject.persist.jpa.JpaPersistModule;
 import org.whiskeysierra.banshie.extractors.Extractor;
 import org.whiskeysierra.banshie.extractors.ExtractorStorage;
 
