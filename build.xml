@@ -60,6 +60,9 @@
             <param name="bundle" value="banshie-extractors"/>
         </antcall>
         <antcall target="build">
+            <param name="bundle" value="banshie-persistence"/>
+        </antcall>
+        <antcall target="build">
             <param name="bundle" value="banshie-main"/>
         </antcall>
     </target>
