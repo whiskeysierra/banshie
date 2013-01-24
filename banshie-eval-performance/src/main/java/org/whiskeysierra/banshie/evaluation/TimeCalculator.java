@@ -2,7 +2,7 @@ package org.whiskeysierra.banshie.evaluation;
 
 import org.whiskeysierra.banshie.execution.event.Event;
 
-final class TimeProcessorCalculator implements Calculator {
+final class TimeCalculator implements Calculator {
 
     private long first = Long.MAX_VALUE;
     private long last = Long.MIN_VALUE;

@@ -16,7 +16,7 @@ public final class PerformanceEvaluationModule extends AbstractModule {
 
         binder.addBinding(Dimension.CPU_USAGE).to(CpuUsageCalculator.class);
         binder.addBinding(Dimension.MEMORY_USAGE).to(MemoryUsageCalculator.class);
-        binder.addBinding(Dimension.TIME).to(TimeProcessorCalculator.class);
+        binder.addBinding(Dimension.TIME).to(TimeCalculator.class);
 
         bind(PerformanceEvaluator.class).to(DefaultPerformanceEvaluator.class).in(Singleton.class);
         bind(export(PerformanceEvaluator.class)).toProvider(service(PerformanceEvaluator.class).export());
