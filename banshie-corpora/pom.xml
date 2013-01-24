@@ -47,6 +47,7 @@
                     <instructions>
                         <Bundle-Module>org.whiskeysierra.banshie.corpora.CorpusModule</Bundle-Module>
                         <Export-Package/>
+                        <Meta-Persistence>META-INF/persistence.xml</Meta-Persistence>
                     </instructions>
                 </configuration>
             </plugin>
