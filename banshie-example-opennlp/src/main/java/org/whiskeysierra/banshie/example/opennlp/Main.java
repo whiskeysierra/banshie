@@ -15,6 +15,9 @@ import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.tokenize.TokenizerModel;
 import opennlp.tools.util.Span;
 
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -58,26 +61,51 @@ public final class Main {
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, XMLStreamException {
         final SentenceDetector detector = getSentenceDetector();
         final Tokenizer tokenizer = getTokenizer();
         final TokenNameFinder finder = getNameFinder();
 
         final InputStreamReader input = new InputStreamReader(System.in, Charsets.UTF_8);
         final String document = CharStreams.toString(input);
+
         final Joiner joiner = Joiner.on(' ');
+        final XMLOutputFactory factory = XMLOutputFactory.newInstance();
+        final XMLStreamWriter writer = factory.createXMLStreamWriter(System.out);
+        writer.writeStartDocument("UTF-8", "1.0");
+        writer.writeStartElement("document");
 
         for (String sentence : detector.sentDetect(document)) {
             final String[] tokens = tokenizer.tokenize(sentence);
             final Span spans[] = finder.find(tokens);
 
-            for (Span span : spans) {
-                // TODO produce xml
-                final List<String> names = Arrays.asList(tokens).subList(span.getStart(), span.getEnd());
+            if (spans.length == 0) {
+                writer.writeCharacters(sentence);
+            } else {
+                final List<String> words = Arrays.asList(tokens);
 
-                System.out.println("Found " + span.getType() + ": " + joiner.join(names));
+                int last = 0;
+
+                for (Span span : spans) {
+                    // between the end of the last and the start of this span
+                    writer.writeCharacters(joiner.join(words.subList(last, span.getStart())));
+
+                    writer.writeStartElement("span");
+                    writer.writeAttribute("type", span.getType());
+                    writer.writeCharacters(joiner.join(words.subList(span.getStart(), span.getEnd())));
+                    writer.writeEndElement();
+
+                    last = span.getEnd();
+                }
+
+                // rest of the sentence
+                writer.writeCharacters(joiner.join(words.subList(last, words.size())));
             }
         }
+
+        writer.writeEndElement();
+        writer.writeEndDocument();
+        writer.close();
 
         finder.clearAdaptiveData();
     }
