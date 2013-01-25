@@ -1,0 +1,83 @@
+package org.whiskeysierra.banshie.example.opennlp;
+
+import com.google.common.base.Joiner;
+import com.google.common.io.CharStreams;
+import com.google.common.io.Resources;
+import opennlp.tools.namefind.NameFinderME;
+import opennlp.tools.namefind.TokenNameFinder;
+import opennlp.tools.namefind.TokenNameFinderModel;
+import opennlp.tools.sentdetect.SentenceDetector;
+import opennlp.tools.sentdetect.SentenceDetectorME;
+import opennlp.tools.sentdetect.SentenceModel;
+import opennlp.tools.tokenize.Tokenizer;
+import opennlp.tools.tokenize.TokenizerME;
+import opennlp.tools.tokenize.TokenizerModel;
+import opennlp.tools.util.Span;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.List;
+
+public final class Main {
+
+    private static InputStream readResource(String name) throws IOException {
+        return Resources.getResource(name).openStream();
+    }
+
+    private static SentenceDetector getSentenceDetector() throws IOException {
+        final InputStream stream = readResource("en-sent.bin");
+
+        try {
+            return new SentenceDetectorME(new SentenceModel(stream));
+        } finally {
+            stream.close();
+        }
+    }
+
+    private static Tokenizer getTokenizer() throws IOException {
+        final InputStream stream = readResource("en-token.bin");
+
+        try {
+            return new TokenizerME(new TokenizerModel(stream));
+        } finally {
+            stream.close();
+        }
+
+    }
+
+    private static TokenNameFinder getNameFinder() throws IOException {
+        final InputStream stream = readResource("en-ner-person.bin");
+
+        try {
+            return new NameFinderME(new TokenNameFinderModel(stream));
+        } finally {
+            stream.close();
+        }
+    }
+
+    public static void main(String[] args) throws IOException {
+        final SentenceDetector detector = getSentenceDetector();
+        final Tokenizer tokenizer = getTokenizer();
+        final TokenNameFinder finder = getNameFinder();
+
+        final String document = CharStreams.toString(new InputStreamReader(System.in));
+        final Joiner joiner = Joiner.on(' ');
+
+        for (String sentence : detector.sentDetect(document)) {
+            final String[] tokens = tokenizer.tokenize(sentence);
+            final Span spans[] = finder.find(tokens);
+
+            for (Span span : spans) {
+                // TODO produce xml
+                final List<String> names = Arrays.asList(tokens).subList(span.getStart(), span.getEnd());
+
+                System.out.println("Found " + span.getType() + ": " + joiner.join(names));
+            }
+        }
+
+        finder.clearAdaptiveData();
+    }
+
+}
