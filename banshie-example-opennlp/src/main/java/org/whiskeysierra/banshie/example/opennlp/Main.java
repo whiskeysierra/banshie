@@ -1,5 +1,6 @@
 package org.whiskeysierra.banshie.example.opennlp;
 
+import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
@@ -62,7 +63,8 @@ public final class Main {
         final Tokenizer tokenizer = getTokenizer();
         final TokenNameFinder finder = getNameFinder();
 
-        final String document = CharStreams.toString(new InputStreamReader(System.in));
+        final InputStreamReader input = new InputStreamReader(System.in, Charsets.UTF_8);
+        final String document = CharStreams.toString(input);
         final Joiner joiner = Joiner.on(' ');
 
         for (String sentence : detector.sentDetect(document)) {
