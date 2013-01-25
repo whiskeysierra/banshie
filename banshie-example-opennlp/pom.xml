@@ -9,7 +9,7 @@
     </parent>
     <name>Banshie Example OpenNLP</name>
     <description>
-        An example module running Apache OpenNLP as an extractor in Banshie.
+        An example module providing Apache OpenNLP as an extractor for Banshie.
     </description>
     <modelVersion>4.0.0</modelVersion>
     <artifactId>banshie-example-opennlp</artifactId>

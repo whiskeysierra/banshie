@@ -62,12 +62,12 @@ public final class Main {
     }
 
     public static void main(String[] args) throws IOException, XMLStreamException {
+        final InputStreamReader reader = new InputStreamReader(System.in, Charsets.UTF_8);
+        final String document = CharStreams.toString(reader);
+
         final SentenceDetector detector = getSentenceDetector();
         final Tokenizer tokenizer = getTokenizer();
         final TokenNameFinder finder = getNameFinder();
-
-        final InputStreamReader input = new InputStreamReader(System.in, Charsets.UTF_8);
-        final String document = CharStreams.toString(input);
 
         final Joiner joiner = Joiner.on(' ');
         final XMLOutputFactory factory = XMLOutputFactory.newInstance();
