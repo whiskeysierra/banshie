@@ -5,6 +5,6 @@ import java.util.Map;
 
 public interface QualityEvaluator {
 
-    Map<Dimension, Value> evaluate(File referenceSet, File output);
+    Map<Dimension, Value> evaluate(File reference, File prediction);
 
 }

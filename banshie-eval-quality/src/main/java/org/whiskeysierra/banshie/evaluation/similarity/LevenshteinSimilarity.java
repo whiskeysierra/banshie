@@ -1,4 +1,4 @@
-package org.whiskeysierra.banshie.evaluation;
+package org.whiskeysierra.banshie.evaluation.similarity;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;

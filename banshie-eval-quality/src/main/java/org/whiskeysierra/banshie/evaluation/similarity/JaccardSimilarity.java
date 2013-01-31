@@ -1,4 +1,4 @@
-package org.whiskeysierra.banshie.evaluation;
+package org.whiskeysierra.banshie.evaluation.similarity;
 
 import com.google.common.base.CharMatcher;
 import com.google.common.base.Splitter;
