@@ -10,12 +10,13 @@ import com.google.common.io.CharStreams;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.List;
 
 public final class Main {
 
     public static void main(String[] args) throws IOException {
-        final InputStreamReader reader = new InputStreamReader(System.in, Charsets.UTF_8);
+        final Reader reader = new InputStreamReader(System.in, Charsets.UTF_8);
         final String document = CharStreams.toString(reader);
 
         final List<String> tokenList = Lists.newArrayList();
@@ -31,7 +32,8 @@ public final class Main {
         final int[] sentenceBoundaries = model.boundaryIndices(tokens, whites);
 
         int sentStartTok = 0;
-        int sentEndTok = 0;
+        int sentEndTok;
+
         for (int i = 0; i < sentenceBoundaries.length; ++i) {
             sentEndTok = sentenceBoundaries[i];
             System.out.println("SENTENCE " + (i + 1) + ": ");
