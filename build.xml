@@ -12,10 +12,13 @@
             <param name="bundle" value="banshie-parent"/>
         </antcall>
         <antcall target="build">
+            <param name="bundle" value="banshie-api"/>
+        </antcall>
+        <antcall target="build">
             <param name="bundle" value="banshie-common"/>
         </antcall>
         <antcall target="build">
-            <param name="bundle" value="banshie-api"/>
+            <param name="bundle" value="banshie-jpa"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-corpora"/>
@@ -64,6 +67,15 @@
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-main"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-example-lingpipe"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-example-opennlp"/>
+        </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-example-stanford-corenlp"/>
         </antcall>
     </target>
 
