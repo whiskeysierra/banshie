@@ -2,6 +2,7 @@ package org.whiskeysierra.banshie.evaluation.score;
 
 import com.google.inject.Inject;
 import org.whiskeysierra.banshie.evaluation.Span;
+import org.whiskeysierra.banshie.evaluation.counter.Counts;
 
 import java.util.List;
 
@@ -15,8 +16,8 @@ final class ErrorMeasure implements Score {
     }
 
     @Override
-    public void update(List<Span> references, List<Span> predictions) {
-        measure.update(references, predictions);
+    public void update(List<Span> references, List<Span> predictions, Counts counts) {
+        measure.update(references, predictions, counts);
     }
 
     @Override

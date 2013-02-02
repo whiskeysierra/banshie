@@ -2,6 +2,7 @@ package org.whiskeysierra.banshie.evaluation.score;
 
 import com.google.inject.Inject;
 import org.whiskeysierra.banshie.evaluation.Span;
+import org.whiskeysierra.banshie.evaluation.counter.Counts;
 
 import java.util.List;
 
@@ -17,9 +18,9 @@ final class FMeasure implements Score {
     }
 
     @Override
-    public void update(List<Span> references, List<Span> predictions) {
-        precision.update(references, predictions);
-        recall.update(references, predictions);
+    public void update(List<Span> references, List<Span> predictions, Counts counts) {
+        precision.update(references, predictions, counts);
+        recall.update(references, predictions, counts);
     }
 
     @Override

@@ -40,4 +40,9 @@ public final class Span {
         this.end = end;
     }
 
+    @Override
+    public String toString() {
+        return "Span type=" + type + " '" + value + "' [" + start + ":" + end + "]";
+    }
+
 }
