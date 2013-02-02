@@ -1,24 +1,31 @@
 package org.whiskeysierra.banshie.evaluation.score;
 
-import org.whiskeysierra.banshie.evaluation.Span;
 import org.whiskeysierra.banshie.evaluation.counter.Counts;
 
-import java.util.List;
-
+/**
+ * Also referred to as the True Positive Rate or Sensitivity.
+ */
 final class Recall implements Score {
 
     private float truePositives;
-    private float target;
+    private float falseNegatives;
 
     @Override
-    public void update(List<Span> references, List<Span> predictions, Counts counts) {
+    public void update(Counts counts) {
         truePositives += counts.getTruePositives();
-        target += references.size();
+        falseNegatives += counts.getFalseNegatives();
     }
 
     @Override
     public float getValue() {
-        return target > 0 ? truePositives / target : Float.NaN;
+        final float sum = truePositives + falseNegatives;
+
+        if (sum > 0) {
+            return truePositives / sum;
+        } else {
+            // cannot divide by zero, return error code
+            return Float.NaN;
+        }
     }
 
     @Override

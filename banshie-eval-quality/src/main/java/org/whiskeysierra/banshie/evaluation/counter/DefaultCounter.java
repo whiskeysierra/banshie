@@ -19,23 +19,21 @@ final class DefaultCounter implements Counter {
     @Override
     public Counts count(List<Span> references, List<Span> predictions) {
         int truePositives = 0;
-
-        final List<Span> r = Lists.newArrayList(references);
-        final List<Span> p = Lists.newArrayList(predictions);
+        int falsePositives = predictions.size();
+        int falseNegatives = references.size();
 
         for (Span reference : references) {
             for (Span prediction : predictions) {
+                // TODO use span location
+                // TODO use overlap mode?!
                 if (similarity.similar(reference.getValue(), prediction.getValue())) {
                     truePositives++;
-
-                    r.remove(reference);
-                    p.remove(prediction);
+                    falsePositives--;
+                    falseNegatives--;
                 }
             }
         }
 
-        int falsePositives = p.size();
-        int falseNegatives = r.size();
 
         return new DefaultCounts(truePositives, falsePositives, falseNegatives);
     }
