@@ -5,24 +5,22 @@ import org.whiskeysierra.banshie.evaluation.counter.Counts;
 final class SlotErrorRate implements Score {
 
     private float truePositives;
-    private float substitutions;
-    private float deletions;
-    private float insertions;
+    private float falseNegatives;
+    private float falsePositives;
 
     @Override
     public void update(Counts counts) {
         truePositives += counts.getTruePositives();
-        substitutions += counts.getSubstitutionErrors();
-        deletions += counts.getDeletionErrors();
-        insertions += counts.getInsertionErrors();
+        falseNegatives += counts.getFalseNegatives();
+        falsePositives += counts.getFalsePositives();
     }
 
     @Override
     public float getValue() {
-        final float sum = truePositives + substitutions + deletions;
+        final float sum = truePositives + falseNegatives;
 
         if (sum > 0) {
-            final float errors = substitutions + deletions + insertions;
+            final float errors = falseNegatives + falsePositives;
             return errors / sum;
         } else {
             // cannot divide by zero, return error code

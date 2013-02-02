@@ -8,10 +8,4 @@ public interface Counts {
 
     int getFalseNegatives();
 
-    int getSubstitutionErrors();
-
-    int getDeletionErrors();
-
-    int getInsertionErrors();
-
 }

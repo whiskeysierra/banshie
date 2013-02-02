@@ -27,20 +27,4 @@ final class DefaultCounts implements Counts {
         return falseNegatives;
     }
 
-    @Override
-    public int getSubstitutionErrors() {
-        // TODO implement
-        return 0;
-    }
-
-    @Override
-    public int getDeletionErrors() {
-        return falseNegatives;
-    }
-
-    @Override
-    public int getInsertionErrors() {
-        return falsePositives;
-    }
-
 }
