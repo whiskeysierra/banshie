@@ -5,14 +5,17 @@
 
 \subsection{Performance measures}
 Core (Precision, Recall, F-Measure) and additional...
+\\
+For classification tasks, the terms true positives, true negatives, false positives, and false negatives (see also Type I and type II errors) compare the results of the classifier under test with trusted external judgments. The terms positive and negative refer to the classifier's prediction (sometimes known as the expectation), and the terms true and false refer to whether that prediction corresponds to the external judgment (sometimes known as the observation). This is illustrated by the table below:
 
 \begin{table}[H]
 \centering
 \begin{tabular}{cccc}
-	& & \multicolumn{2}{c}{\textbf{Prediction}} \\
-	& & + & - \\
-	\multirow{2}{*}{\textbf{Answer}} & + & true positive & false negative \\
-	 & - & false positive & true negative \\
+	& \multicolumn{2}{c}{\textbf{Observation}} \\
+	\multirow{4}{*}{\textbf{Expectation}} & \textbf{true positive}  & \textbf{false positive} \\
+	& Correct result & Unexpected result \\
+	& \textbf{false negative} & \textbf{true negative} \\
+         & Missing result & Correct absence of result
 \end{tabular}
 \caption{Confusion matrix}
 \end{table}
