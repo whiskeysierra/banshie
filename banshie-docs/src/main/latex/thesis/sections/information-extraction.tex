@@ -2,6 +2,7 @@
 \label{sec:information-extraction}
 
 \fxfatal{Information Extraction}
+\fxfatal{Subfield of NLP}
 
 \subsection{Definition}
 
@@ -35,16 +36,73 @@ Information extraction (IE) is the task of automatically extracting structured i
 \newpage
 \subsection{Most typical tasks}
 
-\subsubsection{Named Entity Recognition}
+\fxfatal{Small introduction}
+\fxfatal{Example text}
 
-\subsubsection{Conference Resolution}
+\begin{quote}
+Sam Schwartz retired as executive vice president of the famous hot dog manufacturer, Hupplewhite Inc. He will be succeded by Harry Himmelfarb.
+\cite{Grishman:1997}
+\end{quote}
+
+\subsubsection{Named Entity Recognition}
+\gls{NER}, also referred to as Name Recognition, Entity Identification or Entity Extraction, is defined as the extraction of known entity names. These include people, organizations, locations, date/time and certain numerical expressions. 
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ l  l }
+	\toprule
+	\textbf{Type} & \textbf{Value} \\
+	\midrule
+	\texttt{PERSON} & Sam Schwartz \\
+	\texttt{ORGANIZATION} & Hupplewhite Inc. \\
+	\texttt{PERSON} & Harry Himmelfarb \\
+	\bottomrule
+\end{tabular*}
+\caption{Named Entity Recognition example output}
+\end{table}
+
+\subsubsection{Coreference Resolution}
+\gls{CO}, also referred to as Coreference Analysis, ...
+
+Example: \textit{He} in \enquote{He will be succeded by Harry Himmelfarb.} refers to the previously extracted entity \textit{Sam Schwatz}.
 
 \subsubsection{Template Element Construction}
+\gls{TE}, also referred to as Attribute Extraction, ...
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ l  l }
+	\toprule
+	\textbf{Attribute} & \textbf{Target} \\
+	\midrule
+	executive vice president & Sam Schwartz \\
+	famous hot dog manufacturer & Hupplewhite Inc. \\
+	\bottomrule
+\end{tabular*}
+\caption{Template Element Construction example output}
+\end{table}
 
 \subsubsection{Template Relation Construction}
-or Relationship extraction
+\gls{TR}, also referred to as Relationship extraction, ...
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ l l l l l }
+	\toprule
+	\textbf{Value} & \textbf{Relation}  & \textbf{Value} \\
+	\midrule
+	Sam Schwartz & worked for & Hupplewhite Inc. \\
+	Hupplewhite Inc. & has & executive vice president \\
+	Harry Himmelfarb & works for & Hupplewhite Inc. \\
+	\bottomrule
+\end{tabular*}
+\caption{Template Element Construction example output}
+\end{table}
 
 \subsubsection{Scenario Template Production}
+\gls{ST}, ...
+
+Identification of two persons, a retiring executive vice president and a new one which takes over the job, and a company which employs them.
 
 \subsubsection{Restoring information structure}
 
