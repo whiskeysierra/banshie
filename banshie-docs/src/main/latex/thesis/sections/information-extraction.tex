@@ -32,11 +32,39 @@ Information extraction (IE) is the task of automatically extracting structured i
 
 \newpage
 \subsection{History}
+The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. Sager 1981 published works in the field of medicine and used manually-created structures and templates. This "information formats" were obtained based on rules. Complex system developments were made by Hayes et al. in 1992.
+
+The increase in research in the field of IE forced the DARPA (Defense Advanced Research Projects Agency) in the late 1980s to initiate an operation. Thus, the "Message Understanding Conferences" (MUC) have been launched, aimed at competing implementation and evaluation of IE systems. Participants received test data of a particular domain and a special output format. They than developed IE systems based on these requirements, their performances were compared in terms of unknown documents at conferences. Manually created templates were used as reference data.
+
+The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences:
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ l l l l l l }
+	\toprule
+	& Year & Topic & \shortstack{Number of \\ systems} & \shortstack{Traning \\ documents} & \shortstack{Reference \\ documents} \\
+	\midrule
+	MUC-1 & 1987 & Marine operations & 6 & 12 & 2 \\
+	MUC-2 & 1989 & Marine operations & 8 & 105 & 25 \\
+	MUC-3 & 1991 & Terror acts & 15 & 1300 & 300 \\
+	MUC-4 & 1992 & Terror acts & 17 & - & - \\
+	MUC-5 & 1993 & Joint ventures, & 17 & - & - \\
+	& & microelectronics & & & \\
+	MUC-6 & 1995 & Management & 17 & - & - \\
+	& & changes & & & \\
+	MUC-7 & 1998 & Space travel & - & - & - \\
+	\bottomrule
+\end{tabular*}
+\caption{Message Understanding Conferences}
+\end{table}
+
+The conferences have made a decisive contribution to the development of information extraction. On one hand, the formulation of sub-tasks and metrics should be noted and on the other hand, the striving for domain independence and portability of \gls{IE} systems. The meeting of various research groups and the implementation of systems based on the same task offers enormous opportunities to exchange ideas and to overcome theoretical and paradigmatic differences.
 
 \newpage
 \subsection{Most typical tasks}
 
-\fxfatal{Small introduction}
+The Message Understanding Conferences structures the information extraction into the following sub-tasks due to its complexity.
+
 \fxfatal{Example text}
 
 \begin{quote}
