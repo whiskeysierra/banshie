@@ -18,6 +18,13 @@
 \usepackage[acronym,toc,xindy,shortcuts]{glossaries}
 \usepackage{parskip}
 
+\makeatletter
+\renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
+  {-3.25ex\@plus -1ex \@minus -.2ex}%
+  {1.5ex \@plus .2ex}%
+  {\normalfont\normalsize\bfseries}}
+\makeatother
+
 \makeglossaries
 
 \newacronym{IE}{IE}{Information Extraction}
@@ -33,6 +40,14 @@
 \newacronym{ST}{ST}{Scenario Template Production}
 \newacronym{DARPA}{DARPA}{Defense Advanced Research Projects Agency}
 \newacronym{MUC}{MUC}{Message Understanding Conferences}
+\newacronym{SVM}{SVM}{Support Vector Machines}
+\newacronym{HMM}{HMM}{Hidden Markov Models}
+\newacronym{WG}{WG}{Wrapper Generation}
+\newacronym{ACE}{ACE}{Automatic Content Extraction}
+\newacronym{EDR}{EDR}{Entity Detection and Recognition}
+\newacronym{RDR}{RDR}{Relation Detection and Recognition}
+\newacronym{VDR}{VDR}{Event Detection and Recognition}
+\newacronym{OCR}{OCR}{Optical Character Recognition}
 
 % every section starts on a new page
 \let\stdsection\section
