@@ -32,11 +32,11 @@ Information extraction (IE) is the task of automatically extracting structured i
 
 \newpage
 \subsection{History}
-The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. Sager 1981 published works in the field of medicine and used manually-created structures and templates. This "information formats" were obtained based on rules. Complex system developments were made by Hayes et al. in 1992.
+The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. Sager 1981 published works in the field of medicine and used manually-created structures and templates. This "information formats" were obtained based on rules. Complex system developments were made by Hayes et al. in 1992 \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
-The increase in research in the field of IE forced the DARPA (Defense Advanced Research Projects Agency) in the late 1980s to initiate an operation. Thus, the "Message Understanding Conferences" (MUC) have been launched, aimed at competing implementation and evaluation of IE systems. Participants received test data of a particular domain and a special output format. They than developed IE systems based on these requirements, their performances were compared in terms of unknown documents at conferences. Manually created templates were used as reference data.
+The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. Participants received test data of a particular domain and a special output format. They than developed IE systems based on these requirements, their performances were compared in terms of unknown documents at conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
 
-The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences:
+The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences \cite{Turmo:2006}\cite{Appelt:1999}\cite{Cunningham:2005}:
 
 \begin{table}[H]
 \centering
@@ -58,22 +58,22 @@ The conferences were held between 1987 and 1998. The following table lists the d
 \caption{Message Understanding Conferences}
 \end{table}
 
-The conferences have made a decisive contribution to the development of information extraction. On one hand, the formulation of sub-tasks and metrics should be noted and on the other hand, the striving for domain independence and portability of \gls{IE} systems. The meeting of various research groups and the implementation of systems based on the same task offers enormous opportunities to exchange ideas and to overcome theoretical and paradigmatic differences.
+The conferences have made a decisive contribution to the development of information extraction. On one hand, the formulation of sub-tasks and metrics should be noted and on the other hand, the striving for domain independence and portability of \gls{IE} systems. The meeting of various research groups and the implementation of systems based on the same task offers enormous opportunities to exchange ideas and to overcome theoretical and paradigmatic differences \cite{Cimiano:2003}\cite{Lehnert:1994}.
 
 \newpage
 \subsection{Most typical tasks}
 
-The Message Understanding Conferences structures the information extraction into the following sub-tasks due to its complexity.
+The Message Understanding Conferences structures the information extraction into the following sub-tasks due to its complexity \cite{Carstensen:2010}\cite{Lavelli:2008}:
 
-\fxfatal{Example text}
+The \gls{IE} sub-tasks will be explained using the following example document:
 
 \begin{quote}
-Sam Schwartz retired as executive vice president of the famous hot dog manufacturer, Hupplewhite Inc. He will be succeded by Harry Himmelfarb.
-\cite{Grishman:1997}
+The shiny red rocket was fired on Tuesday. It is the brainchild of Dr. Big Head. Dr. Head is a staff scientist at We Build Rockets Inc.
+\cite{Cunningham:2005}
 \end{quote}
 
 \subsubsection{Named Entity Recognition}
-\gls{NER}, also referred to as Name Recognition, Entity Identification or Entity Extraction, is defined as the extraction of known entity names. These include people, organizations, locations, date/time and certain numerical expressions. 
+\gls{NER}, also referred to as Name Recognition, Entity Identification or Entity Extraction, is defined as the extraction of known entity names. These include people, organizations, locations, products, date/times and certain numerical expressions \cite{Linsmayr:2010}. 
 
 \begin{table}[H]
 \centering
@@ -81,21 +81,23 @@ Sam Schwartz retired as executive vice president of the famous hot dog manufactu
 	\toprule
 	\textbf{Type} & \textbf{Value} \\
 	\midrule
-	\texttt{PERSON} & Sam Schwartz \\
-	\texttt{ORGANIZATION} & Hupplewhite Inc. \\
-	\texttt{PERSON} & Harry Himmelfarb \\
+	\texttt{PRODUCT} & rocket \\
+	\texttt{DATE} & Tuesday \\
+	\texttt{PERSON} & Dr. Big Head \\
+	\texttt{ORGANIZATION} & We Build Rockets Inc. \\
 	\bottomrule
 \end{tabular*}
 \caption{Named Entity Recognition example output}
 \end{table}
 
 \subsubsection{Coreference Resolution}
-\gls{CO}, also referred to as Coreference Analysis, ...
+\gls{CO}, also referred to as Coreference Analysis, Deduplication or Record Linkage. As entities and relationships are extracted from the unstructured source, they need to be integrated with existing databases and with repeated mentions of the same information in the unstructured source. The main challenge in this task is deciding if two strings refer to the same entity in spite of the many noisy variants in which it appears in the unstructured source \cite{Sarawagi:2008}.
 
-Example: \textit{He} in \enquote{He will be succeded by Harry Himmelfarb.} refers to the previously extracted entity \textit{Sam Schwatz}.
+Example: \textit{It} in \enquote{It is the brainchild of Dr. Big Head. Dr. Head is a staff scientist at We Build Rockets Inc.} refers to the previously extracted entity \textit{rocket}.
 
 \subsubsection{Template Element Construction}
-\gls{TE}, also referred to as Attribute Extraction, ...
+\gls{TE}, also referred to as Attribute Extraction, describes the task to associate a given entity with the value of an adjective describing the entity. The value of this adjective typically needs to be derived by combining soft clues spread over many different words around the entity
+ \cite{Sarawagi:2008}.
 
 \begin{table}[H]
 \centering
@@ -103,36 +105,38 @@ Example: \textit{He} in \enquote{He will be succeded by Harry Himmelfarb.} refer
 	\toprule
 	\textbf{Attribute} & \textbf{Target} \\
 	\midrule
-	executive vice president & Sam Schwartz \\
-	famous hot dog manufacturer & Hupplewhite Inc. \\
+	shiny red & rocket \\
+	brainchild of Dr. Big Head & rocket \\
 	\bottomrule
 \end{tabular*}
 \caption{Template Element Construction example output}
 \end{table}
 
 \subsubsection{Template Relation Construction}
-\gls{TR}, also referred to as Relationship extraction, ...
+\gls{TR}, also referred to as Relationship extraction, defines to task of extracting relationship information of previously extracted entities. Relationships are defined over two or more entities related in a predefined way. Examples are \enquote{is employee of} relationship between a person and an organization or \enquote{is acquired by} relationship between pairs of companies \cite{Sarawagi:2008}.
+
+The extraction of relationships differs from the extraction of entities in one significant way. Whereas entities refer to a sequence of words in the source and can be expressed as annotations on the source, relationships are not annotations on a subset of words. Instead they express the associations between two separate text snippets representing the entities \cite{Sarawagi:2008}.
 
 \begin{table}[H]
 \centering
 \begin{tabular*}{\textwidth}{ l l l l l }
 	\toprule
-	\textbf{Value} & \textbf{Relation}  & \textbf{Value} \\
+	\textbf{Entity} & \textbf{Relation}  & \textbf{Entity} \\
 	\midrule
-	Sam Schwartz & worked for & Hupplewhite Inc. \\
-	Hupplewhite Inc. & has & executive vice president \\
-	Harry Himmelfarb & works for & Hupplewhite Inc. \\
+	Dr. Big Head & works for & We Build Rockets Inc. \\
 	\bottomrule
 \end{tabular*}
 \caption{Template Element Construction example output}
 \end{table}
 
+\newpage
 \subsubsection{Scenario Template Production}
-\gls{ST}, ...
+\gls{ST}, also referred to as Event Extraction, tries to extract events that previously extracted entities participate in \cite{Cunningham:2005}.
 
-Identification of two persons, a retiring executive vice president and a new one which takes over the job, and a company which employs them.
+Regarding the given example document, \gls{ST} discovers that there was a rocket launching event in which the various entities were involved \cite{Cunningham:2005}.
 
-\subsubsection{Restoring information structure}
+\subsubsection{Restoring information structure such as Lists, Tables and Ontologies}
+The scope of extraction systems has now expanded to include the extraction of not such atomic entities and flat records but also richer structures such as tables, lists, and trees from various types of documents \cite{Sarawagi:2008}.
 
 \newpage
 \subsection{Progression and development}
