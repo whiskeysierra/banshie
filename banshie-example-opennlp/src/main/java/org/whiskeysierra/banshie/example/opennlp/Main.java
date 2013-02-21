@@ -77,7 +77,7 @@ public final class Main {
 
         for (String sentence : detector.sentDetect(document)) {
             final String[] tokens = tokenizer.tokenize(sentence);
-            final Span spans[] = finder.find(tokens);
+            final Span[] spans = finder.find(tokens);
 
             if (spans.length == 0) {
                 writer.writeCharacters(sentence);
