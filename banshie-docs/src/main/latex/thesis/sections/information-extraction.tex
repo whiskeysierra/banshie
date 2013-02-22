@@ -2,7 +2,8 @@
 \label{sec:information-extraction}
 
 \fxfatal{Information Extraction}
-\fxfatal{Subfield of NLP}
+
+The information extraction is a part of the \gls{NLP}, which focuses its research on the mechanical analysis, processing and generation of natural language. Due to the large amount of information on the internet research in this area is increasingly important to provide access to knowledge and to manage and reproduce the information \cite{Weinhofer:2010}\cite{Linsmayr:2010}.
 
 \subsection{Definition}
 
@@ -30,13 +31,17 @@ Information extraction (IE) is the task of automatically extracting structured i
 \hfill \citeauthor{Wikipedia:IE:2012} \cite{Wikipedia:IE:2012}
 \end{quote}
 
+The information extraction is concerned with the discovery and therefore the Indentification of data from large collections of data, and to present it in a structured format in order to ensure automatic processing can. Not the entire contents of a text is analyzed, but only those passages that are relevant to a domain or user \cite{Lehnert:1994}\cite{Neumann:2001}\cite{Siefkes:2007}.
+
+The challenge in information extraction is the specification of the relevant data. It must be very detailed in order to guarantee an accurate identification. The problem lies in the complexity of natural language. The knowledge can be spread over several blocks and present in different linguistic representation. The latter occurs, for example, through the use of different names, anaphoric expressions, and similar designations. As part of the extraction, therefore, the existence of the same information regardless of the specific formulation are revealed \cite{Cole:1998}\cite{Grishman:2003}\cite{Grishman:2007}\cite{Linsmayr:2010}.
+
 \newpage
 \subsection{History}
 The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. Sager 1981 published works in the field of medicine and used manually-created structures and templates. This "information formats" were obtained based on rules. Complex system developments were made by Hayes et al. in 1992 \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
 The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. Participants received test data of a particular domain and a special output format. They than developed IE systems based on these requirements, their performances were compared in terms of unknown documents at conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
 
-The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences \cite{Turmo:2006}\cite{Appelt:1999}\cite{Cunningham:2005}:
+The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences \cite{Turmo:2006}\cite{Appelt:1999}\cite{Cunningham:2005}\cite{Linsmayr:2010}:
 
 \begin{table}[H]
 \centering
@@ -185,16 +190,40 @@ Extraction of events and scenarios in which entities are involved
 Unlike the \gls{MUC} evaluation results of the program will not be published. Also the tasks of the \gls{ACE} are more complex, as multiple domains are used and also multiple sources of language translation, or the \gls{OCR} need to be analyzed \cite{Cunningham:2005}.
 
 \subsubsection{Ontology-based Information Extraction}
-The idea of the Semantic Web is an extension of traditional content so-called annotations. To realize this requires the creation of annotations, the linking of websites with ontologies and the establishment and management of ontologies. Under an ontology a knowledge model is understood that represents concepts and terms, and their relationships. In this context, studies have been started in the field of \gls{OBIE} which serves the automation of these processes. Unlike traditional information extraction not only the extraction of an entity is focused, but also the image on an ontology \cite{Cunningham:2005}\cite{Maynard:2005}\cite{Weinhofer:2010}\cite{Linsmayr:2010}.
+The idea of the Semantic Web is an extension of traditional content with annotations. The realization requires the creation of annotations, the linking of websites with ontologies and the establishment and management of ontologies. An ontology is a knowledge model that represents concepts and terms, and their relationships. In this context, studies have been started in the field of \gls{OBIE} which serves the automation of these processes. Unlike traditional information extraction the focus is not alone on the extraction of an entity, but also on the image of an ontology \cite{Cunningham:2005}\cite{Maynard:2005}\cite{Weinhofer:2010}\cite{Linsmayr:2010}.
 
 \gls{OBIE} faces the following challenges:
+
+\begin{itemize}
+\item \textbf{Identification of instances of the ontology} \newline
+Instances already defined in the ontology need to be found in the documents.
+\item \textbf{Automatic population of the ontology} \newline
+Instances that belong to the concepts of the ontology are added in the correct position.
+\end{itemize}
+
+The advantage over traditional IE is the linking to an ontology which allows a more meaningful storing of the extracted information \cite{Maynard:2005}.
 
 \newpage
 \subsection{Related fields}
 
 \subsubsection{Information Retrieval}
+In principle, information storage and retrieval is simple. Suppose there is a store of documents and a person (user of the store) formulates a question (request or query) to which the answer is a set of documents satisfying the information need expressed by his question. He can obtain the set by reading all the documents in the store, retaining the relevant documents and discarding all the others. In a sense, this constitutes 'perfect' retrieval. This solution is obviously impracticable. A user either does not have the time or does not wish to spend the time reading the entire document collection, apart from the fact that it may be physically impossible for him to do so \cite{Rijsbergen:1979}.
 
-\subsubsection{Natural Language Processing}
-\gls{NLP} ...
+Information Extraction is not Information Retrieval: Information Extraction differs from traditional techniques in that it does not recover from a collection a subset of documents which are hopefully relevant to a query, based on key-word searching (perhaps augmented by a thesaurus). Instead, the goal is to extract from the documents (which may be in a variety of languages) salient facts about prespecified types of events, entities or relationships. These facts are then usually entered automatically into a database, which may then be used to analyse the data for trends, to give a natural language summary, or simply to serve for on-line access. \cite{GATE:IE}
+
+\subsubsection{Automatic summarization}
+Automatic summarization involves reducing a text document or a larger corpus of multiple documents into a short set of words or paragraph that conveys the main meaning of the text. Extractive methods work by selecting a subset of existing words, phrases, or sentences in the original text to form the summary. In contrast, abstractive methods build an internal semantic representation and then use natural language generation techniques to create a summary that is closer to what a human might generate. Such a summary might contain words not explicitly present in the original. The state-of-the-art abstractive methods are still quite weak, so most research has focused on extractive methods, and this is what we will cover \cite{Goldberg:2007}.
+
+\subsubsection{Document classification}
+Document classification is known under a number of synonyms such as document/text categorization/routing and topic identification. Basically document classification can be defined as content-based assignment of one or more predefined categories (topics) to documents. Document classification can be used for document filtering and routing to topic-specific processing mechanisms such as information extraction and machine translation. However, it is equally useful for filtering and routing documents directly to humans \cite{Knorz:2000}.
+
+Applications are e.g. filtering of news articles for knowledge workers, routing of customer email in a customer service department, or detection and identification of criminal activities for police, military, or crete service environments \cite{Knorz:2000}.
+
+\subsubsection{Data Mining}
+Data Mining, also popularly known as \gls{KDD}, refers to the nontrivial extraction of implicit, previously unknown and potentially useful information from data in databases. While data mining and knowledge discovery in databases (or KDD) are frequently treated as synonyms, data mining is actually part of the knowledge discovery process \cite{Zaiane:1999}. 
+
+\subsubsection{Question answering}
+Question Answering is a specialised form of information retrieval. Given a collection of documents, a Question Answering system attempts to retrieve correct answers to questions posed in natural language. Open-domain question answering requires question answering systems to be able to answer questions about any conceivable topic. Such systems cannot, therefore, rely on hand crafted domain specific knowledge to find and extract the correct answers \cite{Lampert:2004}.
 
 \subsubsection{Machine Learning}
+The Machine Learning field evolved from the broad field of Artificial Intelligence, which aims to mimic intelligent abilities of humans by machines. In the field of Machine Learning one considers the important question of how to make machines able to \enquote{learn}. Learning in this context is understood as inductive inference, where one observes examples that represent incomplete information about some \enquote{statistical phenomenon} \cite{Raetsch:2004}.
