@@ -78,7 +78,7 @@ Figure \ref{fig:fbeta-score} shows the more general formula of $\textit{F}_\beta
 $\textit{F}_\beta$ measures the effectiveness of retrieval with respect to a user who attaches $\beta$ times as much importance to recall as precision \cite{Rijsbergen:1979}.
 
 \subsubsection{Error measure}
-The \textit{error measure} (E) corresponds to the F-measure \cite{Feilmayr:2012}.
+Since \textit{F} is a figure of merit, the higher its value the better we consider the performance of the system. We can then define \textit{E} = 1 – F as a corresponding \textit{error measure} \cite{Makhoul:1999}:
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -87,8 +87,8 @@ The \textit{error measure} (E) corresponds to the F-measure \cite{Feilmayr:2012}
 \caption{Error measure formula}
 \end{figure}
 
-\subsubsection{Error Rate}
-The \textit{Error Rate} (\textit{ERR}) ...
+\subsubsection{Error per Response Fill}
+The \textit{Error per Response Fill} (\textit{ERR})... \cite{Chinchor:1995}.
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -102,7 +102,7 @@ The \textit{Slot Error Rate} (SER) ...
 
 \begin{figure}[H]
 \begin{displaymath}
-	SER = \frac{S+D+I}{N} = \frac{S+D+I}{C+S+D}
+	SER = \frac{S+D+I}{N}
 \end{displaymath}
 \caption{Slot Error Rate formula}
 \end{figure}
