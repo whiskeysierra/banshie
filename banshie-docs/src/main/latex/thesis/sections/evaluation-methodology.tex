@@ -27,7 +27,7 @@ For classification tasks, the terms true positives, true negatives, false positi
 
 \newpage
 \subsubsection{Precision}
-The \textit{precision} (\ensuremath{\pi} or P) is defined as the percentage of correctly retrieved data in the hypothesis \cite{Carstensen:2010}. 
+The \textit{precision} (\ensuremath{\pi} or P), also called Sensitivity, is defined as the percentage of correctly retrieved data in the hypothesis \cite{Carstensen:2010}. 
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -37,7 +37,7 @@ The \textit{precision} (\ensuremath{\pi} or P) is defined as the percentage of c
 \end{figure}
 
 \subsubsection{Recall}
-The \textit{recall} (\ensuremath{\rho} or R) describes the completeness of an extraction, which is determined by the ratio of correctly predicted results to all correct results \cite{Carstensen:2010}.
+The \textit{recall} (\ensuremath{\rho} or R), also referred to as the \gls{PPV}, describes the completeness of an extraction, which is determined by the ratio of correctly predicted results to all correct results \cite{Carstensen:2010}.
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -56,7 +56,7 @@ In figure \ref{fig:recall-precision} the relevant items are to the left of the s
 \end{figure}
 
 \subsubsection{F-measure}
-The \textit{F-measure} (F), or  balanced F-score or $\textit{F}_\textit{1}$ score, ...
+The \textit{F-measure} (F), or  balanced F-score or $\textit{F}_\textit{1}$ score, was introduced to combine \textit{precision} and \textit{recall} into a single measure.
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -65,14 +65,17 @@ The \textit{F-measure} (F), or  balanced F-score or $\textit{F}_\textit{1}$ scor
 \caption{F-measure formula}
 \end{figure}
 
+Figure \ref{fig:fbeta-score} shows the more general formula of $\textit{F}_\beta$-score, which contains a parameter $\beta$ to control the balance between \textit{precision} and \textit{recall}. When $\beta$ = 1, $\textit{F}_\textit{1}$ comes to be equivalent to the harmonic mean of $\pi$ and $\rho$. If $\beta$ > 1, F becomes more recall-oriented and if $\beta$ < 1, it becomes more precisionoriented \cite{Sasaki:2007}.
+
 \begin{figure}[H]
 \begin{displaymath}
-	\textit{F}_\beta = (1+\beta^2) \cdot \frac{\pi \cdot \rho}{(\beta^2 \cdot \pi) + \rho}
+	\textit{F}_\beta = (1+\beta^2) \cdot \frac{\pi \cdot \rho}{(\beta^2 \cdot \pi) + \rho}, (0 \le \beta \le +\infty)
 \end{displaymath}
-\caption{General $\textit{F}_\beta$-score formula}
+\caption{General $\textit{F}_\beta$-score formula \cite{Chinchor:1992}}
+\label{fig:fbeta-score}
 \end{figure}
 
-$\textit{F}_\beta$ \enquote{measures the effectiveness of retrieval with respect to a user who attaches $\beta$ times as much importance to recall as precision} \cite{Rijsbergen:1979}.
+$\textit{F}_\beta$ measures the effectiveness of retrieval with respect to a user who attaches $\beta$ times as much importance to recall as precision \cite{Rijsbergen:1979}.
 
 \subsubsection{Error measure}
 The \textit{error measure} (E) corresponds to the F-measure \cite{Feilmayr:2012}.
