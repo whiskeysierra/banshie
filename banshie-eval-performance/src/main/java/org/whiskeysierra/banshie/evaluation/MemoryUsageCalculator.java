@@ -3,6 +3,9 @@ package org.whiskeysierra.banshie.evaluation;
 import org.whiskeysierra.banshie.execution.event.Event;
 import org.whiskeysierra.banshie.execution.event.MemoryUsageEvent;
 
+/**
+ * Calculates the average memory usage in megabytes.
+ */
 final class MemoryUsageCalculator implements Calculator {
 
     private long used;
@@ -13,7 +16,7 @@ final class MemoryUsageCalculator implements Calculator {
         if (e instanceof MemoryUsageEvent) {
             final MemoryUsageEvent event = MemoryUsageEvent.class.cast(e);
 
-            used += event.getValue();
+            used += event.getValue() / 1024L / 1024L;
             count++;
         }
     }

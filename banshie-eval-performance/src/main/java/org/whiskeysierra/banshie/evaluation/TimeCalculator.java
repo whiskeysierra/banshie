@@ -2,6 +2,9 @@ package org.whiskeysierra.banshie.evaluation;
 
 import org.whiskeysierra.banshie.execution.event.Event;
 
+/**
+ * Calculates the time between the first and the last event in milliseconds.
+ */
 final class TimeCalculator implements Calculator {
 
     private long first = Long.MAX_VALUE;

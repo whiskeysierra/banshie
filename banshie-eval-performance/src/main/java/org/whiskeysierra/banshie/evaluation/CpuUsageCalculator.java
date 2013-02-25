@@ -3,6 +3,9 @@ package org.whiskeysierra.banshie.evaluation;
 import org.whiskeysierra.banshie.execution.event.CpuTimeEvent;
 import org.whiskeysierra.banshie.execution.event.Event;
 
+/**
+ * Calculates the average cpu time as a percentage, expressed as a double between 0.0 and 1.0.
+ */
 final class CpuUsageCalculator implements Calculator {
 
     private int availableProcessors;
