@@ -2,6 +2,8 @@ package org.whiskeysierra.banshie.example.stanford.corenlp;
 
 import com.google.common.base.Charsets;
 import com.google.common.io.CharStreams;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
+import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.NamedEntityTagAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.SentencesAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.TextAnnotation;
@@ -44,15 +46,19 @@ public final class Main {
         for (CoreMap sentence : sentences) {
             for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
                 final String word = token.get(TextAnnotation.class);
-                final String ne = token.get(NamedEntityTagAnnotation.class);
+                final String type = token.get(NamedEntityTagAnnotation.class).toLowerCase(Locale.ENGLISH);
+                final int start = token.get(CharacterOffsetBeginAnnotation.class);
+                final int end = token.get(CharacterOffsetEndAnnotation.class);
 
                 writer.writeCharacters(" ");
 
-                if ("O".equals(ne)) {
+                if ("o".equals(type)) {
                     writer.writeCharacters(word);
                 } else {
                     writer.writeStartElement("span");
-                    writer.writeAttribute("type", ne.toLowerCase(Locale.ENGLISH));
+                    writer.writeAttribute("type", type);
+                    writer.writeAttribute("start", String.valueOf(start));
+                    writer.writeAttribute("end", String.valueOf(end));
                     writer.writeCharacters(word);
                     writer.writeEndElement();
                 }
