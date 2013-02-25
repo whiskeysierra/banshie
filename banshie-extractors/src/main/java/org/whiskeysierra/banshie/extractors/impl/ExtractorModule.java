@@ -4,7 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Singleton;
 import com.google.inject.persist.jpa.JpaPersistModule;
 import com.google.inject.util.Modules;
-import org.whiskeysierra.banshie.extractors.ExtractorStorage;
+import org.whiskeysierra.banshie.extractors.ExtractorRepository;
 import org.whiskeysierra.banshie.jpa.AriesJpaPersistModule;
 
 import static org.ops4j.peaberry.Peaberry.service;
@@ -14,8 +14,8 @@ public final class ExtractorModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(ExtractorStorage.class).to(DefaultExtractorStorage.class).in(Singleton.class);
-        bind(export(ExtractorStorage.class)).toProvider(service(ExtractorStorage.class).export());
+        bind(ExtractorRepository.class).to(DefaultExtractorRepository.class).in(Singleton.class);
+        bind(export(ExtractorRepository.class)).toProvider(service(ExtractorRepository.class).export());
 
         install(Modules.override(new JpaPersistModule("banshie")).with(new AriesJpaPersistModule("banshie")));
     }

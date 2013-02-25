@@ -25,6 +25,10 @@ class CorpusEntity implements Corpus {
         this.uuid = uuid;
     }
 
+    public void setReference(String reference) {
+        this.reference = reference;
+    }
+
     @Override
     public File getReference() {
         return new File(reference);
@@ -33,6 +37,10 @@ class CorpusEntity implements Corpus {
     @Override
     public File getInput() {
         return new File(input);
+    }
+
+    public void setInput(String input) {
+        this.input = input;
     }
 
     public static CorpusEntity copyOf(Corpus corpus) {

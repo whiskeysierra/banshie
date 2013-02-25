@@ -37,6 +37,10 @@ class ExtractorEntity implements Extractor {
         return new File(path);
     }
 
+    public void setPath(String path) {
+        this.path = path;
+    }
+
     public static ExtractorEntity copyOf(Extractor extractor) {
         final ExtractorEntity entity = new ExtractorEntity();
 

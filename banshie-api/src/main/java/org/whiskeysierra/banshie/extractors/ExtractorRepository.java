@@ -3,7 +3,7 @@ package org.whiskeysierra.banshie.extractors;
 import java.util.List;
 import java.util.UUID;
 
-public interface ExtractorStorage {
+public interface ExtractorRepository {
 
     void save(Extractor extractor);
 
