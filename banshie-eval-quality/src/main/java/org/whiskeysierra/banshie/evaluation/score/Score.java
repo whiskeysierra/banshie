@@ -4,8 +4,6 @@ import org.whiskeysierra.banshie.evaluation.counter.Counts;
 
 public interface Score {
 
-    void update(Counts counts);
-
-    float getValue();
+    double calculate(Counts counts);
 
 }

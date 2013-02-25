@@ -15,29 +15,18 @@ final class FMeasure implements Score {
     }
 
     @Override
-    public void update(Counts counts) {
-        precision.update(counts);
-        recall.update(counts);
-    }
+    public double calculate(Counts counts) {
+        final double p = precision.calculate(counts);
+        final double r = recall.calculate(counts);
 
-    @Override
-    public float getValue() {
-        final float p = precision.getValue();
-        final float r = recall.getValue();
-
-        final float sum = p + r;
+        final double sum = p + r;
 
         if (sum > 0) {
             return 2 * (p * r) / sum;
         } else {
             // cannot divide by zero, return error code
-            return Float.NaN;
+            return Double.NaN;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "F-Measure: " + getValue();
     }
 
 }

@@ -1,10 +1,14 @@
 package org.whiskeysierra.banshie.evaluation;
 
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
+import org.whiskeysierra.banshie.evaluation.counter.Counter;
+import org.whiskeysierra.banshie.evaluation.counter.Counts;
+import org.whiskeysierra.banshie.evaluation.score.Score;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -14,14 +18,20 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 final class DefaultQualityEvaluator implements QualityEvaluator {
 
-    final DocumentBuilderFactory factory;
+    private final DocumentBuilderFactory factory;
+    private final Counter counter;
+    private final Map<Dimension, Score> scores;
 
     @Inject
-    DefaultQualityEvaluator(DocumentBuilderFactory factory) {
+    DefaultQualityEvaluator(DocumentBuilderFactory factory, Counter counter,
+        Map<Dimension, Score> scores) {
         this.factory = factory;
+        this.counter = counter;
+        this.scores = scores;
     }
 
     private List<Span> readSpans(File file) {
@@ -38,7 +48,10 @@ final class DefaultQualityEvaluator implements QualityEvaluator {
                 final Element element = Element.class.cast(nodes.item(i));
 
                 final Span span = new Span();
+
                 span.setType(element.getAttribute("type"));
+                span.setStart(Integer.parseInt(element.getAttribute("start")));
+                span.setEnd(Integer.parseInt(element.getAttribute("end")));
                 span.setValue(element.getTextContent());
 
                 spans.add(span);
@@ -56,17 +69,17 @@ final class DefaultQualityEvaluator implements QualityEvaluator {
 
     @Override
     public Map<Dimension, Value> evaluate(File reference, File prediction) {
-        // TODO count insertion, deletion and substitution errors
-        // TODO exact, contains and overlap mode?
-        // TODO run scoring
-
         final List<Span> references = readSpans(reference);
         final List<Span> predictions = readSpans(prediction);
 
-        System.out.println(references);
-        System.out.println(predictions);
+        final Counts counts = counter.count(references, predictions);
+        final Map<Dimension, Value> values = Maps.newHashMap();
 
-        return null;
+        for (Entry<Dimension, Score> entry : scores.entrySet()) {
+            values.put(entry.getKey(), new SimpleValue(entry.getValue().calculate(counts)));
+        }
+
+        return values;
     }
 
 }

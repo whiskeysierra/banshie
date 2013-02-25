@@ -13,18 +13,8 @@ final class ErrorMeasure implements Score {
     }
 
     @Override
-    public void update(Counts counts) {
-        measure.update(counts);
-    }
-
-    @Override
-    public float getValue() {
-        return 1f - measure.getValue();
-    }
-
-    @Override
-    public String toString() {
-        return "Error measure: " + getValue();
+    public double calculate(Counts counts) {
+        return 1d - measure.calculate(counts);
     }
 
 }

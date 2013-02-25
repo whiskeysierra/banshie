@@ -7,30 +7,16 @@ import org.whiskeysierra.banshie.evaluation.counter.Counts;
  */
 final class Recall implements Score {
 
-    private float truePositives;
-    private float falseNegatives;
-
     @Override
-    public void update(Counts counts) {
-        truePositives += counts.getTruePositives();
-        falseNegatives += counts.getFalseNegatives();
-    }
-
-    @Override
-    public float getValue() {
-        final float sum = truePositives + falseNegatives;
+    public double calculate(Counts counts) {
+        final double sum = counts.getTruePositives() + counts.getFalseNegatives();
 
         if (sum > 0) {
-            return truePositives / sum;
+            return counts.getTruePositives() / sum;
         } else {
             // cannot divide by zero, return error code
-            return Float.NaN;
+            return Double.NaN;
         }
-    }
-
-    @Override
-    public String toString() {
-        return "Recall: " + getValue();
     }
 
 }

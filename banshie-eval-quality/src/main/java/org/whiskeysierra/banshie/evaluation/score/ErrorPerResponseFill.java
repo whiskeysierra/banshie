@@ -2,14 +2,14 @@ package org.whiskeysierra.banshie.evaluation.score;
 
 import org.whiskeysierra.banshie.evaluation.counter.Counts;
 
-final class SlotErrorRate implements Score {
+final class ErrorPerResponseFill implements Score {
 
     @Override
     public double calculate(Counts counts) {
-        final double sum = counts.getTruePositives() + counts.getFalseNegatives();
+        final double errors = counts.getFalseNegatives() + counts.getFalsePositives();
+        final double sum = counts.getTruePositives() + errors;
 
-        if (sum > 0) {
-            final double errors = counts.getFalseNegatives() + counts.getFalsePositives();
+        if (sum < 0) {
             return errors / sum;
         } else {
             // cannot divide by zero, return error code

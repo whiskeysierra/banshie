@@ -22,6 +22,8 @@ final class DefaultCounter implements Counter {
         int falsePositives = predictions.size();
         int falseNegatives = references.size();
 
+        // TODO associate references to predications!
+
         for (Span reference : references) {
             for (Span prediction : predictions) {
                 // TODO use span location
