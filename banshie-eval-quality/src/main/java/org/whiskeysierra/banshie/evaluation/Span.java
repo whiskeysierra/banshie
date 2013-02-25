@@ -1,5 +1,7 @@
 package org.whiskeysierra.banshie.evaluation;
 
+import com.google.common.primitives.Ints;
+
 public final class Span {
 
     private String value;
@@ -38,6 +40,11 @@ public final class Span {
 
     public void setEnd(int end) {
         this.end = end;
+    }
+
+    public boolean overlap(Span that) {
+        return (this.start <= that.start && this.end >= that.start) ||
+            (that.start <= this.start && that.end >= this.start);
     }
 
     @Override
