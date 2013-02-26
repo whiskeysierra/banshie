@@ -6,5 +6,7 @@
     <persistence-unit name="banshie" transaction-type="JTA">
         <provider>org.apache.openjpa.persistence.PersistenceProviderImpl</provider>
         <jta-data-source>osgi:service/javax.sql.DataSource/(osgi.jndi.service.name=jdbc/banshiedb)</jta-data-source>
+        <class>org.whiskeysierra.banshie.corpora.impl.CorpusEntity</class>
+        <class>org.whiskeysierra.banshie.extractors.impl.ExtractorEntity</class>
     </persistence-unit>
 </persistence>

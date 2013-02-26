@@ -38,7 +38,7 @@ release.properties
 pom.xml.releaseBackup
 /*/target
 
-/banshie-execution/extractors
+/banshie-execution/executions
 
 /*/src/main/latex/*/*.acn
 /*/src/main/latex/*/*.acr

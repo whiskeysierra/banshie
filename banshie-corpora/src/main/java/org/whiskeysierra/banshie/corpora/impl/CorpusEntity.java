@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.UUID;
 
 @Entity
-class CorpusEntity implements Corpus {
+public class CorpusEntity implements Corpus {
 
     @Id
     private UUID uuid;

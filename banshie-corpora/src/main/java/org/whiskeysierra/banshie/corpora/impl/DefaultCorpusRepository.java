@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 import com.google.inject.persist.Transactional;
+import org.ops4j.peaberry.activation.Start;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.corpora.CorpusRepository;
 
@@ -20,17 +21,23 @@ import java.util.UUID;
 
 public class DefaultCorpusRepository implements CorpusRepository {
 
-    private Provider<EntityManager> provider;
-    private final File base;
+    private final Provider<EntityManager> provider;
+
+    private File basePath = new File("corpora");
 
     @Inject
-    public DefaultCorpusRepository(Provider<EntityManager> provider,
-        @Named("corpus.directory") File base) {
-
+    public DefaultCorpusRepository(Provider<EntityManager> provider) {
         this.provider = provider;
-        this.base = base;
+    }
 
-        base.mkdirs();
+    @Inject(optional = true)
+    public void setBasePath(@Named("corpus.directory") File basePath) {
+        this.basePath = basePath;
+    }
+
+    @Start
+    public void onStart() {
+        basePath.mkdirs();
     }
 
     private EntityManager manager() {
@@ -40,7 +47,7 @@ public class DefaultCorpusRepository implements CorpusRepository {
     @Transactional
     @Override
     public void save(Corpus corpus) {
-        final File directory = new File(base, corpus.getUuid().toString());
+        final File directory = new File(basePath, corpus.getUuid().toString());
         directory.mkdirs();
 
         final File reference = new File(directory, corpus.getReference().getName());

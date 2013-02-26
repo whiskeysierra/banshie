@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 import com.google.inject.name.Named;
 import com.google.inject.persist.Transactional;
+import org.ops4j.peaberry.activation.Start;
 import org.whiskeysierra.banshie.extractors.Extractor;
 import org.whiskeysierra.banshie.extractors.ExtractorRepository;
 
@@ -20,14 +21,23 @@ import java.util.UUID;
 
 public class DefaultExtractorRepository implements ExtractorRepository {
 
-    private Provider<EntityManager> provider;
-    private final File base;
+    private final Provider<EntityManager> provider;
+
+    private File basePath = new File("extractors");
 
     @Inject
-    public DefaultExtractorRepository(Provider<EntityManager> provider,
-        @Named("extractors.directory") File base) {
+    public DefaultExtractorRepository(Provider<EntityManager> provider) {
         this.provider = provider;
-        this.base = base;
+    }
+
+    @Inject(optional = true)
+    public void setBasePath(@Named("extractors.directory") File basePath) {
+        this.basePath = basePath;
+    }
+
+    @Start
+    public void onStart() {
+        basePath.mkdirs();
     }
 
     private EntityManager manager() {
@@ -37,7 +47,7 @@ public class DefaultExtractorRepository implements ExtractorRepository {
     @Transactional
     @Override
     public void save(Extractor extractor) {
-        final File directory = new File(base, extractor.getUuid().toString());
+        final File directory = new File(basePath, extractor.getUuid().toString());
         directory.mkdirs();
 
         final File file = new File(directory, extractor.getPath().getName());

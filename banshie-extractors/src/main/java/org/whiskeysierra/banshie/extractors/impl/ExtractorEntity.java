@@ -8,7 +8,7 @@ import java.io.File;
 import java.util.UUID;
 
 @Entity
-class ExtractorEntity implements Extractor {
+public class ExtractorEntity implements Extractor {
 
     @Id
     private UUID uuid;

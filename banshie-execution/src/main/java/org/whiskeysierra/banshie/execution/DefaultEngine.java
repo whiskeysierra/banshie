@@ -2,6 +2,7 @@ package org.whiskeysierra.banshie.execution;
 
 import com.google.common.io.Files;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 import org.ops4j.peaberry.activation.Start;
 import org.whiskeysierra.banshie.corpora.Corpus;
 import org.whiskeysierra.banshie.execution.monitor.ProcessMonitor;
@@ -20,13 +21,17 @@ final class DefaultEngine implements Engine {
     private final ProcessService service;
     private final ProcessMonitorFactory factory;
 
-    // TODO make configurable
-    private File basePath = new File("extractors");
+    private File basePath = new File("executions");
 
     @Inject
     DefaultEngine(ProcessService service, ProcessMonitorFactory factory) {
         this.service = service;
         this.factory = factory;
+    }
+
+    @Inject(optional = true)
+    public void setBasePath(@Named("execution.directory") File basePath) {
+        this.basePath = basePath;
     }
 
     @Start
