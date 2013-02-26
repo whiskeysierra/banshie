@@ -77,6 +77,9 @@
         <antcall target="build">
             <param name="bundle" value="banshie-example-stanford-corenlp"/>
         </antcall>
+        <antcall target="build">
+            <param name="bundle" value="banshie-web"/>
+        </antcall>
     </target>
 
     <target name="clean">
