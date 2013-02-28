@@ -28,10 +28,8 @@ final class CpuUsageCalculator implements Calculator {
                 this.lastSystemTime = event.getSystemTime();
             } else {
                 final double usage = (double) (event.getValue() - lastCpuTime) / (event.getSystemTime() - lastSystemTime);
-                final double normalized = usage / availableProcessors;
 
-
-                this.usages += normalized;
+                this.usages += usage / availableProcessors;
                 this.count++;
                 this.lastCpuTime = event.getValue();
                 this.lastSystemTime = event.getSystemTime();
@@ -41,7 +39,7 @@ final class CpuUsageCalculator implements Calculator {
 
     @Override
     public Value getResult() {
-        return new SimpleValue(usages / count);
+        return new SimpleValue(Math.min(usages / count, 100d));
     }
 
 }
