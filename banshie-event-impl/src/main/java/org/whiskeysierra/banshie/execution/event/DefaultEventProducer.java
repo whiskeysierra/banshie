@@ -17,8 +17,10 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
+import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.ConnectException;
+import java.util.concurrent.TimeUnit;
 
 final class DefaultEventProducer implements EventProducer {
 
@@ -26,6 +28,7 @@ final class DefaultEventProducer implements EventProducer {
     private final MBeanServerConnection connection;
     private final MemoryMXBean memory;
     private final OperatingSystemMXBean os;
+    private final RuntimeMXBean runtime;
 
     private final EventLogger logger;
 
@@ -36,6 +39,7 @@ final class DefaultEventProducer implements EventProducer {
         this.connection = connection;
         this.memory = proxy(ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
         this.os = proxy(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
+        this.runtime = proxy(ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
 
         this.logger = factory.newLogger(logFile);
     }
@@ -67,8 +71,7 @@ final class DefaultEventProducer implements EventProducer {
 
         event.setTime(System.currentTimeMillis());
         event.setValue(os.getProcessCpuTime());
-        // TODO is it correct to use this (!) system's nano time
-        event.setSystemTime(System.nanoTime());
+        event.setSystemTime(TimeUnit.MILLISECONDS.toNanos(runtime.getUptime()));
         event.setAvailableProcessors(os.getAvailableProcessors());
 
         logger.write(event);
