@@ -22,6 +22,10 @@
         </dependency>
         <dependency>
             <groupId>org.osgi</groupId>
+            <artifactId>org.osgi.core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.osgi</groupId>
             <artifactId>org.osgi.compendium</artifactId>
             <version>4.3.1</version>
         </dependency>
@@ -34,9 +38,24 @@
             <artifactId>peaberry.activation</artifactId>
         </dependency>
         <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+        </dependency>
+        <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>servlet-api</artifactId>
             <version>2.5</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>3.1.3.RELEASE</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
     <build>
@@ -47,6 +66,11 @@
                 <configuration>
                     <instructions>
                         <Bundle-Module>org.whiskeysierra.banshie.web.WebModule</Bundle-Module>
+                        <Export-Package/>
+                        <Import-Package>
+                            org.springframework.web.servlet.view,
+                            *
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>
