@@ -23,7 +23,7 @@ technique of counting results. Figure \ref{tab:confusion-matrix} shows a confusi
 \label{tab:confusion-matrix}
 \end{table}
 
-For each extracted entity, we have to evaluate if it is correct (and thus a true positive) or not (and thus a false positive). The false negative in the matrix is the number of entities that should have been extracted, but haven't. In IE applications, the true negative is usually not used \cite{Sitter:2004}
+For each extracted entity, we have to evaluate if it is correct (and thus a true positive) or not (and thus a false positive). The false negative in the matrix is the number of entities that should have been extracted, but haven't. In IE applications, the true negative is usually not used \cite{Sitter:2004} because we typically do not know what a \enquote{true negative} is. Unlike document classification, a \enquote{bad tuple} does not exist apriori in a document. It only exists because the extraction system can extract it \cite{Ipeirotis:2007}.
 
 Another way to calculate performance measures is based on the notation proposed by \citeauthor{Makhoul:1999} \cite{Makhoul:1999}:
 
@@ -106,9 +106,6 @@ Another commonly used formula for the F-measure is shown in \ref{fig:falpha-scor
 \label{fig:falpha-score}
 \end{figure}
 
-\subsubsection{Accuracy}
-\fxfatal{Accuarcy}
-
 \subsubsection{Error measure}
 Since \textit{F} is a figure of merit, the higher its value the better we consider the performance of the system. We can then define \textit{E} = 1 – $F_\alpha$ as a corresponding \textit{error measure} \cite{Makhoul:1999}:
 
@@ -172,8 +169,8 @@ ERR, the error measure defined by MUC, does have one esthetic advantage in that 
 \subsection{Runtime performance measures}
 After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
-\paragraph{CPU time}
+\subsubsection{CPU time}
 An important metric to measure the runtime performance of a program is the proess CPU time which determines how much CPU time a process spent during its execution. 
 
-\paragraph{Memory consumption}
+\subsubsection{Memory consumption}
 But measuring the process cpu time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
