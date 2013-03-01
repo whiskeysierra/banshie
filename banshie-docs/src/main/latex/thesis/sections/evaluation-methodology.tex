@@ -144,8 +144,10 @@ Often only the F-measure is reported as the evaluation measure of an IE system. 
 
 \newpage
 \subsection{Runtime performance measures}
+After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
-\subsubsection{CPU time}
-An important metric to measure the runtime performance of a program is the CPU time which determines how much CPU time a process required during its execution.
+\paragraph{CPU time}
+An important metric to measure the runtime performance of a program is the proess CPU time which determines how much CPU time a process spent during its execution. 
 
-\subsubsection{Memory consumption}
+\paragraph{Memory consumption}
+But measuring the process cpu time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
