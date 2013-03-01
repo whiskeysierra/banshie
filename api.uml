@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie</OriginalElement>
+  <nodes>
+    <node x="0.0" y="577.0">org.whiskeysierra.banshie.execution.Engine</node>
+    <node x="484.0" y="295.0">org.whiskeysierra.banshie.execution.ExecutionResult</node>
+    <node x="0.0" y="295.0">org.whiskeysierra.banshie.extractors.ExtractorRepository</node>
+    <node x="183.0" y="436.0">org.whiskeysierra.banshie.evaluation.QualityEvaluator</node>
+    <node x="371.0" y="577.0">org.whiskeysierra.banshie.evaluation.PerformanceEvaluator</node>
+    <node x="248.0" y="295.0">org.whiskeysierra.banshie.corpora.CorpusRepository</node>
+    <node x="343.0" y="0.0">org.whiskeysierra.banshie.extractors.Extractor</node>
+    <node x="0.0" y="436.0">org.whiskeysierra.banshie.corpora.Corpus</node>
+    <node x="0.0" y="674.0">org.whiskeysierra.banshie.evaluation.Value</node>
+    <node x="0.0" y="0.0">org.whiskeysierra.banshie.evaluation.Dimension</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.827906976744186" x="302.4522471910113" y="292.5" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

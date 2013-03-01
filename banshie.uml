@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>MODULES</ID>
+  <OriginalElement>mdl-banshie-main</OriginalElement>
+  <nodes>
+    <node x="735.625" y="290.0">mdl-banshie-api</node>
+    <node x="613.890625" y="160.0">mdl-banshie-event-api</node>
+    <node x="685.765625" y="0.0">mdl-banshie-event-impl</node>
+    <node x="206.0" y="0.0">mdl-banshie-execution</node>
+    <node x="1214.5208333333335" y="80.0">mdl-banshie-corpora</node>
+    <node x="398.18750000000006" y="0.0">mdl-banshie-monitor-impl</node>
+    <node x="1145.5208333333335" y="160.0">mdl-banshie-jpa</node>
+    <node x="1138.7986111111113" y="0.0">mdl-banshie-persistence</node>
+    <node x="1029.5208333333335" y="80.0">mdl-banshie-extractors</node>
+    <node x="517.9027777777778" y="80.0">mdl-banshie-common</node>
+    <node x="97.75" y="80.0">mdl-banshie-process-api</node>
+    <node x="301.3402777777778" y="80.0">mdl-banshie-monitor-api</node>
+    <node x="894.5486111111112" y="0.0">mdl-banshie-logging-impl</node>
+    <node x="0.0" y="0.0">mdl-banshie-process-impl</node>
+    <node x="797.890625" y="80.0">mdl-banshie-logging-api</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="mdl-banshie-logging-impl" target="mdl-banshie-event-api">
+      <point x="0.0" y="15.0" />
+      <point x="987.5486111111112" y="50.0" />
+      <point x="994.2829861111112" y="50.0" />
+      <point x="994.2829861111112" y="140.0" />
+      <point x="756.515625" y="140.0" />
+      <point x="61.125" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-persistence" target="mdl-banshie-corpora">
+      <point x="21.75" y="15.0" />
+      <point x="1247.5486111111113" y="60.0" />
+      <point x="1288.5208333333335" y="60.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-event-impl" target="mdl-banshie-common">
+      <point x="-64.5" y="15.0" />
+      <point x="707.265625" y="50.0" />
+      <point x="633.4027777777778" y="50.0" />
+      <point x="38.5" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-execution" target="mdl-banshie-monitor-api">
+      <point x="54.0" y="15.0" />
+      <point x="341.0" y="50.0" />
+      <point x="345.8402777777778" y="50.0" />
+      <point x="-44.5" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-logging-impl" target="mdl-banshie-api">
+      <point x="62.0" y="15.0" />
+      <point x="1049.5486111111113" y="50.0" />
+      <point x="1005.2829861111112" y="50.0" />
+      <point x="1005.2829861111112" y="220.0" />
+      <point x="812.125" y="220.0" />
+      <point x="18.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-process-impl" target="mdl-banshie-api">
+      <point x="-46.5" y="15.0" />
+      <point x="46.5" y="50.0" />
+      <point x="81.015625" y="50.0" />
+      <point x="81.015625" y="270.0" />
+      <point x="740.125" y="270.0" />
+      <point x="-54.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-corpora" target="mdl-banshie-api">
+      <point x="37.0" y="15.0" />
+      <point x="1325.5208333333335" y="250.0" />
+      <point x="839.125" y="250.0" />
+      <point x="45.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-extractors" target="mdl-banshie-api">
+      <point x="-41.0" y="15.0" />
+      <point x="1070.5208333333335" y="230.0" />
+      <point x="821.125" y="230.0" />
+      <point x="27.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-process-api" target="mdl-banshie-api">
+      <point x="0.0" y="15.0" />
+      <point x="186.25" y="260.0" />
+      <point x="749.125" y="260.0" />
+      <point x="-45.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-execution" target="mdl-banshie-api">
+      <point x="0.0" y="15.0" />
+      <point x="286.9027777777778" y="250.0" />
+      <point x="758.125" y="250.0" />
+      <point x="-36.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-event-impl" target="mdl-banshie-api">
+      <point x="21.5" y="15.0" />
+      <point x="793.265625" y="50.0" />
+      <point x="787.390625" y="50.0" />
+      <point x="787.390625" y="210.0" />
+      <point x="794.125" y="210.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-monitor-impl" target="mdl-banshie-common">
+      <point x="70.125" y="15.0" />
+      <point x="561.8125" y="50.0" />
+      <point x="556.4027777777778" y="50.0" />
+      <point x="-38.5" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-extractors" target="mdl-banshie-jpa">
+      <point x="41.0" y="15.0" />
+      <point x="1152.5208333333335" y="130.0" />
+      <point x="1165.0208333333335" y="130.0" />
+      <point x="-39.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-persistence" target="mdl-banshie-api">
+      <point x="65.25" y="15.0" />
+      <point x="1291.0486111111113" y="50.0" />
+      <point x="1373.0208333333335" y="50.0" />
+      <point x="1373.0208333333335" y="260.0" />
+      <point x="848.125" y="260.0" />
+      <point x="54.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-event-impl" target="mdl-banshie-logging-api">
+      <point x="64.5" y="15.0" />
+      <point x="836.265625" y="50.0" />
+      <point x="842.140625" y="50.0" />
+      <point x="-44.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-monitor-impl" target="mdl-banshie-api">
+      <point x="-23.375" y="15.0" />
+      <point x="468.31250000000006" y="50.0" />
+      <point x="489.8402777777778" y="50.0" />
+      <point x="489.8402777777778" y="230.0" />
+      <point x="776.125" y="230.0" />
+      <point x="-18.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-monitor-impl" target="mdl-banshie-monitor-api">
+      <point x="-70.125" y="15.0" />
+      <point x="421.56250000000006" y="50.0" />
+      <point x="434.8402777777778" y="50.0" />
+      <point x="44.5" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-persistence" target="mdl-banshie-jpa">
+      <point x="-21.75" y="15.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-monitor-api" target="mdl-banshie-api">
+      <point x="0.0" y="15.0" />
+      <point x="390.3402777777778" y="240.0" />
+      <point x="767.125" y="240.0" />
+      <point x="-27.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-logging-api" target="mdl-banshie-event-api">
+      <point x="-44.25" y="15.0" />
+      <point x="842.140625" y="130.0" />
+      <point x="715.765625" y="130.0" />
+      <point x="20.375" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-logging-impl" target="mdl-banshie-logging-api">
+      <point x="-62.0" y="15.0" />
+      <point x="925.5486111111112" y="50.0" />
+      <point x="930.640625" y="50.0" />
+      <point x="44.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-execution" target="mdl-banshie-process-api">
+      <point x="-54.0" y="15.0" />
+      <point x="233.0" y="50.0" />
+      <point x="230.5" y="50.0" />
+      <point x="44.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-monitor-impl" target="mdl-banshie-event-api">
+      <point x="23.375" y="15.0" />
+      <point x="515.0625" y="50.0" />
+      <point x="500.8402777777778" y="50.0" />
+      <point x="500.8402777777778" y="130.0" />
+      <point x="634.265625" y="130.0" />
+      <point x="-61.125" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-event-impl" target="mdl-banshie-event-api">
+      <point x="-21.5" y="15.0" />
+      <point x="750.265625" y="60.0" />
+      <point x="682.4027777777778" y="60.0" />
+      <point x="682.4027777777778" y="130.0" />
+      <point x="675.015625" y="130.0" />
+      <point x="-20.375" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-process-impl" target="mdl-banshie-process-api">
+      <point x="46.5" y="15.0" />
+      <point x="139.5" y="50.0" />
+      <point x="142.0" y="50.0" />
+      <point x="-44.25" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-jpa" target="mdl-banshie-api">
+      <point x="0.0" y="15.0" />
+      <point x="1204.0208333333335" y="240.0" />
+      <point x="830.125" y="240.0" />
+      <point x="36.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-logging-api" target="mdl-banshie-api">
+      <point x="44.25" y="15.0" />
+      <point x="930.640625" y="210.0" />
+      <point x="803.125" y="210.0" />
+      <point x="9.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-corpora" target="mdl-banshie-jpa">
+      <point x="-37.0" y="15.0" />
+      <point x="1251.5208333333335" y="130.0" />
+      <point x="1243.0208333333335" y="130.0" />
+      <point x="39.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-persistence" target="mdl-banshie-extractors">
+      <point x="-65.25" y="15.0" />
+      <point x="1160.5486111111113" y="50.0" />
+      <point x="1111.5208333333335" y="50.0" />
+      <point x="0.0" y="-15.0" />
+    </edge>
+    <edge source="mdl-banshie-event-api" target="mdl-banshie-api">
+      <point x="0.0" y="15.0" />
+      <point x="695.390625" y="220.0" />
+      <point x="785.125" y="220.0" />
+      <point x="-9.0" y="-15.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="393.5" y="160.0" />
+  <SelectedNodes />
+  <Categories />
+</Diagram>
+
