@@ -14,8 +14,8 @@ public final class PerformanceEvaluationModule extends AbstractModule {
         final MapBinder<Dimension, Calculator> binder = MapBinder.newMapBinder(binder(),
             Dimension.class, Calculator.class);
 
-        binder.addBinding(Dimension.CPU_USAGE).to(CpuUsageCalculator.class);
-        binder.addBinding(Dimension.MEMORY_USAGE).to(MemoryUsageCalculator.class);
+        binder.addBinding(Dimension.CPU_TIME).to(CpuUsageCalculator.class);
+        binder.addBinding(Dimension.MEMORY_CONSUMPTION).to(MemoryUsageCalculator.class);
         binder.addBinding(Dimension.TIME).to(TimeCalculator.class);
 
         bind(PerformanceEvaluator.class).to(DefaultPerformanceEvaluator.class).in(Singleton.class);

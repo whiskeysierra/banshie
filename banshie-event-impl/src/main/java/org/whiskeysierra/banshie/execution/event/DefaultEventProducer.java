@@ -5,6 +5,8 @@ import com.google.common.base.Throwables;
 import com.google.inject.Inject;
 import com.google.inject.assistedinject.Assisted;
 import com.sun.management.OperatingSystemMXBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.whiskeysierra.banshie.execution.logging.EventLogger;
 import org.whiskeysierra.banshie.execution.logging.EventLoggerFactory;
 
@@ -17,18 +19,16 @@ import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.MemoryMXBean;
 import java.lang.management.MemoryUsage;
-import java.lang.management.RuntimeMXBean;
 import java.lang.reflect.UndeclaredThrowableException;
 import java.net.ConnectException;
-import java.util.concurrent.TimeUnit;
 
 final class DefaultEventProducer implements EventProducer {
 
-    // TODO make these final and move initialization to constructor
+    private static final Logger LOG = LoggerFactory.getLogger(DefaultEventProducer.class);
+
     private final MBeanServerConnection connection;
     private final MemoryMXBean memory;
     private final OperatingSystemMXBean os;
-    private final RuntimeMXBean runtime;
 
     private final EventLogger logger;
 
@@ -39,12 +39,10 @@ final class DefaultEventProducer implements EventProducer {
         this.connection = connection;
         this.memory = proxy(ManagementFactory.MEMORY_MXBEAN_NAME, MemoryMXBean.class);
         this.os = proxy(ManagementFactory.OPERATING_SYSTEM_MXBEAN_NAME, OperatingSystemMXBean.class);
-        this.runtime = proxy(ManagementFactory.RUNTIME_MXBEAN_NAME, RuntimeMXBean.class);
 
         this.logger = factory.newLogger(logFile);
     }
 
-    // TODO make static?
     private <T> T proxy(String name, Class<T> type) throws MalformedObjectNameException {
         return JMX.newMXBeanProxy(connection, new ObjectName(name), type);
     }
@@ -58,8 +56,7 @@ final class DefaultEventProducer implements EventProducer {
             logMemoryUsage();
         } catch (UndeclaredThrowableException e) {
             if (Throwables.getRootCause(e) instanceof ConnectException) {
-                // discard, as the jmx connection might have been closed in the meantime
-                // TODO add log statement
+                LOG.info("JMX connections was closed");
             } else {
                 throw e;
             }
@@ -71,8 +68,6 @@ final class DefaultEventProducer implements EventProducer {
 
         event.setTime(System.currentTimeMillis());
         event.setValue(os.getProcessCpuTime());
-        event.setSystemTime(TimeUnit.MILLISECONDS.toNanos(runtime.getUptime()));
-        event.setAvailableProcessors(os.getAvailableProcessors());
 
         logger.write(event);
     }

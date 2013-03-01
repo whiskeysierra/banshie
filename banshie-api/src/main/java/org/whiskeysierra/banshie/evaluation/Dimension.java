@@ -2,7 +2,7 @@ package org.whiskeysierra.banshie.evaluation;
 
 public enum Dimension {
 
-    CPU_USAGE, MEMORY_USAGE, TIME,
+    CPU_TIME, MEMORY_CONSUMPTION, TIME,
 
     PRECISION, RECALL, F_MEASURE, ACCUARCY,
 

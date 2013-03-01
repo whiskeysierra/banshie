@@ -3,43 +3,27 @@ package org.whiskeysierra.banshie.evaluation;
 import org.whiskeysierra.banshie.execution.event.CpuTimeEvent;
 import org.whiskeysierra.banshie.execution.event.Event;
 
+import java.util.concurrent.TimeUnit;
+
 /**
- * Calculates the average cpu time as a percentage, expressed as a double between 0.0 and 1.0.
+ * Calculates the maximum cpu time in milliseconds.
  */
 final class CpuUsageCalculator implements Calculator {
 
-    private int availableProcessors;
-
-    private long lastCpuTime;
-    private long lastSystemTime;
-
-    private double usages;
-    private long count;
+    private long time = Long.MIN_VALUE;
 
     @Override
     public void process(Event e) {
         if (e instanceof CpuTimeEvent) {
             final CpuTimeEvent event = CpuTimeEvent.class.cast(e);
 
-            this.availableProcessors = Math.max(availableProcessors, event.getAvailableProcessors());
-
-            if (lastCpuTime == 0L) {
-                this.lastCpuTime = event.getValue();
-                this.lastSystemTime = event.getSystemTime();
-            } else {
-                final double usage = (double) (event.getValue() - lastCpuTime) / (event.getSystemTime() - lastSystemTime);
-
-                this.usages += usage / availableProcessors;
-                this.count++;
-                this.lastCpuTime = event.getValue();
-                this.lastSystemTime = event.getSystemTime();
-            }
+            this.time = Math.max(time, event.getValue());
         }
     }
 
     @Override
     public Value getResult() {
-        return new SimpleValue(Math.min(usages / count, 100d));
+        return new SimpleValue(TimeUnit.NANOSECONDS.toMillis(time));
     }
 
 }
