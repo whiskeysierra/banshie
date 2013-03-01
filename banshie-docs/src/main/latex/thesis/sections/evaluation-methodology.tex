@@ -145,17 +145,7 @@ Often only the F-measure is reported as the evaluation measure of an IE system. 
 \newpage
 \subsection{Runtime performance measures}
 
-\subsubsection{CPU usage}
-An important metric to measure the runtime performance of a program is the relative CPU usage which determines how much CPU time a process required during its execution.
+\subsubsection{CPU time}
+An important metric to measure the runtime performance of a program is the CPU time which determines how much CPU time a process required during its execution.
 
-\begin{figure}[H]
-\begin{displaymath}
-	u_{cpu} = \frac{\Delta t_{cpu}}{\Delta t_{system} \cdot n_{cpu}}
-\end{displaymath}
-\caption{CPU utilization formula}
-\label{eq:cpu-usage}
-\end{figure}
-
-Equation \ref{eq:cpu-usage} shows the calculation of the relative CPU usage. It's based on $\Delta t_{cpu}$ and $\Delta t_{system}$. $\Delta t_{cpu}$ is the process' CPU time difference , while $\Delta t_{system}$ represents the total CPU time. $n_{cpu}$ is the number of processors to normalize the result into the usual $[0, 100]$ range, or $[0.0, 1.0]$ respectively. 
-
-\subsubsection{Memory usage}
+\subsubsection{Memory consumption}
