@@ -117,6 +117,7 @@ Since \textit{F} is a figure of merit, the higher its value the better we consid
 	E = 1 - F_\alpha = \frac{S + (1-\alpha) \cdot D + \alpha \cdot I}{(1-\alpha) \cdot N + \alpha \cdot M}, (0 \le \alpha \le 1)
 \end{displaymath}
 \caption{Error measure formula}
+\label{eq:error-measure}
 \end{figure}
 
 \subsubsection{Error per Response Fill}
@@ -124,9 +125,10 @@ The \textit{Error per Response Fill} (\textit{ERR}) is based on the Error measur
 
 \begin{figure}[H]
 \begin{displaymath}
-	\textit{ERR} = \frac{S+D+I}{C+S+D+I}
+	ERR = \frac{S+D+I}{C+S+D+I}
 \end{displaymath}
 \caption{Error per response fill formula}
+\label{eq:error-per-response-fill}
 \end{figure}
 
 \subsubsection{Slot Error Rate}
@@ -141,6 +143,30 @@ The \textit{Slot Error Rate} (SER) was originally proposed by \citeauthor{Makhou
 
 \subsection{Discussion}
 Often only the F-measure is reported as the evaluation measure of an IE system. If the same weighting for recall and precision is used in calculating the F-measure, this gives an indication of which system is the better one. However, often it may be important to know the individual recall and precision scores of a system to be able to fully compare different systems. When one system has a recall of 10\% and a precision of 90\%, this will obtain the same F-measure as a system which obtains a recall of 90\% and a precision of 10\%, even though both systems are very different. Differences on how a system scores with regards to recall and precision will be unnoticed when reporting only F-measure \cite{Sitter:2004}.
+
+For $\alpha = 0.5$, E in \ref{eq:error-measure} reduces to:
+
+\begin{figure}[H]
+\begin{displaymath}
+	E = \frac{S + (D+I)/2}{C+S+(D+I)/2} = \frac{S + (D+I)/2}{(N+M)/2}
+\end{displaymath}
+\caption{Error measure for $\alpha = 0.5$}
+\label{eq:error-measure2}
+\end{figure}
+
+The denominator in \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two! If our objective is to count all errors, then there is no a priori reason why we should deweight deletions and insertions in this manner. In other words, by simply using F as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are! \cite{Makhoul:1999}
+
+A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999}. ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has a problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite \ref{eq:error-per-response-fill2} as \cite{Makhoul:1999}:
+
+\begin{figure}[H]
+\begin{displaymath}
+	ERR = \frac{S+D+I}{N+I}
+\end{displaymath}
+\caption{Error per response fill formula}
+\label{eq:error-per-response-fill2}
+\end{figure}
+
+ERR, the error measure defined by MUC, does have one esthetic advantage in that it is guaranteed to be between 0 and 1, while SER, the slot error rate, can become greater than 1 under certain high error conditions \cite{Makhoul:1999}.
 
 \newpage
 \subsection{Runtime performance measures}
