@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie</OriginalElement>
+  <nodes>
+    <node x="0.0" y="295.0">org.whiskeysierra.banshie.evaluation.QualityEvaluator</node>
+    <node x="0.0" y="392.0">org.whiskeysierra.banshie.evaluation.PerformanceEvaluator</node>
+    <node x="341.0" y="392.0">org.whiskeysierra.banshie.evaluation.Value</node>
+    <node x="0.0" y="0.0">org.whiskeysierra.banshie.evaluation.Dimension</node>
+  </nodes>
+  <notes />
+  <edges />
+  <settings layout="Hierarchic Group" zoom="0.827906976744186" x="302.0" y="293.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

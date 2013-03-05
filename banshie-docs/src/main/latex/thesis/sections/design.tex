@@ -153,15 +153,34 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 \caption{Maven Bundle Plugin usage}
 \end{listing}
 
-
 \newpage
 \subsection{API}
 
+\paragraph{Domain model and persistence}
+Corpus, Extractor, CorpusRepository, ExtractorRepository
+
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.9\textwidth]{api.png}
-\caption{Banshie API diagram}
-\label{fig:api}
+\includegraphics[width=0.7\textwidth]{api-model.png}
+\caption{Banshie Model API}
+\end{figure}
+
+\paragraph{Execution}
+Engine, ExecutionResult
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{api-execution.png}
+\caption{Banshie Execution API}
+\end{figure}
+
+\paragraph{Evaluation}
+QualityEvaluator, PerformanceEvaluator, Dimension, Value
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{api-evaluation.png}
+\caption{Banshie Evaluation API}
 \end{figure}
 
 \newpage
@@ -233,3 +252,15 @@ The attribtues \texttt{start} and \texttt{end} define the character offset of th
 
 \subsection{Reference-hypothesis association}
 Evaliex \cite{Linsmayr:2010} uses an extended version of the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication based on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient. But since Banshie, in its current version, focuses solely on Named Entity Recognition, a simpler algorithm to associate reference and hypothesis has been used. Spans are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
+
+\subsection{Implementation}
+
+\subsubsection{Engine}
+Too big, required to be split up into multiple smaller, more maintainable modules.
+Process management, Process Monitor, Event Producer, JMX, Event Logger, JSON logfile
+
+\subsubsection{Quality Evaluator}
+Map prediction to reference, count true positives, false positives, false negatives, run configured scores, collect results
+
+\subsubsection{Performance Evaluator}
+Read log file line by line, call update on configured calculators, collect results
