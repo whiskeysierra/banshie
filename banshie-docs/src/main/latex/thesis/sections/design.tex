@@ -232,5 +232,4 @@ The span element has three attributes: \texttt{type}, \texttt{start} and \texttt
 The attribtues \texttt{start} and \texttt{end} define the character offset of the span in the original document to support character based association of spans in the reference and the predication.
 
 \subsection{Reference-hypothesis association}
-Evaliex \cite{Linsmayr:2010} uses the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. 
-
+Evaliex \cite{Linsmayr:2010} uses an extended version of the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication based on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient. But since Banshie, in its current version, focuses solely on Named Entity Recognition, a simpler algorithm to associate reference and hypothesis has been used. Spans are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
