@@ -193,7 +193,25 @@ final Map<Dimension, Value> q =
 \end{listing}
 
 \subsection{Extractor interface specification}
-Java 6+, executable Jar file (jarjar, resources, ...), Manifest, MainClass header, plain text document stdtin, xml stdout
+Since Banshie aims to evaluate the extraction quality as well as the runtime performance of information extraction systems it sets some special requirements for extractors.
+
+Any extractor evaluated by the framework is required to by written in Java and compiled for Java 1.6 or higher as a single executable Jar file. Being packaged as a single file requires the extractor to bundle every external dependency into a single archive. Embedding third-party java libraries can be accomplished by utilizing the \textit{JarJar}\footnote{\url{https://code.google.com/p/jarjar/}} tool. External files like models and training data can packaged as standard classpath resources.
+
+For a Jar file to be executable it has to have a manifest file, i.e. META-INF/MANIFEST.MF), and a manifest header as shown in the following listing:
+
+\begin{listing}[H]
+\texttt{Main-Class: org.whiskeysierra.banshie.example.opennlp.Main}
+\caption{Extractor manifest header}
+\end{listing}
+
+The extractor can than be started using the following command.
+
+\begin{listing}[H]
+\texttt{java -jar extractor.jar}
+\caption{Extractor java execution command}
+\end{listing}
+
+Since an extractor under evaluation has a single input, the test document, and a single output, the annotated hypothesis, the natural choice was to utilize standard streams, standard input (\textit{stdin}) and and standard output (\textit{stdout}) respectively. The test document is passed to the extractor in UTF-8 encoding. Whether the extractor streams the document or reads it into memory as a whole is up the extractor. The output format is \gls{XML} as defined by the schema shown in listing \ref{lst:xml-schema}.
 
 \begin{listing}[H]
 \inputminted{xml}{../../../../../banshie-api/src/main/resources/schema.xsd}
@@ -201,8 +219,18 @@ Java 6+, executable Jar file (jarjar, resources, ...), Manifest, MainClass heade
 \label{lst:xml-schema}
 \end{listing}
 
+As shown in listing \ref{lst:xml-example}, the defined output format is a very simple XML document containing the original document and all found spans annotated with the corresponding type as a simple XML element tag.
+
 \begin{listing}[H]
 \inputminted{xml}{../../../../../banshie-api/src/main/resources/example.xml}
 \caption{Banshie XML Example}
 \label{lst:xml-example}
 \end{listing}
+
+The span element has three attributes: \texttt{type}, \texttt{start} and \texttt{end}. Type is one of \texttt{person}, \texttt{organiazation} or \texttt{location}, based on the ENAMEX tags developed for the Message Understanding Conference \cite{Grishman:1996}.
+
+The attribtues \texttt{start} and \texttt{end} define the character offset of the span in the original document to support character based association of spans in the reference and the predication.
+
+\subsection{Reference-hypothesis association}
+Evaliex \cite{Linsmayr:2010} uses the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. 
+
