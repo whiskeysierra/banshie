@@ -380,6 +380,21 @@ Once events have been created, they need to be persisted on the file system to a
 \caption{EventLogger implementation}
 \end{figure}
 
+\begin{listing}[H]
+\begin{minted}{javascript}
+{"type":"cpu","time":1362134570374,"value":440000000}
+{"type":"memory","time":1362134570376,"value":12817008}
+{"type":"cpu","time":1362134571374,"value":440000000}
+{"type":"memory","time":1362134571375,"value":12818096}
+{"type":"cpu","time":1362134572378,"value":440000000}
+{"type":"memory","time":1362134572393,"value":12822128}
+{"type":"cpu","time":1362134573374,"value":450000000}
+{"type":"memory","time":1362134573376,"value":12822128}
+\end{minted}
+\caption{Example event log file}
+\label{lst:event-log}
+\end{listing}
+
 \newpage
 \subsubsection{Quality evaluation}
 The default \texttt{QualityEvaluator} implementation has serveral tasks. It needs to map the prediction to the reference, count true positives, false positives, false negatives, run configured scoring metrics and collect their results.
