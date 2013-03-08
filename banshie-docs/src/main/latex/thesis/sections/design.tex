@@ -371,6 +371,7 @@ The default implementation of the \texttt{ProcessMonitor} interface delegates th
 It's the \texttt{EventProducer}'s responsibility to retrieve runtime performance figures by calling the corresponding \gls{JMX} endpoints, to create and populate the suitable \texttt{Event} instances. The producer creates \gls{JMX} proxies for \texttt{MemoryMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/lang/management/MemoryMXBean.html}} and \texttt{OperatingSystemMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/jre/api/management/extension/com/sun/management/OperatingSystemMXBean.html}}, creates \texttt{CpuTimeEvent}s and \texttt{MemoryUsageEvent}s and delegates their persistence to the \texttt{EventLogger} service.
 
 \paragraph{Event persistence}
+Once events have been created, they need to be persisted on the file system to allow processing them later on during evaluation. Event persistence in Banshie is provided by the default \texttt{EventLogger} implementation, which creates a single text-oriented log file. \texttt{Event}s are serialized using \gls{JSON} mapping capabilities of the Jackson\footnote{\url{http://jackson.codehaus.org/}} library. The resulting event log file contains one \gls{JSON} entity per line.
 
 \begin{figure}[H]
 \centering
@@ -389,7 +390,7 @@ Map prediction to reference, count true positives, false positives, false negati
 \end{figure}
 
 \newpage
-\paragraph{Reference-Hypthesis-association}
+\paragraph{Reference-hypothesis association}
 
 \begin{figure}[H]
 \centering
