@@ -381,8 +381,8 @@ Once events have been created, they need to be persisted on the file system to a
 \end{figure}
 
 \newpage
-\subsubsection{Quality Evaluator}
-The default \texttt{QualityEvaluator} implementation has serveral tasks. It needs to map the prediction to rthe eference, count true positives, false positives, false negatives, run configured scoring metrics and collect their results.
+\subsubsection{Quality evaluation}
+The default \texttt{QualityEvaluator} implementation has serveral tasks. It needs to map the prediction to the reference, count true positives, false positives, false negatives, run configured scoring metrics and collect their results.
 
 \begin{figure}[H]
 \centering
@@ -433,28 +433,14 @@ final class Recall implements Score {
 \end{listing}
 
 \newpage
-\subsubsection{Performance Evaluator}
-Read log file line by line, deserialize event, call update on configured calculators, collect results
-
+\subsubsection{Performance evaluation}
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{performance-evaluation.png}
 \caption{PerformanceEvaluator implementation}
 \end{figure}
 
-\begin{listing}[H]
-\begin{minted}{java}
-interface Calculator {
-
-    void process(Event event);
-
-    Value getResult();
-
-}
-\end{minted}
-\caption{Calculator Interface}
-\label{lst:calculator}
-\end{listing}
+Runtime performance evaluation is a little bit easier than quality evaluation. The default \texttt{PerformanceEvaluator} implementation needs to read the event log file line by line, deserialize events, update all configured calculators and finally collect their results.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -470,6 +456,53 @@ public boolean processLine(String line) throws IOException {
 }
 \end{minted}
 \caption{LogFileProcessor}
+\end{listing}
+
+A \texttt{Calculator} is similar to the \texttt{Score} interface shown earlier, except that calculators are inherently stateful.
+
+\begin{listing}[H]
+\begin{minted}{java}
+interface Calculator {
+
+    void process(Event event);
+
+    Value getResult();
+
+}
+\end{minted}
+\caption{Calculator Interface}
+\label{lst:calculator}
+\end{listing}
+
+Listing \ref{lst:memory-calculator} demonstrates a common \texttt{Calculator} implementation at the example of the \texttt{MemoryUsageCalculator} which computes the average memory consumption in megabytes.
+
+\begin{listing}[H]
+\begin{minted}{java}
+final class MemoryUsageCalculator implements Calculator {
+
+    private long used;
+    private long count;
+
+    @Override
+    public void process(Event e) {
+        if (e instanceof MemoryUsageEvent) {
+            final MemoryUsageEvent event = 
+                MemoryUsageEvent.class.cast(e);
+
+            used += event.getValue() / 1024L / 1024L;
+            count++;
+        }
+    }
+
+    @Override
+    public Value getResult() {
+        return new SimpleValue(used / count);
+    }
+
+}
+\end{minted}
+\caption{MemoryUsageCalculator}
+\label{lst:memory-calculator}
 \end{listing}
 
 
