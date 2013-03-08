@@ -20,8 +20,10 @@ final class DefaultPerformanceEvaluator implements PerformanceEvaluator {
 
     @Override
     public Map<Dimension, Value> evaluate(File logFile) {
+        final LogFileProcessor processor = provider.get();
+
         try {
-            return Files.readLines(logFile, Charsets.UTF_8, provider.get());
+            return Files.readLines(logFile, Charsets.UTF_8, processor);
         } catch (IOException e) {
             throw new IllegalStateException(e);
         }

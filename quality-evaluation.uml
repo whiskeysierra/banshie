@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie.evaluation</OriginalElement>
+  <nodes>
+    <node x="155.5" y="102.0">org.whiskeysierra.banshie.evaluation.DefaultQualityEvaluator</node>
+    <node x="576.0" y="0.0">org.whiskeysierra.banshie.evaluation.counter.Counter</node>
+    <node x="346.0" y="0.0">org.whiskeysierra.banshie.evaluation.score.Score</node>
+    <node x="0.0" y="0.0">org.whiskeysierra.banshie.evaluation.QualityEvaluator</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.whiskeysierra.banshie.evaluation.DefaultQualityEvaluator" target="org.whiskeysierra.banshie.evaluation.counter.Counter">
+      <point x="197.0" y="-82.0" />
+      <point x="648.0" y="77.0" />
+      <point x="726.5" y="77.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.evaluation.DefaultQualityEvaluator" target="org.whiskeysierra.banshie.evaluation.score.Score">
+      <point x="0.0" y="-82.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.evaluation.DefaultQualityEvaluator" target="org.whiskeysierra.banshie.evaluation.QualityEvaluator">
+      <point x="-197.0" y="-82.0" />
+      <point x="254.0" y="77.0" />
+      <point x="163.0" y="77.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.6896551724137931" x="541.0" y="156.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

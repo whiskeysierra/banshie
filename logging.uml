@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie.execution.logging</OriginalElement>
+  <nodes>
+    <node x="0.0" y="124.0">org.whiskeysierra.banshie.execution.logging.DefaultEventLogger</node>
+    <node x="74.0" y="0.0">org.whiskeysierra.banshie.execution.logging.EventLogger</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.whiskeysierra.banshie.execution.logging.DefaultEventLogger" target="org.whiskeysierra.banshie.execution.logging.EventLogger">
+      <point x="0.0" y="-71.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="1.0" x="84.5" y="130.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

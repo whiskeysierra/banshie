@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie.execution.event</OriginalElement>
+  <nodes>
+    <node x="306.0" y="270.0">org.whiskeysierra.banshie.execution.event.MemoryUsageEvent</node>
+    <node x="495.0" y="248.0">org.whiskeysierra.banshie.execution.logging.EventLogger</node>
+    <node x="243.32142857142856" y="0.0">org.whiskeysierra.banshie.execution.event.Event</node>
+    <node x="238.32142857142856" y="124.0">org.whiskeysierra.banshie.execution.event.AbstractEvent</node>
+    <node x="0.0" y="248.0">org.whiskeysierra.banshie.execution.event.EventProducer</node>
+    <node x="152.99999999999997" y="270.0">org.whiskeysierra.banshie.execution.event.CpuTimeEvent</node>
+    <node x="48.99999999999994" y="372.0">org.whiskeysierra.banshie.execution.event.DefaultEventProducer</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.whiskeysierra.banshie.execution.event.DefaultEventProducer" target="org.whiskeysierra.banshie.execution.logging.EventLogger">
+      <point x="192.0" y="-137.0" />
+      <point x="496.99999999999994" y="347.0" />
+      <point x="574.0" y="347.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.DefaultEventProducer" target="org.whiskeysierra.banshie.execution.event.MemoryUsageEvent">
+      <point x="64.0" y="-137.0" />
+      <point x="368.99999999999994" y="347.0" />
+      <point x="390.5" y="347.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.MemoryUsageEvent" target="org.whiskeysierra.banshie.execution.event.AbstractEvent">
+      <point x="0.0" y="-15.0" />
+      <point x="390.5" y="223.0" />
+      <point x="335.07142857142856" y="223.0" />
+      <point x="32.25" y="37.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.CpuTimeEvent" target="org.whiskeysierra.banshie.execution.event.AbstractEvent">
+      <point x="0.0" y="-15.0" />
+      <point x="219.49999999999997" y="223.0" />
+      <point x="270.57142857142856" y="223.0" />
+      <point x="-32.25" y="37.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.DefaultEventProducer" target="org.whiskeysierra.banshie.execution.event.EventProducer">
+      <point x="-192.0" y="-137.0" />
+      <point x="112.99999999999994" y="347.0" />
+      <point x="66.5" y="347.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.DefaultEventProducer" target="org.whiskeysierra.banshie.execution.event.CpuTimeEvent">
+      <point x="-64.0" y="-137.0" />
+      <point x="240.99999999999994" y="347.0" />
+      <point x="219.49999999999997" y="347.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.event.AbstractEvent" target="org.whiskeysierra.banshie.execution.event.Event">
+      <point x="0.0" y="-37.0" />
+      <point x="0.0" y="37.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.8018018018018018" x="326.5" y="323.0" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Methods</Category>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

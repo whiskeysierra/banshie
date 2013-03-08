@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>org.whiskeysierra.banshie.execution.process</OriginalElement>
+  <nodes>
+    <node x="532.0" y="226.0">org.whiskeysierra.banshie.execution.process.DefaultRunningProcess</node>
+    <node x="612.0" y="102.0">org.whiskeysierra.banshie.execution.process.RunningProcess</node>
+    <node x="515.5" y="0.0">com.google.common.io.InputSupplier</node>
+    <node x="174.75" y="831.0">org.whiskeysierra.banshie.execution.process.DefaultProcessService</node>
+    <node x="0.0" y="629.0">org.whiskeysierra.banshie.execution.process.ProcessService</node>
+    <node x="690.5" y="0.0">com.google.common.io.OutputSupplier</node>
+    <node x="354.0" y="595.0">org.whiskeysierra.banshie.execution.process.DefaultManagedProcess</node>
+    <node x="187.0" y="326.5">org.whiskeysierra.banshie.execution.process.ManagedProcess</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="org.whiskeysierra.banshie.execution.process.RunningProcess" target="com.google.common.io.OutputSupplier">
+      <point x="35.75" y="-37.0" />
+      <point x="719.25" y="77.0" />
+      <point x="774.0" y="77.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.DefaultManagedProcess" target="org.whiskeysierra.banshie.execution.process.DefaultRunningProcess">
+      <point x="81.25" y="-93.0" />
+      <point x="597.75" y="570.0" />
+      <point x="683.5" y="570.0" />
+      <point x="0.0" y="159.5" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.DefaultProcessService" target="org.whiskeysierra.banshie.execution.process.DefaultManagedProcess">
+      <point x="83.5" y="-81.0" />
+      <point x="425.25" y="806.0" />
+      <point x="516.5" y="806.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.RunningProcess" target="com.google.common.io.InputSupplier">
+      <point x="-35.75" y="-37.0" />
+      <point x="647.75" y="77.0" />
+      <point x="593.0" y="77.0" />
+      <point x="0.0" y="26.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.DefaultRunningProcess" target="org.whiskeysierra.banshie.execution.process.RunningProcess">
+      <point x="0.0" y="-159.5" />
+      <point x="0.0" y="37.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.DefaultManagedProcess" target="org.whiskeysierra.banshie.execution.process.ManagedProcess">
+      <point x="-81.25" y="-93.0" />
+      <point x="435.25" y="570.0" />
+      <point x="349.5" y="570.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+    <edge source="org.whiskeysierra.banshie.execution.process.DefaultProcessService" target="org.whiskeysierra.banshie.execution.process.ProcessService">
+      <point x="-83.5" y="-81.0" />
+      <point x="258.25" y="806.0" />
+      <point x="167.0" y="806.0" />
+      <point x="0.0" y="59.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.527147087857848" x="429.0" y="496.49999999999994" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Fields</Category>
+    <Category>Constructors</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

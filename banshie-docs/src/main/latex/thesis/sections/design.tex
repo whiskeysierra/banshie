@@ -5,17 +5,18 @@
 This chapter presents the implemented framework \textit{Banshie} (Benchmark Framework for Information Extraction). The requirements, architecture, design and concrete implementation details are explained and discussed on the following pages.
 
 \subsection{Analysis and requirements}
-Provide a platform to benchmark domain-specific information extraction modules.
+The main goal was to provide a platform to benchmark domain-specific information extraction modules. The framework had to be designed for extension and modularity. It should be based on the OSGi infrastructure and build with state-of-the-art patterns, like \gls{DI}, \gls{IoC} and Composition over Inheritence, in mind.
 
-Designed for Extension and Modularity
-OSGi-aware
-State of the Art patterns: DI, IoC, Composition over Inheritence, ...
-Open Source (Github!)
+Banshie had to be developed in an Open Source fashion. Because of that, the whole code base as well as the all documentation is freely available on Banshie's Github repository on
 
 \url{https://github.com/whiskeysierra/banshie}
 
 \subsection{Architecture}
-OSGi, module hierarchy, dependencies
+Banshie is completely written in Java and distributed as OSGi bundles. The architecture of the framework was not the result of a \gls{BDUF} but is rather based on a very rough design idea which allows to incrementally build in the design details as the project progresses. \citeauthor{Knoernschild:2012} provides a catalog of architectural patterns for building highly modular systems in his book:
+
+\fullcite{Knoernschild:2012}
+
+Almost all Banshie's modules are the result of applying these patterns during the development. The following figure shows all relevant modules as well as their dependencies.
 
 \newpage
 \begin{figure}[H]
@@ -155,18 +156,23 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 
 \newpage
 \subsection{API}
+The framework's \gls{API} can be divided into three main components which are described in detail on the following pages.
 
 \paragraph{Domain model and persistence}
-Corpus, Extractor, CorpusRepository, ExtractorRepository
+Banshie's domain model has been designed with simplicity and extensibility in mind. The two only entity classes, \texttt{Corpus} and \texttt{Extractor}, are merely containers for file locations and very little meta data, but since the persistence layer is based on \gls{JPA}, which is based on \gls{POJO}s, adding properties is a rather easy task.
+
+An extractor holds the name, version and the path to the executable jar file while a corpus identifies the reference output as well as a related input document.
+
+For each of the model classes a persistence service interface is provided. Since the framework in it current stage does not require very sophisticated features, the interface of these services is kept to a minimum intentionally.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{api-model.png}
-\caption{Banshie Model API}
+\includegraphics[width=0.6\textwidth]{api-model.png}
+\caption{Banshie model and persistence API}
 \end{figure}
 
 \paragraph{Execution}
-Engine, ExecutionResult
+Apart from the domain model and persistence layer, the framework offers two significant features to its clients: execution and evaluation. The execution package contains one major interface for executing extractors: the \texttt{Engine}. The Engine provides a single methods which takes an Extractor-Corpus-pair and performs an execution. The result of the extractor run is than passed back to the caller in form of a \texttt{ExtractorResult} containing references to the extractor's xml output file and the event log file. For more details about the structure of the event log file please consult chapter \ref{sec:implementation}.
 
 \begin{figure}[H]
 \centering
@@ -174,16 +180,21 @@ Engine, ExecutionResult
 \caption{Banshie Execution API}
 \end{figure}
 
+\newpage
 \paragraph{Evaluation}
-QualityEvaluator, PerformanceEvaluator, Dimension, Value
+Evaluation is, next to execution, the other main feature of the framework. The evaluation packages contains several type definitions as shown in figure \ref{fig:evaluation-api}:
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{api-evaluation.png}
 \caption{Banshie Evaluation API}
+\label{fig:evaluation-api}
 \end{figure}
 
+The two main service types are \texttt{QualityEvaluator} and \texttt{PerformanceEvaluator}. Both have a very similar interface, since they a single method to evaluate the execution result. The QualityEvaluator compares the Corpus' reference and the Extractor's hypothesis and calculates quality performance measures like Precision, Recall and F-Measure. The PerformanceEvaluator on the other hand focues on calculating runtime performance measure, like CPU time, memory consumption and execution time, by processing the event log file.
+
 \newpage
+\paragraph{API Usage}
 Listing \ref{lst:usage} shows the simple basic steps required to perform a single extractor evaluation evaluation.
 
 \begin{listing}[H]
@@ -254,13 +265,185 @@ The attribtues \texttt{start} and \texttt{end} define the character offset of th
 Evaliex \cite{Linsmayr:2010} uses an extended version of the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication based on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient. But since Banshie, in its current version, focuses solely on Named Entity Recognition, a simpler algorithm to associate reference and hypothesis has been used. Spans are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
 
 \subsection{Implementation}
+\label{sec:implementation}
 
 \subsubsection{Engine}
-Too big, required to be split up into multiple smaller, more maintainable modules.
-Process management, Process Monitor, Event Producer, JMX, Event Logger, JSON logfile
+The \textit{Engine} interface offers a single facade to executing an \texttt{Extractor} against a supplied \texttt{Corpus}. It's the Engine's responibility to provide an independent and isolated execution environment for extractors, to manage process creation and lifecycle and to collect and persist runtime events.
 
+After an initial design draft, it was clear, that the Engine implementation will be too big for a single module. So the engine implementation was split up into multiple smaller, more maintainable modules using the module development patterns defined by \citeauthor{Knoernschild:2012}\cite{Knoernschild:2012}. The engine's submodules are described in the following chapters.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{execution.png}
+\caption{Engine implementation}
+\end{figure}
+
+\newpage
+\paragraph{Process management}
+The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls and unfortunately there are several common traps that can cause code that works as expected for a single invocation of a small executable to do terrible things when repeatedly calling several complex external applications \cite{Cartmell:2009}. There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
+
+Since executing an extractor in an isolated, independent execution environment is a crucial part of the Engine's task the framework required a cleaner, more fail-safe API for process creation and lifecycle management that integrates nicely with the rest of the framework and it's main general purpose library, i.e. Guava. Listing \ref{lst:process} demonstrates the minimal steps to use the  framework's Process API while figure \ref{fig:process} shows the relevant parts of it.
+
+\begin{listing}[H]
+\begin{minted}{java}
+final ManagedProcess managed = service.prepare("java", "-version");
+final RunningProcess process = managed.call();
+
+// write to process.getOutput() or
+// read from process.getInput()
+
+process.await();
+// or process.cancel()
+\end{minted}
+\caption{ProcessService API example usage}
+\label{lst:process}
+\end{listing}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{process.png}
+\caption{ProcessService implementation}
+\label{fig:process}
+\end{figure}
+
+\newpage
+\paragraph{Process monitoring}
+After an extractor has been started in its own environment using the ProcessService API, the operating system process needs to be monitored to ensure correct execution and to collect events, like current cpu time and memory consumption, in a periodical way, e.g. every x milliseconds. 
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{monitor.png}
+\caption{ProcessMonitor implementation}
+\end{figure}
+
+The repeated polling is realized with the JDK's built-in \\ \texttt{ScheduledExecutorService}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ScheduledExecutorService.html}} which schedules a special \texttt{Runnable} to run in a scheduled fashion, like shown in listing \ref{lst:scheduling}
+
+\begin{listing}[H]
+\begin{minted}{java}
+executor.scheduleAtFixedRate(runnable, 0L, 1L, TimeUnit.SECONDS);
+\end{minted}
+\caption{Scheduling in java}
+\label{lst:scheduling}
+\end{listing}
+
+\newpage
+Collecting events on a separate process can be realized by using \gls{JMX}, which allows managing and monitoring java applications through a well specified and extensible interface. To allow a \gls{JMX} connection, a java process needs to be started with a special set of command line parameters as shown in listing \ref{lst:process-configuring}.
+
+\begin{listing}[H]
+\begin{minted}{java}
+final ManagedProcess managed = service.prepare(
+    "java",
+    "-Dcom.sun.management.jmxremote",
+    "-Dcom.sun.management.jmxremote.port=" + port,
+    "-Dcom.sun.management.jmxremote.authenticate=false",
+    "-Dcom.sun.management.jmxremote.ssl=false",
+    "-jar", extractor.getPath()
+);
+\end{minted}
+\caption{Configuring process to use JMX}
+\label{lst:process-configuring}
+\end{listing}
+
+After the process has been started, a \gls{JMX} connection can be established with the following steps:
+
+\begin{listing}[H]
+\begin{minted}{java}
+final String url = "service:jmx:rmi:///jndi/rmi://localhost:" + 
+    port + "/jmxrmi";
+final JMXServiceURL serviceUrl = new JMXServiceURL(url);
+final JMXConnector connector = 
+    JMXConnectorFactory.connect(serviceUrl, null);
+\end{minted}
+\caption{JMX connection}
+\label{lst:jmx}
+\end{listing}
+
+The default implementation of the \texttt{ProcessMonitor} interface delegates the work of creating events to another service, the \texttt{EventProducer}, by passing on the \texttt{JMXConnector}.
+
+\newpage
+\paragraph{Event production}
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{event.png}
+\caption{EventProducer implementation}
+\end{figure}
+
+It's the \texttt{EventProducer}'s responsibility to retrieve runtime performance figures by calling the corresponding \gls{JMX} endpoints, to create and populate the suitable \texttt{Event} instances. The producer creates \gls{JMX} proxies for \texttt{MemoryMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/lang/management/MemoryMXBean.html}} and \texttt{OperatingSystemMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/jre/api/management/extension/com/sun/management/OperatingSystemMXBean.html}}, creates \texttt{CpuTimeEvent}s and \texttt{MemoryUsageEvent}s and delegates their persistence to the \texttt{EventLogger} service.
+
+\paragraph{Event persistence}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.7\textwidth]{logging.png}
+\caption{EventLogger implementation}
+\end{figure}
+
+\newpage
 \subsubsection{Quality Evaluator}
 Map prediction to reference, count true positives, false positives, false negatives, run configured scores, collect results
 
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{quality-evaluation.png}
+\caption{QualityEvaluator implementation}
+\end{figure}
+
+\newpage
+\paragraph{Reference-Hypthesis-association}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.8\textwidth]{counter.png}
+\caption{Counter implementation}
+\end{figure}
+
+\newpage
+\paragraph{Scoring}
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{score.png}
+\caption{Score implementation}
+\end{figure}
+
+\newpage
 \subsubsection{Performance Evaluator}
 Read log file line by line, call update on configured calculators, collect results
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=\textwidth]{performance-evaluation.png}
+\caption{PerformanceEvaluator implementation}
+\end{figure}
+
+\begin{listing}[H]
+\begin{minted}{java}
+interface Calculator {
+
+    void process(Event event);
+
+    Value getResult();
+
+}
+\end{minted}
+\caption{Calculator Interface}
+\label{lst:calculator}
+\end{listing}
+
+\begin{listing}[H]
+\begin{minted}{java}
+@Override
+public boolean processLine(String line) throws IOException {
+    final Event event = mapper.readValue(line, Event.class);
+
+    for (Calculator calculator : calculators.values()) {
+        calculator.process(event);
+    }
+
+    return true;
+}
+\end{minted}
+\caption{LogFileProcessor}
+\end{listing}
+
+
