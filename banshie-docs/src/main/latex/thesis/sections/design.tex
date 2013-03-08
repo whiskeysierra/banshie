@@ -262,6 +262,7 @@ The span element has three attributes: \texttt{type}, \texttt{start} and \texttt
 The attribtues \texttt{start} and \texttt{end} define the character offset of the span in the original document to support character based association of spans in the reference and the predication.
 
 \subsection{Reference-hypothesis association}
+\label{sec:association}
 Evaliex \cite{Linsmayr:2010} uses an extended version of the \enquote{General Greedy Mapping Algorithm} as proposed by \citeauthor{Douthat:1998} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication based on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient. But since Banshie, in its current version, focuses solely on Named Entity Recognition, a simpler algorithm to associate reference and hypothesis has been used. Spans are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
 
 \subsection{Implementation}
@@ -381,7 +382,7 @@ Once events have been created, they need to be persisted on the file system to a
 
 \newpage
 \subsubsection{Quality Evaluator}
-Map prediction to reference, count true positives, false positives, false negatives, run configured scores, collect results
+The default \texttt{QualityEvaluator} implementation has serveral tasks. It needs to map the prediction to rthe eference, count true positives, false positives, false negatives, run configured scoring metrics and collect their results.
 
 \begin{figure}[H]
 \centering
@@ -389,17 +390,16 @@ Map prediction to reference, count true positives, false positives, false negati
 \caption{QualityEvaluator implementation}
 \end{figure}
 
-\newpage
-\paragraph{Reference-hypothesis association}
+The reference-hypothesis association is provided by the \texttt{Counter} class, as shown in figure \ref{fig:counter}. For details about the reference-hypothesis association algorithm used, please consult chapter \ref{sec:association}.
 
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{counter.png}
 \caption{Counter implementation}
+\label{fig:counter}
 \end{figure}
 
-\newpage
-\paragraph{Scoring}
+The scoring metrics are realized by implementations of the \texttt{Score} interface. Since several metrics are based on others, implementations are free to reuse instances of other types as shown in the following package diagram.
 
 \begin{figure}[H]
 \centering
@@ -407,9 +407,34 @@ Map prediction to reference, count true positives, false positives, false negati
 \caption{Score implementation}
 \end{figure}
 
+Listing \ref{lst:recall} shows an example \texttt{Score} implementation, in this case \texttt{Recall}.
+
+\begin{listing}[H]
+\begin{minted}{java}
+final class Recall implements Score {
+
+    @Override
+    public double calculate(Counts counts) {
+        final double sum = counts.getTruePositives() + 
+            counts.getFalseNegatives();
+
+        if (sum > 0) {
+            return counts.getTruePositives() / sum;
+        } else {
+            // cannot divide by zero, return error code
+            return Double.NaN;
+        }
+    }
+
+}
+\end{minted}
+\caption{Recall score implementation}
+\label{lst:recall}
+\end{listing}
+
 \newpage
 \subsubsection{Performance Evaluator}
-Read log file line by line, call update on configured calculators, collect results
+Read log file line by line, deserialize event, call update on configured calculators, collect results
 
 \begin{figure}[H]
 \centering
