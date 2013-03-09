@@ -20,6 +20,11 @@
 \usepackage[table]{xcolor}
 \usepackage{perpage}
 \usepackage{setspace}
+\usepackage{minted}
+\usemintedstyle{friendly}
+
+% TODO remove before final
+\usepackage[draft]{fixme}
 
 % re-start footnote counter per page
 \MakePerPage{footnote}
@@ -30,6 +35,11 @@
 % line spacing
 \setstretch{1.15}
 
+% every section starts on a new page
+\let\stdsection\section
+\renewcommand\section{\newpage\stdsection}
+
+% paragraph headlines in bold face and with margin
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
   {-3.25ex\@plus -1ex \@minus -.2ex}%
@@ -79,17 +89,11 @@
 \newacronym{CLI}{CLI}{Command Line Interface}
 \newacronym{UI}{UI}{User Interface}
 
-% every section starts on a new page
-\let\stdsection\section
-\renewcommand\section{\newpage\stdsection}
-
-\usepackage{minted}
-\usemintedstyle{friendly}
-\usepackage[draft]{fixme}
 \bibliography{thesis}
 \title{Design and Implementation of a \\ Modular Benchmarking Framework to \\ Evaluate Information Extraction Quality}
 \author{Willi Schönborn, 774190 \\ Advisor: Prof. Dr. Stefan Edlich}
 \date{\today}
+
 \begin{document}
 \selectlanguage{english}
 
@@ -98,6 +102,7 @@
 \setcounter{page}{1}
 \pagenumbering{roman}
 
+% TODO remove before final
 \newpage
 \listoffixmes
 
