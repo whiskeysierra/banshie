@@ -59,7 +59,7 @@ pom.xml.releaseBackup
 /*/src/main/latex/*/*.lox
 /*/src/main/latex/*/*.mp
 /*/src/main/latex/*/*.out
-/*/src/main/latex/*/*.pdf
+/*/src/main/latex/*/*-eps-converted-to.pdf
 /*/src/main/latex/*/*.pyg
 /*/src/main/latex/*/*.run.xml
 /*/src/main/latex/*/*.synctex.gz
