@@ -6,7 +6,7 @@ This chapter presents the implemented framework \textit{Banshie} (Benchmark Fram
 \subsection{Analysis and requirements}
 The main goal was to provide a platform to benchmark domain-specific information extraction modules. The framework had to be designed for extension and modularity. It should be based on the OSGi infrastructure and build with state-of-the-art patterns, like \gls{DI}, \gls{IoC} and Composition over Inheritence, in mind.
 
-Banshie had to be developed in an Open Source fashion. Because of that, the whole code base as well as the all documentation is freely available on Banshie's Github repository on
+Since Banshie had to be developed in an Open Source fashion, its whole code base as well as the  documentation is available via
 
 \url{https://github.com/whiskeysierra/banshie}
 
@@ -158,7 +158,7 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 The framework's \gls{API} can be divided into three main components which are described in detail on the following pages.
 
 \paragraph{Domain model and persistence}
-Banshie's domain model has been designed with simplicity and extensibility in mind. The two only entity classes, \texttt{Corpus} and \texttt{Extractor}, are merely containers for file locations and very little meta data, but since the persistence layer is based on \gls{JPA}, which is based on \gls{POJO}s, adding properties is a rather easy task.
+Banshie's domain model has been designed with simplicity and extensibility in mind. The two only entity classes, \texttt{Corpus} and \texttt{Extractor}, are merely containers for file locations and very little meta data, but since the persistence layer is based on \gls{JPA}, which is based on POJOs, adding properties is a rather easy task.
 
 An extractor holds the name, version and the path to the executable jar file while a corpus identifies the reference output as well as a related input document.
 
@@ -166,10 +166,11 @@ For each of the model classes a persistence service interface is provided. Since
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{api-model.png}
+\includegraphics[width=0.8\textwidth]{api-model.png}
 \caption{Banshie model and persistence API}
 \end{figure}
 
+\newpage
 \paragraph{Execution}
 Apart from the domain model and persistence layer, the framework offers two significant features to its clients: execution and evaluation. The execution package contains one major interface for executing extractors: the \texttt{Engine}. The Engine provides a single methods which takes an Extractor-Corpus-pair and performs an execution. The result of the extractor run is than passed back to the caller in form of a \texttt{ExtractorResult} containing references to the extractor's xml output file and the event log file. For more details about the structure of the event log file please consult chapter \ref{sec:implementation}.
 
@@ -375,7 +376,7 @@ Once events have been created, they need to be persisted on the file system to a
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{logging.png}
+\includegraphics[width=0.65\textwidth]{logging.png}
 \caption{EventLogger implementation}
 \end{figure}
 
@@ -387,10 +388,8 @@ Once events have been created, they need to be persisted on the file system to a
 {"type":"memory","time":1362134571375,"value":12818096}
 {"type":"cpu","time":1362134572378,"value":440000000}
 {"type":"memory","time":1362134572393,"value":12822128}
-{"type":"cpu","time":1362134573374,"value":450000000}
-{"type":"memory","time":1362134573376,"value":12822128}
 \end{minted}
-\caption{Example event log file}
+\caption{Example event log file excerpt}
 \label{lst:event-log}
 \end{listing}
 

@@ -19,12 +19,17 @@
 \usepackage{parskip}
 \usepackage[table]{xcolor}
 \usepackage{perpage}
+\usepackage{setspace}
+
+% re-start footnote counter per page
 \MakePerPage{footnote}
+
+% set table of content depth
 \setcounter{tocdepth}{5}
 
 % line spacing
-%\usepackage{setspace}
 %\onehalfspacing
+\setstretch{1.15}
 
 \makeatletter
 \renewcommand\paragraph{\@startsection{paragraph}{4}{\z@}%
