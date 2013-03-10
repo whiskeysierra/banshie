@@ -4,7 +4,7 @@
 Information extraction is a part of the \gls{NLP}, which focuses its research on the mechanical analysis, processing and generation of natural language. Due to the large amount of information on the internet research in this area is increasingly important to provide access to knowledge and to manage and reproduce the information \cite{Weinhofer:2010}\cite{Linsmayr:2010}.
 
 \subsection{Definition}
-\fxfatal{Short introduction}
+For a better understanding of what \gls{IE} really is, we sould take a look at the following definitions:
 
 \begin{quote}
 Information Extraction is a technology that is futuristic from the user's point of view in the current information-driven world. Rather than indicating which documents need to be read by a user, it extracts pieces of information that are salient to the user's needs. Links between the extracted information and the original documents are maintained to allow the user to reference context. The kinds of information that systems extract vary in detail and reliability.
@@ -30,11 +30,9 @@ Information extraction (IE) is the task of automatically extracting structured i
 \hfill \citeauthor{Wikipedia:IE:2012} \cite{Wikipedia:IE:2012}
 \end{quote}
 
-\fxfatal{How are these definitions relevant?}
+To summarize these definitions one can say that information extraction is concerned with the discovery and therefore the identification of relevant information from large collections of data, and aims to present it in a structured format in order to ensure automatic processing. \cite{Lehnert:1994}\cite{Neumann:2001}\cite{Siefkes:2007}.
 
-The information extraction is concerned with the discovery and therefore the identification of relevant information from large collections of data, and aims to present it in a structured format in order to ensure automatic processing. \cite{Lehnert:1994}\cite{Neumann:2001}\cite{Siefkes:2007}.
-
-The challenge in information extraction is the specification of the relevant data. It must be very detailed in order to guarantee an accurate identification. The problem lies in the complexity of natural language. The knowledge can be spread over several blocks and be present in different linguistic representation. The latter occurs, for example, through the use of different names, anaphoric expressions, and similar designations. As part of the extraction, therefore, the existence of the same information regardless of the specific formulation are revealed \cite{Cole:1998}\cite{Grishman:2003}\cite{Grishman:2007}\cite{Linsmayr:2010}.
+The challenge in information extraction ccording to \cite{Grishman:2003} is the specification of the relevant data. It must be very detailed in order to guarantee an accurate identification. The problem lies in the complexity of natural language. The knowledge can be spread over several blocks and be present in different linguistic representation. The latter occurs, for example, through the use of different names, anaphoric expressions, and similar designations. As part of the extraction, therefore, the existence of the same information regardless of the specific formulation are revealed \cite{Cole:1998}\cite{Grishman:2003}\cite{Grishman:2007}\cite{Linsmayr:2010}.
 
 \newpage
 \subsection{History}
@@ -102,7 +100,7 @@ The shiny red rocket was fired on Tuesday. It is the brainchild of Dr. Big Head.
 \end{table}
 
 \subsubsection{Coreference Resolution}
-\gls{CO} is also referred to as Coreference Analysis, Deduplication or Record Linkage. As entities and relationships are extracted from the unstructured source, they need to be integrated with existing databases and with repeated mentions of the same information in the unstructured source. \fxfatal{Needs reformulation} The main challenge in this task is deciding if two strings refer to the same entity in spite of the many noisy variants in which it appears in the unstructured source \cite{Sarawagi:2008}.
+\gls{CO} is also referred to as Coreference Analysis, Deduplication or Record Linkage. As entities and relationships are extracted from the unstructured source, they need to be integrated into existing databases with repeated mentions of the same information in the unstructured source. The main challenge in this task is deciding if two strings refer to the same entity in spite of the many noisy variants in which it appears in the unstructured source \cite{Sarawagi:2008}.
 
 Example 1: \textit{It} in \enquote{It is the brainchild of Dr. Big Head.} refers to the previously extracted entity \textit{rocket}.
 
@@ -159,7 +157,7 @@ There are different approaches for the construction of an IE system which are di
 The current research in the field of information extraction relates mainly to the extraction of information from HTML pages and the automatic addition of annotations with the aid of ontologies \cite{Linsmayr:2010}.
 
 \subsubsection{Knowledge Engineering}
-The method of Knowledge Engineering is the manual creation of grammar by a human expert. The identification can be done either by comparing them to a list or by applying rules. \fxfatal{Reformulate} Domain knowledge, which is not always available, is necessary to specify extraction rules in which case the method of knowledge engineering can not be applied. Experts must find patterns by inspecting the corpus and produce guidelines according to these patterns \cite{Schramm:2008}\cite{Turmo:2006}.
+The method of Knowledge Engineering is the manual creation of a grammar by a human expert. Domain knowledge, which is not always available, is necessary to specify extraction rules in which case the method of knowledge engineering can not be applied. Experts must find patterns by inspecting the corpus and produce guidelines according to these patterns \cite{Schramm:2008}\cite{Turmo:2006}.
 
 The process is usually implemented iteratively. At first one needs to define grammar rules, which are then tested on a training corpus. The rules may be modified depending on the results. The steps are repeated to achieve an acceptable output \cite{Appelt:1999}.
 
@@ -173,7 +171,7 @@ This is based on a manually annotated corpus, which contains posititive and nega
 In this method, a corpus is supplied with a small amount of annotations (seeds). During the application phase the seeds with the best combination of features for customizing existing rules and creating new ones are located and used. This approach is referred to as bootstrapping \cite{Carstensen:2010}\cite{Chang:2006}.
 
 \paragraph{Unsupervised learning}
-The method of unsupervised learning requires no annotations and manually generated training data. The system will only be given a set of entities whose properties are analyzed. The knowledge gained is the basis for the localization of entities \cite{Carstensen:2010}\cite{Schramm:2008}. \fxfatal{How can you control unsupervised machine learning?}
+The method of unsupervised learning requires no annotations and manually generated training data. The system will only be given a set of entities whose properties are analyzed. The knowledge gained is the basis for the localization of entities \cite{Carstensen:2010}\cite{Schramm:2008}.
 
 \subsubsection{Wrapper Generation}
 The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other sites, which may also have relevant knowledge. Because of these challenges investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
@@ -208,12 +206,9 @@ Instances that belong to the concepts of the ontology are added in the correct p
 
 The advantage over traditional IE is the linking to an ontology which allows a more meaningful storing of the extracted information \cite{Maynard:2005}.
 
-\fxfatal{Information without semantics}
-\fxfatal{New information may require ontology to be modified}
-\fxfatal{Mixed approach}
-
 \newpage
 \subsection{Related fields}
+\gls{IE} focuses on the identification and filtering of information relevant to specific domain. Since \gls{IE} is a sub-field of \gls{NLP}, we need to separate it from related fields also concerned with the automatic processing of natural languages.
 
 \subsubsection{Information Retrieval}
 In principle, information storage and retrieval is simple. Suppose there is a store of documents and a person (user of the store) formulates a question (request or query) to which the answer is a set of documents satisfying the information need expressed by his question. He can obtain the set by reading all the documents in the store, retaining the relevant documents and discarding all the others. In a sense, this constitutes 'perfect' retrieval. This solution is obviously impracticable. A user either does not have the time or does not wish to spend the time reading the entire document collection, apart from the fact that it may be physically impossible for him to do so \cite{Rijsbergen:1979}. \fxfatal{Quoting}
@@ -239,7 +234,3 @@ Data Mining, also popularly known as \gls{KDD}, refers to the nontrivial extract
 
 \subsubsection{Question answering}
 Question Answering is a specialised form of information retrieval. Given a collection of documents, a Question Answering system attempts to retrieve correct answers to questions posed in natural language. Open-domain question answering requires question answering systems to be able to answer questions about any conceivable topic. Such systems cannot, therefore, rely on hand crafted domain specific knowledge to find and extract the correct answers \cite{Lampert:2004}.
-
-\subsubsection{Machine Learning}
-The Machine Learning field evolved from the broad field of Artificial Intelligence, which aims to mimic intelligent abilities of humans by machines. In the field of Machine Learning one considers the important question of how to make machines able to \enquote{learn}. Learning in this context is understood as inductive inference, where one observes examples that represent incomplete information about some \enquote{statistical phenomenon} \cite{Raetsch:2004}.
-\fxfatal{Weak, requires more or better information}
