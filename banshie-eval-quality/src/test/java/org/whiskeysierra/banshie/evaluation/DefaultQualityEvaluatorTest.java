@@ -27,7 +27,7 @@ public final class DefaultQualityEvaluatorTest {
 
             if (value == null) continue;
 
-            System.out.println(dimension + ": " + value);
+            System.out.println(dimension.name() + ": " + value);
         }
 
         System.out.println();
@@ -35,11 +35,13 @@ public final class DefaultQualityEvaluatorTest {
 
     @Test
     public void opennlp() {
+        System.out.println("Apache OpenNLP");
         run("opennlp.xml");
     }
 
     @Test
     public void corenlp() {
+        System.out.println("Stanford CoreNLP");
         run("corenlp.xml");
     }
 

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <span type="person" start="0" end="13">Pierre Vinken</span>,
+    61 years old, will join the board as a nonexecutive director
+    <span type="date" start="76" end="83">Nov. 29</span>.
+    Mr. <span type="person" start="89" end="95">Vinken</span>
+    is chairman of <span type="organization" start="111"
+    end="124">Elsevier N.V.</span>, the Dutch publishing group.
+    <span type="person" start="154" end="167">Rudolph Agnew
+    </span>, 55 years old and former chairman of
+    <span type="organization" start="205" end="233">Consolidated
+    Gold Fields PLC</span>, was named a director of this
+    British industrial conglomerate .
+</document>

@@ -1,12 +1,114 @@
-\section{Results and Analysis}
+\section{Results and analysis}
 \label{sec:results}
-\fxfatal{Results and Analysis}
-
-\fxfatal{Open Source Extractors}
-% Apache OpenNLP, Stanford NLP
+\fxfatal{Introduction to results}
 
 \subsection{Examples}
-\fxfatal{Adapter implementations, code, complexity, effort, experiences}
+\fxfatal{Introduction to examples}
 
-\fxfatal{Evaluation results}
+\begin{listing}[H]
+\texttt{\input{example.txt}}
+\caption{Example document}
+\label{lst:example-document}
+\end{listing}
 
+\begin{listing}[H]
+\inputminted{xml}{reference.xml}
+\caption{Example extraction reference}
+\label{lst:example-reference}
+\end{listing}
+
+\fxfatal{complexity, effort, experiences, ...}
+
+\newpage
+\subsubsection{Apache OpenNLP}
+\fxfatal{Apache OpenNLP}
+
+\begin{listing}[H]
+\begin{minted}{java}
+final SentenceDetector detector = getSentenceDetector();
+final Tokenizer tokenizer = getTokenizer();
+final TokenNameFinder finder = getNameFinder();
+
+for (Span sentences : detector.sentPosDetect(document)) {
+    final String sentence = sentences.getCoveredText(document);
+    final Span[] indices = tokenizer.tokenizePos(sentence);
+    final String[] tokens = spansToStrings(indices, sentence);
+    final Span[] spans = finder.find(tokens);
+    final List<String> words = Arrays.asList(tokens);
+
+    for (Span span : spans) {
+        final String word = joiner.join(
+            words.subList(span.getStart(), span.getEnd()));
+        final String type = span.getType();
+        final int start = sentences.getStart() + 
+            indices[span.getStart()].getStart();
+        final int end = sentences.getStart() + 
+            indices[span.getEnd()].getEnd() - 1;
+
+        // ...
+    }
+}
+\end{minted}
+\caption{Apache OpenNLP extractor adapter}
+\label{lst:opennlp-adapter}
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{css}{opennlp.txt}
+\caption{Apache OpenNLP extraction result}
+\label{lst:opennlp-result}
+\end{listing}
+
+\begin{listing}[H]
+\texttt{\input{opennlp.txt}}
+\caption{Apache OpenNLP evaluation result}
+\end{listing}
+
+\fxfatal{Performance evaluation result}
+
+\newpage
+\subsubsection{Stanford CoreNLP}
+\fxfatal{Stanford CoreNLP}
+
+\begin{listing}[H]
+\begin{minted}{java}
+final Annotation annotation = new Annotation(document);
+
+final Properties properties = new Properties();
+properties.put("annotators", "tokenize, ssplit, pos, lemma, ner");
+final StanfordCoreNLP pipeline = new StanfordCoreNLP(properties);
+
+pipeline.annotate(annotation);
+
+final List<CoreMap> sentences = 
+    annotation.get(SentencesAnnotation.class);
+
+for (CoreMap sentence : sentences) {
+    for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
+        final String word = 
+            token.get(TextAnnotation.class);
+        final String type = 
+            token.get(NamedEntityTagAnnotation.class);
+        final int start = token.beginPosition();
+        final int end = token.endPosition();
+
+        // ...
+    }
+}
+\end{minted}
+\caption{Stanford CoreNLP extractor adapter}
+\label{lst:corenlp-adapter}
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{xml}{corenlp.xml}
+\caption{Stanford CoreNLP extraction result}
+\label{lst:corenlp-result}
+\end{listing}
+
+\begin{listing}[H]
+\inputminted{css}{corenlp.txt}
+\caption{Stanford CoreNLP evaluation result}
+\end{listing}
+
+\fxfatal{Performance evaluation result}
