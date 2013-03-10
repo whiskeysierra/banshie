@@ -21,6 +21,7 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.Arrays;
 import java.util.List;
 
@@ -71,7 +72,7 @@ public final class Main {
 
         final Joiner joiner = Joiner.on(' ');
         final XMLOutputFactory factory = XMLOutputFactory.newInstance();
-        final XMLStreamWriter writer = factory.createXMLStreamWriter(System.out);
+        final XMLStreamWriter writer = factory.createXMLStreamWriter(new OutputStreamWriter(System.out, Charsets.UTF_8));
         writer.writeStartDocument("UTF-8", "1.0");
         writer.writeStartElement("document");
 

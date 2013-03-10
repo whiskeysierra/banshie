@@ -18,6 +18,7 @@ import javax.xml.stream.XMLStreamException;
 import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
@@ -39,7 +40,7 @@ public final class Main {
         final List<CoreMap> sentences = annotation.get(SentencesAnnotation.class);
 
         final XMLOutputFactory factory = XMLOutputFactory.newInstance();
-        final XMLStreamWriter writer = factory.createXMLStreamWriter(System.out);
+        final XMLStreamWriter writer = factory.createXMLStreamWriter(new OutputStreamWriter(System.out, Charsets.UTF_8));
         writer.writeStartDocument("UTF-8", "1.0");
         writer.writeStartElement("document");
 

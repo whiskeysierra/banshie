@@ -2,8 +2,19 @@
 \label{sec:results}
 \fxfatal{Introduction to results}
 
+\subsection{Open Source Extractors}
+
+\subsubsection{Apache OpenNLP}
+\fxfatal{OpenNLP introduction}
+
+\subsubsection{Stanford CoreNLP}
+\fxfatal{CoreNLP introduction}
+% difference to stanford nlp, ...
+
 \subsection{Examples}
-\fxfatal{Introduction to examples}
+\fxfatal{Introduction}
+
+Very small test document for the sake of readability.
 
 \begin{listing}[H]
 \texttt{\input{example.txt}}
@@ -16,8 +27,6 @@
 \caption{Example extraction reference}
 \label{lst:example-reference}
 \end{listing}
-
-\fxfatal{complexity, effort, experiences, ...}
 
 \newpage
 \subsubsection{Apache OpenNLP}
@@ -54,17 +63,15 @@ for (Span sentences : detector.sentPosDetect(document)) {
 \end{listing}
 
 \begin{listing}[H]
-\inputminted{css}{opennlp.txt}
+\inputminted{xml}{opennlp.xml}
 \caption{Apache OpenNLP extraction result}
 \label{lst:opennlp-result}
 \end{listing}
 
 \begin{listing}[H]
-\texttt{\input{opennlp.txt}}
+\inputminted{java}{opennlp.txt}
 \caption{Apache OpenNLP evaluation result}
 \end{listing}
-
-\fxfatal{Performance evaluation result}
 
 \newpage
 \subsubsection{Stanford CoreNLP}
@@ -107,8 +114,11 @@ for (CoreMap sentence : sentences) {
 \end{listing}
 
 \begin{listing}[H]
-\inputminted{css}{corenlp.txt}
+\inputminted{java}{corenlp.txt}
 \caption{Stanford CoreNLP evaluation result}
 \end{listing}
 
-\fxfatal{Performance evaluation result}
+\newpage
+\subsection{Conclusion}
+\fxfatal{complexity, effort, experiences, ...}
+% roughly 100 loc each

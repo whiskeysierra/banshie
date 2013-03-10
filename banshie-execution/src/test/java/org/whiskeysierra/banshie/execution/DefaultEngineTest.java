@@ -3,6 +3,7 @@ package org.whiskeysierra.banshie.execution;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import org.easymock.EasyMock;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.whiskeysierra.banshie.common.InstallMode;
 import org.whiskeysierra.banshie.corpora.Corpus;
@@ -19,8 +20,7 @@ import java.util.UUID;
 
 public final class DefaultEngineTest {
 
-    @Test
-    public void test() {
+    private void run(String path) {
         final Injector injector = Guice.createInjector(
             new LoggingModule(),
             new EventModule(InstallMode.STANDALONE),
@@ -35,7 +35,7 @@ public final class DefaultEngineTest {
         final Corpus corpus = EasyMock.createMock(Corpus.class);
 
         EasyMock.expect(extractor.getUuid()).andReturn(UUID.randomUUID()).anyTimes();
-        EasyMock.expect(extractor.getPath()).andReturn(new File("src/test/resources/echo.jar")).anyTimes();
+        EasyMock.expect(extractor.getPath()).andReturn(new File(path)).anyTimes();
 
         EasyMock.expect(corpus.getUuid()).andReturn(UUID.randomUUID()).anyTimes();
         EasyMock.expect(corpus.getInput()).andReturn(new File("src/test/resources/input.txt")).anyTimes();
@@ -47,6 +47,23 @@ public final class DefaultEngineTest {
         // TODO run assertions
 
         EasyMock.verify(extractor, corpus);
+    }
+
+    @Test
+    @Ignore
+    public void echo() {
+        run("src/test/resources/echo.jar");
+    }
+
+    @Test
+    @Ignore
+    public void opennlp() {
+        run("../banshie-example-opennlp/target/banshie-example-opennlp-1.0-SNAPSHOT-jar-with-dependencies.jar");
+    }
+
+    @Test
+    public void corenlp() {
+        run("../banshie-example-stanford-corenlp/target/banshie-example-stanford-corenlp-1.0-SNAPSHOT-jar-with-dependencies.jar");
     }
 
 }
