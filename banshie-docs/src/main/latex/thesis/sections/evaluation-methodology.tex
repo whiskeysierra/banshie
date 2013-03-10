@@ -43,7 +43,7 @@ Another way to calculate performance measures is based on the notation proposed 
 \end{tabular*}
 \end{table}
 
-\fxfatal{Slot definition}
+\gls{IE} has been, according to \cite{Chinchor:1998}, traditionally defined as the extraction of information from a text in the form of text strings and processed text strings which are placed into slots labeled to indicate the kind of information that can fill them. To summarize: Slots, in this context, can be understood as the extraction target for entities.
 
 The most used evaluation measures in \gls{IE} are recall, precision and F-measure. Some additional ones, like Error per response fill and  Slot error rate, were proposed by \cite{Chinchor:1995} and \cite{Makhoul:1999}.
 
@@ -57,7 +57,7 @@ The \textit{precision} (\ensuremath{\pi} or P), also called Sensitivity, is defi
 \caption{Precision formula}
 \end{figure}
 
-\fxfatal{Example}
+For example, a precision of .9 can be translated to: 90\% of the slots in the hypothesis were extracted correctly.
 
 \subsubsection{Recall}
 The \textit{recall} (\ensuremath{\rho} or R), also referred to as the \gls{PPV}, describes the completeness of an extraction, which is determined by the ratio of correctly predicted results to all correct results \cite{Carstensen:2010}.
@@ -69,7 +69,7 @@ The \textit{recall} (\ensuremath{\rho} or R), also referred to as the \gls{PPV},
 \caption{Recall formula}
 \end{figure}
 
-\fxfatal{Example}
+An exemplary recall of .9 can be interpreted as follows: 90\% of the slots in the reference were extracted correctly.
 
 Figure \ref{fig:recall-precision} shows a graphical interpretation of precision and recall. The relevant items are to the left of the straight line while the retrieved items are within the oval. The red regions represent errors. On the left these are the relevant items not retrieved (false negatives), while on the right they are the retrieved items that are not relevant (false positives). Precision and recall are the quotient of the left green region by respectively the oval (horizontal arrow) and the left region (diagonal arrow) \cite{Wikipedia:Precision_and_recall}.
 
