@@ -22,7 +22,15 @@ public final class DefaultQualityEvaluatorTest {
 
         Assert.assertFalse(values.isEmpty());
 
-        System.out.println(values);
+        for (Dimension dimension : Dimension.values()) {
+            final Value value = values.get(dimension);
+
+            if (value == null) continue;
+
+            System.out.println(dimension + ": " + value);
+        }
+
+        System.out.println();
     }
 
     @Test
