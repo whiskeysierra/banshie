@@ -38,7 +38,7 @@ The challenge in information extraction ccording to \cite{Grishman:2003} is the 
 \subsection{History}
 The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
-The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. \fxfatal{What's the motivation?} Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. Participants received test data of a particular domain and a special output format. They then developed IE systems based on these requirements, their performances were compared in terms of unknown documents at the conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
+The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. The \gls{DARPA} initiated and financed these conferences to encourage research in the field of \gls{IE} for military and intelligence purposes. Participants of the conferences received test data of a particular domain and a special output format. They then developed IE systems based on these requirements, their performances were compared in terms of unknown documents at the conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
 
 The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences \cite{Turmo:2006}\cite{Appelt:1999}\cite{Cunningham:2005}\cite{Linsmayr:2010}:
 
@@ -74,11 +74,9 @@ The Message Understanding Conferences structured the information extraction into
 The \gls{IE} sub-tasks will be explained using the following example document:
 
 \begin{quote}
-The shiny red rocket was fired on Tuesday. It is the brainchild of Dr. Big Head. Dr. Head is a staff scientist at We Build Rockets Inc.
+The shiny red rocket was fired near Springfield on Tuesday. It is the brainchild of Dr. Big Head. Dr. Head is a staff scientist at We Build Rockets Inc.
 \cite{Cunningham:2005}
 \end{quote}
-
-\fxfatal{Add location to example?}
 
 \subsubsection{Named Entity Recognition}
 \gls{NER}, also referred to as Name Recognition, Entity Identification or Entity Extraction, is defined as the extraction of known entity names. These include people, organizations, locations, products, date/times and certain numerical expressions \cite{Linsmayr:2010}. 
@@ -90,6 +88,7 @@ The shiny red rocket was fired on Tuesday. It is the brainchild of Dr. Big Head.
 	\textbf{Type} & \textbf{Value} \\
 	\midrule
 	\texttt{PRODUCT} & rocket \\
+	\texttt{LOCATION} & Springfield \\
 	\texttt{DATE} & Tuesday \\
 	\texttt{PERSON} & Dr. Big Head \\
 	\texttt{PERSON} & Dr. Head \\

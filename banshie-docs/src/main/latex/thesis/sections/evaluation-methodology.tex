@@ -186,11 +186,9 @@ ERR, the error measure defined by MUC, does have one esthetic advantage in that 
 After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
 \subsubsection{CPU time}
-An important metric to measure the runtime performance of a program is the process CPU time which determines how much time in the CPU a process spent during its execution. 
-
-\fxfatal{What does it say? Why is it important?}
+An important metric to measure the runtime performance of a program is the process CPU time which determines how much time in the CPU a process spent during its execution. CPU time is usually more comparable than pure execution time as it isn't influenced by other processes in a multitask environment. A lower CPU time means a program or an algorithm requires less time to execute which is usually preferable.
 
 \subsubsection{Memory consumption}
-But measuring the process CPU time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
+But measuring the process CPU time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. A lower memory footprint is usually preferable, but trading CPU time for memory might lead in better results in certain scenarios. Assessing those memory tradeoffs usually differs from use case to use case. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
 
-\fxfatal{Peak vs average? Why is it important?}
+Memory consumption can be measured as an average value, but ocassionally the peak value might be of a certain interest as well.
