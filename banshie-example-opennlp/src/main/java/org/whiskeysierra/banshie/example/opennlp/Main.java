@@ -75,10 +75,10 @@ public final class Main {
         writer.writeStartDocument("UTF-8", "1.0");
         writer.writeStartElement("document");
 
-        for (Span sentenceIndices : detector.sentPosDetect(document)) {
-            final String sentence = sentenceIndices.getCoveredText(document).toString();
-            final Span[] tokenIndices = tokenizer.tokenizePos(sentence);
-            final String[] tokens = Span.spansToStrings(tokenIndices, sentence);
+        for (Span sentences : detector.sentPosDetect(document)) {
+            final String sentence = sentences.getCoveredText(document).toString();
+            final Span[] indices = tokenizer.tokenizePos(sentence);
+            final String[] tokens = Span.spansToStrings(indices, sentence);
             final Span[] spans = finder.find(tokens);
 
             if (spans.length == 0) {
@@ -91,8 +91,8 @@ public final class Main {
                 for (Span span : spans) {
                     final String word = joiner.join(words.subList(span.getStart(), span.getEnd()));
                     final String type = span.getType();
-                    final int start = sentenceIndices.getStart() + tokenIndices[span.getStart()].getStart();
-                    final int end = sentenceIndices.getStart() + tokenIndices[span.getEnd()].getEnd() - 1;
+                    final int start = sentences.getStart() + indices[span.getStart()].getStart();
+                    final int end = sentences.getStart() + indices[span.getEnd()].getEnd() - 1;
 
                     // between the end of the last and the start of this span
                     writer.writeCharacters(joiner.join(words.subList(last, span.getStart())));
