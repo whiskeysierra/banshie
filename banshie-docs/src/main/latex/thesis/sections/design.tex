@@ -112,7 +112,7 @@ Using \gls{JPA} in an \gls{OSGi} environment is not a straight forward task. \gl
 \caption{Persistence bundle header}
 \end{listing}
 
-A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} container delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. To minimize common boilerplate code and manual transaction handling, all \gls{JPA} client bundles use the Guice extension \textit{Guice Persist}. Guice Persist offers AOP-interception for annotated methods as shown in the following listing:
+A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} containers delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. To minimize common boilerplate code and manual transaction handling, all \gls{JPA} client bundles use the Guice extension \textit{Guice Persist}. Guice Persist offers AOP-interception for annotated methods as shown in the following listing:
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -284,7 +284,7 @@ After an initial design draft, it was clear, that the Engine implementation will
 
 \newpage
 \paragraph{Process management}
-The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls and unfortunately there are several common traps that can cause code that works as expected for a single invocation of a small executable to do terrible things when repeatedly calling several complex external applications \cite{Cartmell:2009}. There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
+The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls and unfortunately there are a lot of common traps \cite{Cartmell:2009}. \fxfatal{Examples?} There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
 
 Since executing an extractor in an isolated, independent execution environment is a crucial part of the Engine's task the framework required a cleaner, more fail-safe API for process creation and lifecycle management that integrates nicely with the rest of the framework and it's main general purpose library, i.e. Guava. Listing \ref{lst:process} demonstrates the minimal steps to use the  framework's Process API while figure \ref{fig:process} shows the relevant parts of it.
 
