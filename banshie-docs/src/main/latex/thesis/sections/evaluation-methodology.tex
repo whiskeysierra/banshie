@@ -1,7 +1,7 @@
 \section{Evaluation Methodology}
 \label{sec:evaluation-methodology}
 
-In the previous chapter the field of information extraction was presented. The process of IE does not only require the extraction itself, but also the relevance of localized facts for the respective domain. Thus, a quality assessment is required, which focuses on the advancement of development and the juxtaposition of approaches. The evaluation is the formulation of new problems which have to be integrated into the development \cite{Linsmayr:2010}. The methodology of the evaluation is described in this chapter.
+In the previous chapter the field of information extraction was presented. The process of IE does not only require the extraction itself, but also needs to evaluate the relevance of localized facts for the respective domain. Thus, a quality assessment is required, which focuses on the advancement of development and the juxtaposition of approaches. The evaluation is the formulation of new problems which have to be integrated into the development \cite{Linsmayr:2010}. The methodology of the evaluation is described in this chapter.
 
 \subsection{Performance measures}
 A typical way to evaluate an IE system is by using a confusion matrix. This is a well-known
@@ -9,8 +9,9 @@ technique of counting results. Figure \ref{tab:confusion-matrix} shows a confusi
 
 \begin{table}[H]
 \centering
-\begin{tabular}{cccc}
+\begin{tabular}{c|ccc}
 	& \multicolumn{2}{c}{\shortstack{\textbf{Actual class} \\ (Observation)}} \\
+	\toprule
 	\multirow{6}{*}{\shortstack{\textbf{Predicted class} \\ (Expectation)}} & \textbf{\textit{tp}}  & \cellcolor{gray!15} \textbf{\textit{fp}} \\
 	& (true positive) & \cellcolor{gray!15} (false positive) \\
 	& Correct result & \cellcolor{gray!15} Unexpected result \\
@@ -22,7 +23,7 @@ technique of counting results. Figure \ref{tab:confusion-matrix} shows a confusi
 \label{tab:confusion-matrix}
 \end{table}
 
-For each extracted entity, we have to evaluate if it is correct (and thus a true positive) or not (and thus a false positive). The false negative in the matrix is the number of entities that should have been extracted, but haven't. In IE applications, the true negative is usually not used \cite{Sitter:2004} because we typically do not know what a \enquote{true negative} is. Unlike document classification, a \enquote{bad tuple} does not exist apriori in a document. It only exists because the extraction system can extract it \cite{Ipeirotis:2007}.
+For each extracted entity, we have to evaluate if it is correct (and thus a true positive) or not (and thus a false positive). The false negative in the matrix is the number of entities that should have been extracted, but haven't. In IE applications, the true negative is usually not used \cite{Sitter:2004} because we typically do not know what a \enquote{true negative} is. Unlike in document classification, a \enquote{bad tuple} does not exist apriori in a document. It only exists because the extraction system can extract it \cite{Ipeirotis:2007}.
 
 Another way to calculate performance measures is based on the notation proposed by \citeauthor{Makhoul:1999} \cite{Makhoul:1999}:
 
@@ -42,6 +43,8 @@ Another way to calculate performance measures is based on the notation proposed 
 \end{tabular*}
 \end{table}
 
+\fxfatal{Slot definition}
+
 The most used evaluation measures in \gls{IE} are recall, precision and F-measure. Some additional ones, like Error per response fill and  Slot error rate, were proposed by \cite{Chinchor:1995} and \cite{Makhoul:1999}.
 
 \subsubsection{Precision}
@@ -54,6 +57,8 @@ The \textit{precision} (\ensuremath{\pi} or P), also called Sensitivity, is defi
 \caption{Precision formula}
 \end{figure}
 
+\fxfatal{Example}
+
 \subsubsection{Recall}
 The \textit{recall} (\ensuremath{\rho} or R), also referred to as the \gls{PPV}, describes the completeness of an extraction, which is determined by the ratio of correctly predicted results to all correct results \cite{Carstensen:2010}.
 
@@ -63,6 +68,8 @@ The \textit{recall} (\ensuremath{\rho} or R), also referred to as the \gls{PPV},
 \end{displaymath}
 \caption{Recall formula}
 \end{figure}
+
+\fxfatal{Example}
 
 Figure \ref{fig:recall-precision} shows a graphical interpretation of precision and recall. The relevant items are to the left of the straight line while the retrieved items are within the oval. The red regions represent errors. On the left these are the relevant items not retrieved (false negatives), while on the right they are the retrieved items that are not relevant (false positives). Precision and recall are the quotient of the left green region by respectively the oval (horizontal arrow) and the left region (diagonal arrow) \cite{Wikipedia:Precision_and_recall}.
 
@@ -150,15 +157,25 @@ For $\alpha = 0.5$, E in \ref{eq:error-measure} reduces to:
 \label{eq:error-measure2}
 \end{figure}
 
-The denominator in \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two! If our objective is to count all errors, then there is no a priori reason why we should deweight deletions and insertions in this manner. In other words, by simply using F as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are! \cite{Makhoul:1999}
+The denominator in figure \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two. If the objective is to count all errors, then there is no a priori reason why one should deweight deletions and insertions in this manner.  \cite{Makhoul:1999} argues that by simply using \textit{F} as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are.
 
-A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999}. ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has a problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite \ref{eq:error-per-response-fill2} as \cite{Makhoul:1999}:
+A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999}. 
+
+\begin{figure}[H]
+\begin{displaymath}
+	ERR = \frac{S+D+I}{C+S+D+I}
+\end{displaymath}
+\caption{Error per response fill formula}
+\label{eq:error-per-response-fill}
+\end{figure}
+
+ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has a problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite figure \ref{eq:error-per-response-fill} as \cite{Makhoul:1999}:
 
 \begin{figure}[H]
 \begin{displaymath}
 	ERR = \frac{S+D+I}{N+I}
 \end{displaymath}
-\caption{Error per response fill formula}
+\caption{Rewritten error per response fill formula}
 \label{eq:error-per-response-fill2}
 \end{figure}
 
@@ -169,7 +186,11 @@ ERR, the error measure defined by MUC, does have one esthetic advantage in that 
 After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
 \subsubsection{CPU time}
-An important metric to measure the runtime performance of a program is the proess CPU time which determines how much CPU time a process spent during its execution. 
+An important metric to measure the runtime performance of a program is the process CPU time which determines how much time in the CPU a process spent during its execution. 
+
+\fxfatal{What does it say? Why is it important?}
 
 \subsubsection{Memory consumption}
 But measuring the process CPU time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
+
+\fxfatal{Peak vs average? Why is it important?}

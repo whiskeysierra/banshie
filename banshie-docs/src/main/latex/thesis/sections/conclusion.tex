@@ -6,24 +6,25 @@
 No Web UI :(
 
 \subsection{Outlook and future work}
-Banshie's architectural design is based on solid, state-of-the-art pattern, but to expand the frameworks capabilities beyond prototype character some ideas come to mind. Some of these ideas will be explained and discussed on the following pages.
+Banshie's architectural design is based on solid, state-of-the-art patterns, but to expand the frameworks capabilities beyond prototype character some ideas come to mind. Some of these ideas will be explained and discussed on the following pages.
 
-The current focus is clearly the field of \textit{Named Entity Recocgnition}, which is an important part of \textit{Information Extraction} and \textit{Natural Language Processing}, but there are other tasks in \gls{IE} which are equally interesting, e.g. relationship extraction, part-of-speech tagging or grammatical sentence analysis. Just to name a few.
+The current focus is clearly the field of \textit{Named Entity Recocgnition}, which is an important part of \textit{Information Extraction} and \textit{Natural Language Processing}, but there are other tasks in \gls{IE} which are equally interesting, e.g. relationship extraction, part-of-speech tagging or grammatical sentence analysis (see chapter \ref{sec:information-extraction}).
 
-Supporting multiple \gls{IE} tasks requires the platform to offer a more flexible XML schema. Reusing the reference- and hypothesis schema definitions proposed by GeMap comes to mind \cite{Linsmayr:2010b}.
+Supporting multiple \gls{IE} tasks requires Banshie to offer a more flexible XML schema. Reusing the reference- and hypothesis schema definitions proposed by GeMap comes to mind \cite{Linsmayr:2010b}.
 
 Since Evaliex uses a different reference-hypothesis association algorithm, offering a swappable mapping algorithm for the performance evaluation could be a useful extension to the framework.
+\fxfatal{... to compare results and/or to allow users to choose based on their use case.}
 
 The modified version of the \textit{General Greedy Mapping Algorithm} used in \textit{Evaliex} is based in string/word similarity. Future versions of the Banshie platform should support multiple algorithm, e.g. Levenshtein distance and Jaccard coefficient, as well as a plug-in mechanism for those similarity checks.
 
 The current version of the framework only supports \gls{JVM}-based extractors and since different extractors have different requirements, e.g. memory and garbage collector configuration, applying custom additional command line parameters to the external Java process would be handy.
 
-Another stage of expansion would include alternate \texttt{Engine} implementations to support non \gls{JVM}-based extractors. Different engines would of course require different means to collection runtime events. In other words for different engines one need to supply a viable \gls{JMX} client alternative.
+Another stage of expansion would include alternate \texttt{Engine} implementations to support non \gls{JVM}-based extractors. Different engines would of course require different means to collect runtime events. In other words for different engines one needs to supply a viable \gls{JMX} client alternative.
 
-The framework, in its current state, is solely an \gls{API}-based tool, which offers great embeddability, for \gls{OSGi}- and likewise Java SE environments. To support more use cases providing a simple text-based \gls{CLI} seems to be a promising extension to the platform.
+The framework, in its current state, is solely an \gls{API}-based tool, which offers great embeddability for \gls{OSGi}- and likewise Java SE environments. To support more use cases providing a simple text-based \gls{CLI} seems to be a promising extension to the platform.
 
-A Web \gls{UI}, in addition to the \gls{CLI}, would be an even more user-friendly approach. A web-based frontend could include fail-safe, responsive and intuitive interface elements, i.e. forms, to allow easy upload, querying and execution of extractors. A Web \gls{UI} would also be an excellent place to provide visual representations of statistical data and analytical results in the form of charts and diagrams.
+A Web \gls{UI}, in addition to the \gls{CLI}, would be an even more user-friendly approach. A web-based frontend could include fail-safe, responsive and intuitive interface elements to allow easy upload, querying and execution of extractors. A Web \gls{UI} would also be an excellent place to provide visual representations of statistical data and analytical results in the form of charts and diagrams.
 
 Collecting, persisting and aggregating CPU time and memory consumption is the straigtforward approach to measure the runtime performance of a program. But other users might require different or additional measures like file system consumption, thread count or startup latency. \gls{JMX} supports many, many more indicators and extensions to the \textit{event production} implementation could support a more customizable approach in the future.
 
-The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for statistical analysis is imaginable.
+The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for statistical analysis is imaginable. \fxfatal{To gain what?}

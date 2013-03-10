@@ -1,6 +1,8 @@
 \section{Modularity}
 \label{sec:modularity}
 
+\fxfatal{Relevance to this thesis?!}
+
 Modularity is a frequently used term in Software Engineering. To understand the fundamental concept of it, take a look at the following definitions:
 
 \begin{quote}
@@ -66,7 +68,9 @@ Modules are stateless and exist only as a single instance per version. We don’
 
 \newpage
 \subsection{OSGi}
-The \gls{OSGi} technology is a set of specifications that define a dynamic component system for Java. These specifications enable a development model where applications are dynamically composed of many different reusable components. The \gls{OSGi} specifications enable components to hide their implementations from other components while communicating through services, which are objects that are specifically shared between components. This surprisingly simple model has far reaching effects for almost any aspect of the software development process \cite{OSGi}. In OSGi parlance, a module is known as a bundle. OSGi provides a framework for managing bundles that are packaged as regular Java JAR files with an accompanying manifest. The manifest contains important metadata that describes the bundles and its dependencies to the OSGi framework \cite{Knoernschild:2012}. Figure \ref{fig:layering-osgi} shows the layered model architecture of the \gls{OSGi} service platform.
+The \gls{OSGi} technology is a set of specifications that define a dynamic component system for Java. These specifications enable a development model where applications are dynamically composed of many different reusable components. The \gls{OSGi} specifications enable modules to hide their implementations from other modules while communicating through services, which are objects that are specifically shared between modules. This surprisingly simple model has far reaching effects for almost any aspect of the software development process \cite{OSGi}. In OSGi parlance, a module is known as a bundle. OSGi provides a framework for managing bundles that are packaged as regular Java JAR files with an accompanying manifest. The manifest contains important metadata that describes the bundles and its dependencies to the OSGi framework \cite{Knoernschild:2012}. Figure \ref{fig:layering-osgi} shows the layered model architecture of the \gls{OSGi} service platform.
+
+\fxfatal{Better connect to previous sections. Why was OSGi chosen?}
 
 \begin{figure}[H]
 \centering
@@ -92,6 +96,8 @@ In summary, the \gls{OSGi} service platform offers the following features \cite{
 	\item \textbf{Dependency management}: \\
 	Requires explicit declaration of dependencies between modules.
 \end{itemize}
+
+\fxfatal{Shows that OSGi is a proven, reliable platform spec, used in many projects and under continious development for many years. Rock solid, obvious choice for highly modular java systems.}
 
 \newpage
 \subsubsection{Specification versions}
@@ -130,3 +136,5 @@ Some of the most widely used open source implementations of the \gls{OSGi} speci
 		\url{http://www.knopflerfish.org/} \\
 		Knopflerfish is the spin-off from one of the \gls{OSGi} alliance founding members and was open-sourced in 2003.
 \end{itemize}
+
+\fxfatal{Which did I use and why?}
