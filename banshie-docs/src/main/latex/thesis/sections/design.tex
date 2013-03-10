@@ -237,7 +237,7 @@ The extractor can than be started using the following command: \\ \texttt{java -
 
 Since an extractor under evaluation has a single input, the test document, and a single output, the annotated hypothesis, the natural choice was to utilize standard streams, standard input (\textit{stdin}) and and standard output (\textit{stdout}) respectively. The test document is passed to the extractor as plain text in UTF-8 encoding. Whether the extractor streams the document or reads it into memory as a whole is up the extractor. The output format is \gls{XML} as defined by the schema shown in listing \ref{lst:xml-schema}.
 
-\fxfatal{Does only support single document extraction!}
+It should be explicitly stated, that this approach in its current form only supports single document extraction.
 
 \begin{listing}[H]
 \inputminted{xml}{../../../../../banshie-api/src/main/resources/schema.xsd}
@@ -277,7 +277,7 @@ After an initial design draft, it was clear, that the Engine implementation will
 
 \newpage
 \paragraph{Process management}
-The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls and unfortunately there are a lot of common traps \cite{Cartmell:2009}. \fxfatal{Examples?} There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
+The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls, which may lead to deadlocks or zombie processes \cite{Cartmell:2009}. There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
 
 Since executing an extractor in an isolated, independent execution environment is a crucial part of the Engine's task the framework required a cleaner, more fail-safe API for process creation and lifecycle management that integrates nicely with the rest of the framework and it's main general purpose library, i.e. Guava. Listing \ref{lst:process} demonstrates the minimal steps to use the  framework's Process API while figure \ref{fig:process} shows the relevant parts of it.
 
@@ -315,9 +315,6 @@ After an extractor has been started in its own environment using the ProcessServ
 
 The repeated polling is realized with the JDK's built-in \\ \texttt{ScheduledExecutorService}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ScheduledExecutorService.html}} which schedules a special \texttt{Runnable} to run in a scheduled fashion, like shown in listing \ref{lst:scheduling}
 
-\fxfatal{Mention the possible impact of JMX/Polling auf die Messergebnisse: context switches}
-\fxfatal{Possible solution: multiple runs and calculate the average}
-
 \begin{listing}[H]
 \begin{minted}{java}
 executor.scheduleAtFixedRate(runnable, 0L, 1L, TimeUnit.SECONDS);
@@ -344,8 +341,6 @@ final ManagedProcess managed = service.prepare(
 \label{lst:process-configuring}
 \end{listing}
 
-\fxfatal{Mention that this is the reason why Banshie is limited to JVM-based extractors at the moment.}
-
 After the process has been started, a \gls{JMX} connection can be established with the following steps:
 
 \begin{listing}[H]
@@ -361,6 +356,8 @@ final JMXConnector connector =
 \end{listing}
 
 The default implementation of the \texttt{ProcessMonitor} interface delegates the work of creating events to another service, the \texttt{EventProducer}, by passing on the \texttt{JMXConnector}.
+
+It's worth mentioning that relying on \gls{JMX} for measuring performance values of an external extraction process is the reason why Banshie is currently limited to JVM-based extractors.
 
 \newpage
 \paragraph{Event production}
