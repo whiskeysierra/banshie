@@ -1,7 +1,5 @@
 package org.whiskeysierra.banshie.evaluation;
 
-import com.google.common.primitives.Ints;
-
 public final class Span {
 
     private String value;

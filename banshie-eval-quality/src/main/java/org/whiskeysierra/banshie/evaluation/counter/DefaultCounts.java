@@ -27,4 +27,9 @@ final class DefaultCounts implements Counts {
         return falseNegatives;
     }
 
+    @Override
+    public String toString() {
+        return "Counts [tp=" + getTruePositives() + ", fp=" + getFalsePositives() +
+            ", fn=" + getFalseNegatives() + "]";
+    }
 }

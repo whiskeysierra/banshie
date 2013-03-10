@@ -1,29 +1,37 @@
 package org.whiskeysierra.banshie.evaluation.counter;
 
+import com.google.common.collect.Sets;
 import org.whiskeysierra.banshie.evaluation.Span;
 
 import java.util.List;
+import java.util.Set;
 
 final class DefaultCounter implements Counter {
 
     @Override
     public Counts count(List<Span> references, List<Span> predictions) {
-        int truePositives = 0;
-        int falsePositives = predictions.size();
-        int falseNegatives = references.size();
+        final Set<Span> truePositives = Sets.newHashSet();
+        final Set<Span> falsePositives = Sets.newHashSet(predictions);
+        final Set<Span> falseNegatives = Sets.newHashSet(references);
 
-        loop: for (Span prediction : predictions) {
+        loop:
+        for (Span prediction : predictions) {
             for (Span reference : references) {
                 if (reference.overlap(prediction)) {
-                    truePositives++;
-                    falsePositives--;
-                    falseNegatives--;
+                    truePositives.add(reference);
+                    falsePositives.remove(prediction);
+                    falseNegatives.remove(reference);
+
                     continue loop;
                 }
             }
         }
 
-        return new DefaultCounts(truePositives, falsePositives, falseNegatives);
+        return new DefaultCounts(
+            truePositives.size(),
+            falsePositives.size(),
+            falseNegatives.size()
+        );
     }
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document>
+    <span type="person" start="0" end="6">Pierre</span>
+    <span type="person" start="7" end="13">Vinken</span>,
+    61 years old, will join the board as a nonexecutive director
+    <span type="date" start="76" end="80">Nov.</span>
+    <span type="date" start="81" end="83">29</span>.
+    Mr. <span type="person" start="89" end="95">Vinken
+    </span> is chairman of
+    <span type="organization" start="111" end="119">Elsevier</span>
+    <span type="organization" start="120" end="124">N.V.</span>
+    , the Dutch publishing group.
+    <span type="person" start="154" end="161">Rudolph</span>
+    <span type="person" start="162" end="167">Agnew</span>,
+    55 years old and former chairman of
+    <span type="organization" start="205" end="217">Consolidated</span>
+    <span type="organization" start="218" end="222">Gold</span>
+    <span type="organization" start="223" end="229">Fields</span>
+    <span type="organization" start="230" end="233">PLC</span>,
+    was named a director of this British industrial conglomerate.
+</document>

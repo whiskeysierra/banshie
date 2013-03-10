@@ -9,7 +9,7 @@ final class ErrorPerResponseFill implements Score {
         final double errors = counts.getFalseNegatives() + counts.getFalsePositives();
         final double sum = counts.getTruePositives() + errors;
 
-        if (sum < 0) {
+        if (sum > 0) {
             return errors / sum;
         } else {
             // cannot divide by zero, return error code

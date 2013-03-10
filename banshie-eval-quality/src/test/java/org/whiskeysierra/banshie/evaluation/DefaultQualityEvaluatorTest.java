@@ -1,33 +1,38 @@
 package org.whiskeysierra.banshie.evaluation;
 
-import com.google.common.collect.Maps;
-import org.easymock.EasyMock;
+import com.google.inject.Guice;
+import com.google.inject.Injector;
 import org.junit.Assert;
 import org.junit.Test;
-import org.whiskeysierra.banshie.evaluation.counter.Counter;
-import org.whiskeysierra.banshie.evaluation.score.Score;
 
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
 import java.util.Map;
 
 public final class DefaultQualityEvaluatorTest {
 
-    @Test
-    public void test() {
-        final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        final Counter counter = EasyMock.createNiceMock(Counter.class);
-        final Map<Dimension, Score> scores = Maps.newHashMap();
-
-        final QualityEvaluator unit = new DefaultQualityEvaluator(factory, counter, scores);
+    private void run(String name) {
+        final Injector injector = Guice.createInjector(new QualityEvaluationModule());
+        final QualityEvaluator unit = injector.getInstance(QualityEvaluator.class);
 
         final File resources = new File("src/test/resources");
         final File reference = new File(resources, "reference.xml");
-        final File prediction = new File(resources, "prediction.xml");
+        final File prediction = new File(resources, name);
 
         final Map<Dimension, Value> values = unit.evaluate(reference, prediction);
 
-        Assert.assertTrue(values.isEmpty());
+        Assert.assertFalse(values.isEmpty());
+
+        System.out.println(values);
+    }
+
+    @Test
+    public void opennlp() {
+        run("opennlp.xml");
+    }
+
+    @Test
+    public void corenlp() {
+        run("corenlp.xml");
     }
 
 }

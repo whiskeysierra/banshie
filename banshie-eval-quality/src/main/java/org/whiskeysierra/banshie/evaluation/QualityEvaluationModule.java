@@ -7,6 +7,7 @@ import org.whiskeysierra.banshie.evaluation.counter.CounterModule;
 import org.whiskeysierra.banshie.evaluation.score.ScoreModule;
 import org.whiskeysierra.banshie.evaluation.similarity.SimilarityModule;
 
+import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.stream.XMLInputFactory;
 
 import static org.ops4j.peaberry.Peaberry.service;
@@ -26,8 +27,8 @@ public final class QualityEvaluationModule extends AbstractModule {
 
     @Provides
     @Singleton
-    public XMLInputFactory provideXmlInputFactory() {
-        return XMLInputFactory.newFactory();
+    public DocumentBuilderFactory provideDocumentBuilderFactory() {
+        return DocumentBuilderFactory.newInstance();
     }
 
 }
