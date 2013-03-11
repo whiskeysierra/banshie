@@ -363,7 +363,7 @@ It's worth mentioning that relying on \gls{JMX} for measuring performance values
 \paragraph{Event production}
 \begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth, trim=20px 20px 0 0, clip=true]{event.png}
+\includegraphics[width=0.95\textwidth, trim=20px 20px 0 0, clip=true]{event.png}
 \caption{EventProducer implementation}
 \end{figure}
 
@@ -376,7 +376,7 @@ Using \gls{JPA} for persisting events would have certainly been an option, but u
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth, trim=20px 19px 0 0, clip=true]{logging.png}
+\includegraphics[width=0.65\textwidth, trim=20px 19px 0 0, clip=true]{logging.png}
 \caption{EventLogger implementation}
 \end{figure}
 
@@ -497,8 +497,18 @@ interface Calculator {
 \label{lst:calculator}
 \end{listing}
 
-\fxfatal{At least name all written calculators and their purpose}
+Banshie, in its current version, ships with three different \texttt{Calculators}:
 
+\begin{itemize}
+	\item \textbf{\texttt{CpuUsageCalculator}} \\
+		Retrieves the CPU time from a stream of events.
+	\item \textbf{\texttt{MemoryUsageCalculator}} \\
+		Calculates the average memory consumption in megabytes.
+	\item \textbf{\texttt{TimeCalculator}} \\
+		Calculates the total execution time in milliseconds.
+\end{itemize}
+
+\newpage
 Listing \ref{lst:memory-calculator} demonstrates a common \texttt{Calculator} implementation at the example of the \texttt{MemoryUsageCalculator} which computes the average memory consumption in megabytes.
 
 \begin{listing}[H]
