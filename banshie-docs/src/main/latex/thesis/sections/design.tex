@@ -372,22 +372,32 @@ It's the \texttt{EventProducer}'s responsibility to retrieve runtime performance
 \paragraph{Event persistence}
 Once events have been created, they need to be persisted on the file system to allow processing them later on during evaluation. Event persistence in Banshie is provided by the default \texttt{EventLogger} implementation, which creates a single text-oriented log file. \texttt{Event}s are serialized using \gls{JSON} mapping capabilities of the Jackson\footnote{\url{http://jackson.codehaus.org/}} library. The resulting event log file contains one \gls{JSON} entity per line.
 
-\fxfatal{Why not JPA? Advantages of JSON? Versioning!}
+Using \gls{JPA} for persisting events would have certainly been an option, but using a text-based logfile approach has its advantages. First of all, it's more resource friendly to stream text to a file than it is to go through several layers of abstraction to access a database via \gls{JPA}. Another reason to use \gls{JSON} for serializing is the flexibility it provides; one could easily add more information to events in the future by just a extending the \gls{JSON} structure with additional key-value pairs.
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.65\textwidth, trim=20px 19px 0 0, clip=true]{logging.png}
+\includegraphics[width=0.75\textwidth, trim=20px 19px 0 0, clip=true]{logging.png}
 \caption{EventLogger implementation}
 \end{figure}
 
 \begin{listing}[H]
 \begin{minted}{javascript}
-{"type":"cpu","time":1362134570374,"value":440000000}
-{"type":"memory","time":1362134570376,"value":12817008}
-{"type":"cpu","time":1362134571374,"value":440000000}
-{"type":"memory","time":1362134571375,"value":12818096}
-{"type":"cpu","time":1362134572378,"value":440000000}
-{"type":"memory","time":1362134572393,"value":12822128}
+{"type":"cpu","time":1362932786442,"value":630000000}
+{"type":"memory","time":1362932786870,"value":21402296}
+{"type":"cpu","time":1362932787374,"value":1160000000}
+{"type":"memory","time":1362932787399,"value":34213984}
+{"type":"cpu","time":1362932788375,"value":2620000000}
+{"type":"memory","time":1362932788423,"value":90823392}
+{"type":"cpu","time":1362932789375,"value":3790000000}
+{"type":"memory","time":1362932789383,"value":162860136}
+{"type":"cpu","time":1362932790375,"value":6810000000}
+{"type":"memory","time":1362932791603,"value":239290480}
+{"type":"cpu","time":1362932791612,"value":6880000000}
+{"type":"memory","time":1362932791614,"value":240990136}
+{"type":"cpu","time":1362932792374,"value":7840000000}
+{"type":"memory","time":1362932792376,"value":304883808}
+{"type":"cpu","time":1362932793375,"value":9110000000}
+{"type":"memory","time":1362932793378,"value":313170504}
 \end{minted}
 \caption{Example event log file excerpt}
 \label{lst:event-log}

@@ -159,15 +159,7 @@ For $\alpha = 0.5$, E in \ref{eq:error-measure} reduces to:
 
 The denominator in figure \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two. If the objective is to count all errors, then there is no a priori reason why one should deweight deletions and insertions in this manner.  \cite{Makhoul:1999} argues that by simply using \textit{F} as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are.
 
-A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999}. 
-
-\begin{figure}[H]
-\begin{displaymath}
-	ERR = \frac{S+D+I}{C+S+D+I}
-\end{displaymath}
-\caption{Error per response fill formula}
-\label{eq:error-per-response-fill}
-\end{figure}
+A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999} as shown in figure \ref{eq:error-per-response-fill}.
 
 ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has a problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite figure \ref{eq:error-per-response-fill} as \cite{Makhoul:1999}:
 
