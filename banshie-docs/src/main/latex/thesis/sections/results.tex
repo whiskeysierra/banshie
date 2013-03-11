@@ -37,7 +37,7 @@ The example reference output, listing \ref{lst:example-reference}, was created m
 
 \newpage
 \subsubsection{Apache OpenNLP}
-\fxfatal{Apache OpenNLP}
+Listing \ref{lst:opennlp-adapter} shows the most relevant part of the adapter implementation for the Apache OpenNLP Name Finder Tool, with omitting the document reading and output writing part of the code. The three most important services provided by OpenNLP are the \texttt{SentenceDetector}, the \texttt{Tokenizer} and the \texttt{NameFinder}. The SentenceDetector and Tokenizer are used to split up the input document into sentences and sentences into tokens respectively. The resulting lists of tokens are than passed on to the NameFinder which finds spans and marks them as persons, organizations or locations accordingly.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -69,16 +69,24 @@ for (Span sentences : detector.sentPosDetect(document)) {
 \label{lst:opennlp-adapter}
 \end{listing}
 
+\newpage
+Listing \ref{lst:opennlp-result} shows the extraction result produced by the adapter implementation.
+
 \begin{listing}[H]
 \inputminted{xml}{opennlp.xml}
 \caption{Apache OpenNLP extraction result}
 \label{lst:opennlp-result}
 \end{listing}
 
+The evaluation result of the extraction outcome and the recorded event log produced by the default \texttt{PerformanceEvaluator} and \texttt{QualityEvaluator} implementations, discussed in chapter \ref{sec:design}, is shown in following listing.
+
 \begin{listing}[H]
 \inputminted{java}{opennlp.txt}
 \caption{Apache OpenNLP evaluation result}
+\label{lst:opennlp-eval-result}
 \end{listing}
+
+As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2.25 seconds CPU time and 35 megabytes of memory to perform the extraction but on the other it only scored a recall of .3 and a F-measure of .5, which means the OpenNLP tagger only found a third of what could have been found, according to our reference output.
 
 \newpage
 \subsubsection{Stanford CoreNLP}
