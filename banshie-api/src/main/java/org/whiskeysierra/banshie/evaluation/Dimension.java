@@ -11,7 +11,6 @@ public enum Dimension {
     PRECISION("Precision"),
     RECALL("Recall"),
     F_MEASURE("F-measure"),
-    ACCUARCY("Accuracy"),
 
     // error measures
     ERROR_MEASURE("Error measure"),

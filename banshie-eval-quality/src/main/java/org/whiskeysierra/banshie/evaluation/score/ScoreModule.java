@@ -14,7 +14,6 @@ public final class ScoreModule extends AbstractModule {
         binder.addBinding(Dimension.ERROR_MEASURE).to(ErrorMeasure.class);
         binder.addBinding(Dimension.ERROR_PER_RESPONSE_FILL).to(ErrorPerResponseFill.class);
         binder.addBinding(Dimension.F_MEASURE).to(FMeasure.class);
-        binder.addBinding(Dimension.ACCUARCY).to(Accuracy.class);
         binder.addBinding(Dimension.PRECISION).to(Precision.class);
         binder.addBinding(Dimension.RECALL).to(Recall.class);
         binder.addBinding(Dimension.SLOT_ERROR_RATE).to(SlotErrorRate.class);
