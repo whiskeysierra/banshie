@@ -92,8 +92,7 @@ As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2
 
 \newpage
 \subsubsection{Stanford CoreNLP}
-\fxfatal{Stanford CoreNLP}
-The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed around pipelines. 
+The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed a pipelines. It's possible to add different annotators to a pipeline which work on any document passed down the pipeline. The most common annotators are \texttt{tokenize} (tokenizing), \texttt{ssplit} (sentence splitting), \texttt{pos} (part-of-speech tagging) and \texttt{ner} (named entity recognition). The results produced by the annotators can then be retrieved by using the corresponding \texttt{get}-methods on sentence or token instances as shown in listing \ref{lst:corenlp-adapter}.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -125,16 +124,25 @@ for (CoreMap sentence : sentences) {
 \label{lst:corenlp-adapter}
 \end{listing}
 
+\newpage
+The extraction of the CoreNLP adapter is shown in listing \ref{lst:corenlp-result} and it's obvious that it contains much more annotated tokens than the OpenNLP result in listing \ref{lst:opennlp-result}. But since the Stanford \gls{NER} tagger works on tokens, it tags individual words with \gls{NER} types.
+
 \begin{listing}[H]
 \inputminted{xml}{corenlp.xml}
 \caption{Stanford CoreNLP extraction result}
 \label{lst:corenlp-result}
 \end{listing}
 
+\newpage
+Listing \ref{lst:corenlp-eval-result} shows the evaluation result of the CoreNLP adapter.
+
 \begin{listing}[H]
 \inputminted{java}{corenlp.txt}
 \caption{Stanford CoreNLP evaluation result}
+\label{lst:corenlp-eval-result}
 \end{listing}
+
+It quickly becomes apparent, that Stanford CoreNLP produces perfect extraction results, according to our example reference, but does so on the expense of required CPU time and memory consumption.
 
 \newpage
 \subsection{Summary}
