@@ -28,3 +28,5 @@ A Web \gls{UI}, in addition to the \gls{CLI}, would be an even more user-friendl
 Collecting, persisting and aggregating CPU time and memory consumption is the straigtforward approach to measure the runtime performance of a program. But other users might require different or additional measures like file system consumption, thread count or startup latency. \gls{JMX} supports many, many more indicators and extensions to the \textit{event production} implementation could support a more customizable approach in the future.
 
 The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for statistical analysis is imaginable. \fxfatal{To gain what?}
+
+\subsection{Lessons learned}
