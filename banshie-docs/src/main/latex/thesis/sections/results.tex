@@ -69,6 +69,8 @@ for (Span sentences : detector.sentPosDetect(document)) {
 \label{lst:opennlp-adapter}
 \end{listing}
 
+OpenNLP's \gls{NER} is primarily designed to work with sentences, but since our schema requires character offsets, some additional index counting is requiring.
+
 \newpage
 Listing \ref{lst:opennlp-result} shows the extraction result produced by the adapter implementation.
 
@@ -91,6 +93,7 @@ As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2
 \newpage
 \subsubsection{Stanford CoreNLP}
 \fxfatal{Stanford CoreNLP}
+The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed around pipelines. 
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -136,5 +139,6 @@ for (CoreMap sentence : sentences) {
 \newpage
 \subsection{Summary}
 \fxfatal{Outro}
-%complexity, effort, experiences, ...
+% complexity, effort, experiences, ...
 % roughly 100 loc each
+% nice example of common evaluation result: possible tradeoff between different extractors: better results for more cpu time and memory! 
