@@ -222,6 +222,7 @@ final Map<Dimension, Value> q =
 \end{listing}
 
 \subsection{Extractor interface specification}
+\label{sec:extractor-specification}
 Since Banshie aims to evaluate the extraction quality as well as the runtime performance of information extraction systems it sets some special requirements for extractors.
 
 Any extractor evaluated by the framework is required to by written in Java and compiled for Java 1.6 or higher as a single executable Jar file. Being packaged as a single file requires the extractor to bundle every external dependency into a single archive. Embedding third-party java libraries can be accomplished by utilizing the \textit{JarJar}\footnote{\url{https://code.google.com/p/jarjar/}} tool. External files like models and training data can packaged as standard classpath resources.

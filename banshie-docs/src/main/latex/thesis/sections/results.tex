@@ -1,6 +1,6 @@
 \section{Results}
 \label{sec:results}
-This chapter aims to demonstrate how existing information extraction systems can be evaluated with Banshie. For evaluation purposes two freely available \gls{NER} taggers were chosen. A test document, reference output and examplary adapter implementations for the selected systems will be shown and discussed over the course of the following pages.
+This chapter aims to show the results of the framework implementation by demonstrating how existing information extraction systems can be evaluated with Banshie. For evaluation purposes two freely available \gls{NER} taggers were chosen. A test document, reference output and examplary adapter implementations for the selected systems will be shown and discussed over the course of the following pages.
 
 \subsection{Open Source Extractors}
 Several \gls{NLP} tools and suites exist but for the purpose of evaluating Banshie only two were chosen. The choice came down to Apache OpenNLP and Stanford CoreNLP because both are well-known tools from respected authorities in Open Source Software and Natural Language Processing: in this case the \acs{ASF} and Christopher Manning\footnote{\url{http://nlp.stanford.edu/~manning/}} respectively. A second reason for selecting those two is that both are written in Java and available via the Maven Central repository.
@@ -18,8 +18,7 @@ The Stanford CoreNLP code is written in Java, licensed under the GNU General Pub
 
 \newpage
 \subsection{Examples}
-\fxfatal{Introduction}
-For the sake of readability of this document and to keep the evaluation process understandable an extremely small test document, shown in listing \ref{lst:example-document}, was chosen.
+This chapter will show the most relevant parts of the adapter implementations to make the selected \gls{NER} tools compatible to the extractor interface specification described in chapter \ref{sec:extractor-specification}. For the sake of readability of this document and to keep the evaluation process understandable an extremely small test document, shown in listing \ref{lst:example-document}, was chosen.
 
 \begin{listing}[H]
 \texttt{\input{example.txt}}
