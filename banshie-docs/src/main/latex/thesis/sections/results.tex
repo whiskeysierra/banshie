@@ -1,26 +1,33 @@
-\section{Results and analysis}
+\section{Results}
 \label{sec:results}
-\fxfatal{Introduction to results}
+This chapter aims to demonstrate how existing information extraction systems can be evaluated with Banshie. For evaluation purposes two freely available \gls{NER} taggers were chosen. A test document, reference output and examplary adapter implementations for the selected systems will be shown and discussed over the course of the following pages.
 
 \subsection{Open Source Extractors}
+Several \gls{NLP} tools and suites exist but for the purpose of evaluating Banshie only two were chosen. The choice came down to Apache OpenNLP and Stanford CoreNLP because both are well-known tools from respected authorities in Open Source Software and Natural Language Processing: in this case the \acs{ASF} and Christopher Manning\footnote{\url{http://nlp.stanford.edu/~manning/}} respectively. A second reason for selecting those two is that both are written in Java and available via the Maven Central repository.
 
 \subsubsection{Apache OpenNLP}
-\fxfatal{OpenNLP introduction}
+Apache OpenNLP\footnote{\url{http://opennlp.apache.org/}} is a machine learning based toolkit for the processing of natural language text. It supports the most common NLP tasks, such as tokenization, sentence segmentation, part-of-speech tagging, named entity extraction, chunking, parsing, and coreference resolution. \cite{OpenNLP}
+
+The Apache OpenNLP project is written in Java, licensed under the Apache License Version 2.0, available on Maven Central and completed incubation on February 2012 and is now an Apache top level project.
 
 \subsubsection{Stanford CoreNLP}
-\fxfatal{CoreNLP introduction}
-% difference to stanford nlp, ...
+Stanford CoreNLP
+\footnote{\url{http://nlp.stanford.edu/software/corenlp.shtml}} is an integrated framework, which make it very easy to apply a bunch of language analysis tools to a piece of text. Stanford CoreNLP integrates tools, like the a part-of-speech tagger, a named entity recognizer, a parser, and a coreference resolution system, and provides model files for analysis of English. The goal of the project is to enable people to quickly and painlessly get complete linguistic annotations of natural language texts. It is designed to be highly flexible and extensible. \cite{CoreNLP}
 
+The Stanford CoreNLP code is written in Java, licensed under the GNU General Public License and available on Maven Central.
+
+\newpage
 \subsection{Examples}
 \fxfatal{Introduction}
-
-Very small test document for the sake of readability.
+For the sake of readability of this document and to keep the evaluation process understandable an extremely small test document, shown in listing \ref{lst:example-document}, was chosen.
 
 \begin{listing}[H]
 \texttt{\input{example.txt}}
 \caption{Example document}
 \label{lst:example-document}
 \end{listing}
+
+The example reference output, listing \ref{lst:example-reference}, was created manually by annotating the example document with xml tags. It should be noted, that an editor visualizing the UTF-8 character offset is extremely helpful when creating a reference output by hand. Another possibility is to take the output of one extractor and modify the result accordingly.
 
 \begin{listing}[H]
 \inputminted{xml}{reference.xml}
@@ -120,5 +127,6 @@ for (CoreMap sentence : sentences) {
 
 \newpage
 \subsection{Summary}
-\fxfatal{complexity, effort, experiences, ...}
+\fxfatal{Outro}
+%complexity, effort, experiences, ...
 % roughly 100 loc each

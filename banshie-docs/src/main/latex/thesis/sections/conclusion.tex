@@ -12,8 +12,7 @@ The current focus is clearly the field of \textit{Named Entity Recocgnition}, wh
 
 Supporting multiple \gls{IE} tasks requires Banshie to offer a more flexible XML schema. Reusing the reference- and hypothesis schema definitions proposed by GeMap comes to mind \cite{Linsmayr:2010b}.
 
-Since Evaliex uses a different reference-hypothesis association algorithm, offering a swappable mapping algorithm for the performance evaluation could be a useful extension to the framework.
-\fxfatal{... to compare results and/or to allow users to choose based on their use case.}
+Since Evaliex uses a different reference-hypothesis association algorithm, offering a swappable reference-hypothesis mapping algorithm for the performance evaluation could be a useful extension to the framework to compare results and/or to allow users to choose based on their use case.
 
 The modified version of the \textit{General Greedy Mapping Algorithm} used in \textit{Evaliex} is based in string/word similarity. Future versions of the Banshie platform should support multiple algorithm, e.g. Levenshtein distance and Jaccard coefficient, as well as a plug-in mechanism for those similarity checks.
 
@@ -27,7 +26,7 @@ A Web \gls{UI}, in addition to the \gls{CLI}, would be an even more user-friendl
 
 Collecting, persisting and aggregating CPU time and memory consumption is the straigtforward approach to measure the runtime performance of a program. But other users might require different or additional measures like file system consumption, thread count or startup latency. \gls{JMX} supports many, many more indicators and extensions to the \textit{event production} implementation could support a more customizable approach in the future.
 
-The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for statistical analysis is imaginable. \fxfatal{To gain what?}
+The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for a more flexible and user-oriented statistical analysis is imaginable.
 
 \subsection{Lessons learned}
 \fxfatal{Lessons learned}
