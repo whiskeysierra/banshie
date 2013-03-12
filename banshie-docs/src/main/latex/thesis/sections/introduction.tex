@@ -6,21 +6,18 @@ Within the age of the Internet and social media sites there is a vast amount of 
 
 Since the beginning of \gls{IE} evaluating the quality of an extractor was always an important factor. But \gls{IE} is missing two things: a set of comprehensive, standard evaluation measures and a well-designed, extensible evaluation framework. Most of the evaluation measures used in current tools are lent from \textit{Information Retrieval}, which usually don't really grasp the inexact nature of \gls{IE}.
 
-\fxfatal{More motivation..., MIA/DIMA}
-%\url{http://www.mia-marktplatz.de/}
-%\url{http://www.dima.tu-berlin.de/}
+The biggest motivator for this thesis is the \gls{DIMA}\footnote{\url{http://www.dima.tu-berlin.de/}} group at the TU Berlin, which is currently developing a cloud-based Marketplace for Information and Analytics: \textit{MIA}\footnote{\url{http://www.mia-marktplatz.de/}}. The MIA marketplace platform requires such a framework for several of its components, such as extractor ranking and automatic extractor improvements.
+
+The available evaluation tools for \gls{IE} tools support usually most of the better known metrics, but they don't support the evaluation of the runtime performance of extractors under testing. The concept of combining the execution and evaluation of information extraction systems into a single platform to measure extraction quality and runtime performance simultaneously is a unique approach. The author did not find any similar approach for information extraction evaluation while conducting research for this thesis.
 
 \subsection{Objective}
 The goal of this thesis is a formal discussion of known and used performance measures for IE and a working prototype of a highly modular benchmark framework for Java-based platforms to run and test information extraction systems in isolation to measure IE-related performance values, e.g. \textit{precision}, \textit{recall} and \textit{F-Measure}, as well as runtime performance measures, e.g. CPU time and memory consumption.
 
-\fxfatal{Requirements}
-% why is execution+evaluation unique?
+Since the framework is planned to be used in a bigger research and development project it has to meet several technical and organizational criteria: The framework has to be developed in an Open Source fashion and released under a business-friendly Open Source license to allow a broad spectrum of researchers and developers to use, modify and improve the framework. To minimize the future development efforts for other researchers and developers, the framework needs to be portable, maintainable and flexible. Portability can be ensured by reyling on the Java programming language and the Java platform in general.
 
 \subsection{Structure}
-The background knowledge required to put this thesis into context is separated into three chapters: \nameref{sec:information-extraction}, \nameref{sec:evaluation-methodology} and \nameref{sec:modularity}:
+The background knowledge and basics required to put this thesis into context is separated into three chapters: \nameref{sec:information-extraction}, \nameref{sec:evaluation-methodology} and \nameref{sec:modularity}:
 
-Chapter \ref{sec:information-extraction} (\nameref{sec:information-extraction}) contains different definitions of \gls{IE}, a small discourse about its history, a more or less complete list of the most typical tasks in \gls{IE} and some information about common \gls{IE} approaches, current developments and related fields. \nameref{sec:evaluation-methodology}, chapter \ref{sec:evaluation-methodology}, shows and discusses current state-of-the-art evaluation techniques and performance measures for information extraction systems and tools. Chapter \ref{sec:modularity} (\nameref{sec:modularity}) contains different definitions, goals and requirements of modularity as well as a quick overview about modularity in general and Java and the \gls{OSGi} service platform in particular.
-
-\fxfatal{These chapters are the basics of this thesis}
+Chapter \ref{sec:information-extraction} (\nameref{sec:information-extraction}) contains different definitions of \gls{IE}, a small discourse about its history, a more or less complete list of the most typical tasks in \gls{IE} and some information about common \gls{IE} approaches, current developments and related fields. \nameref{sec:evaluation-methodology}, chapter \ref{sec:evaluation-methodology}, shows and discusses current state-of-the-art evaluation techniques and performance measures for information extraction systems and tools. Since the framework is required to be highly modular, we first need to define the term \textit{modularity} and how it affects software design and engineering. Chapter \ref{sec:modularity} (\nameref{sec:modularity}) contains different definitions, goals and requirements of modularity as well as a quick overview about modularity in general and Java and the \gls{OSGi} service platform in particular.
 
 The chapters \ref{sec:design} \nameref{sec:design} and \ref{sec:results} \nameref{sec:results} describe the framework requirements, architecture and implementation steps as well as the result and analysis of the system. The conclusion in chapter \ref{sec:conclusion} will be a critical review of the work done in the course of this thesis as well as an outlook on future work.
