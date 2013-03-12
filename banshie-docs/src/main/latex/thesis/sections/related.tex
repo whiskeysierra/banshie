@@ -2,8 +2,6 @@
 \label{sec:related-work}
 This chapter aims to provide a quick overview of some of the better known frameworks for evaluating information extraction systems.
 
-\fxfatal{Discuss each system individually in the context of this thesis}
-
 \subsection{Evaliex}
 \textit{Evaliex} is an \gls{IE} evaluation tool which integrates measurement concepts, like state-of-the-art scoring metrics, measuring string and semantic similarities and by parameterization of metric scoring, and provides an efficient user interface that supports evaluation control and the visualization of \gls{IE} results.
 
@@ -32,8 +30,9 @@ The Ellogon Collection Comparison tool ships, very much like the Gate Annotation
 
 ANNALIST is, in contrast to the previously described systems, a pure evaluation tool. The data can be imported via special plug-ins and is processed by individual modules. The \textit{Alignment Tool} associates hypotheses and references for each annotation type. The subsequent metric calculation is performed by the scoring module which determines precision, recall and the F-measure. The output module visualizes the results in a table \cite{Linsmayr:2010}.
 
-\fxfatal{Shortcomings?}
+ANNALIST meets the requirement of this thesis to offer an extensible evaluation tool by providing a plug-in mechanism. Plug-ins enable the tool to accept other input formats. In other words plug-ins translate between different input formats and required formats for the scoring module. ANNALIST comes with a \gls{CLI} and is therefore not developed with embeddability in mind.
 
 \subsection{Summary}
-\fxfatal{Shortcomings of these systems? What does Banshie try to improve?}
-% all tools are just evaluating results, they don't handle execution and can't evaluate runtime performance
+All of these systems offer information extraction evaluation, some more sophisticated than others. Some of them are primary evaluation tools, others just support evaluation, next to several other features. But none of the tools described above is designed to be embedded in other software systems as a library. They usually only provide a user interface but not an \gls{API}. But most importantly, every tool only supports the evaluation of extraction results, not the runtime performance of different extractors.
+
+Because none of these systems meets the requirements a new framework had to be designed which is based on the concepts of embeddability, extensibility, modularity and which combines the execution and evalutation of information extraction systems.
