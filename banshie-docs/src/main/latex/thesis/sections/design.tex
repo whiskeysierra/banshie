@@ -423,7 +423,26 @@ The reference-hypothesis association is provided by the \texttt{Counter} class, 
 \label{fig:counter}
 \end{figure}
 
-The scoring metrics are realized by implementations of the \texttt{Score} interface. Since several metrics are based on others, implementations are free to reuse instances of other types as shown in the following package diagram.
+The scoring metrics are realized by implementations of the \texttt{Score} interface. Every performance metric discussed in chapter \ref{sec:evaluation-methodology} has been implemented as single \texttt{Score} implementation.
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ll}
+	\toprule
+	Metric & Implementation class \\
+	\midrule
+	Precision ($\rho$) & \texttt{Precision} \\
+	Recall ($\pi$) &  \texttt{Recall} \\
+	F-measure (\textit{F}) & \texttt{FMeasure} \\
+	Error measure (\textit{E}) & \texttt{ErrorMeasure} \\
+	Error per response fill (\textit{ERR}) & \texttt{ErrorPerResponseFill} \\
+	Slot error rate (\textit{SER}) & \texttt{SlotErrorRate} \\
+	\bottomrule
+\end{tabular*}
+\caption{Metric implementations}
+\end{table}
+
+Since several metrics are based on others, implementations are free to reuse instances of other types as shown in the following package diagram.
 
 \begin{figure}[H]
 \centering
