@@ -1,9 +1,13 @@
 \section{Conclusion}
 \label{sec:conclusion}
-\fxfatal{Conclusion}
+This chapter attempts to summarize this thesis by reviewing. It also gives an outlook for future work and research that can be done based on the results of this thesis.
 
 \subsection{Review}
+\fxfatal{Review}
 No Web UI :(
+
+\subsection{Lessons learned}
+\fxfatal{Lessons learned}
 
 \subsection{Outlook and future work}
 Banshie's architectural design is based on solid, state-of-the-art patterns, but to expand the frameworks capabilities beyond prototype character some ideas come to mind. Some of these ideas will be explained and discussed on the following pages.
@@ -27,6 +31,3 @@ A Web \gls{UI}, in addition to the \gls{CLI}, would be an even more user-friendl
 Collecting, persisting and aggregating CPU time and memory consumption is the straigtforward approach to measure the runtime performance of a program. But other users might require different or additional measures like file system consumption, thread count or startup latency. \gls{JMX} supports many, many more indicators and extensions to the \textit{event production} implementation could support a more customizable approach in the future.
 
 The memory consumption is calculated as the average heap size while the CPU time just looks at the last value. Those are just concrete implementations of generic aggregate functions: \texttt{AVG} and \texttt{LAST} in that case. A more sophisticated approach would be to support an extensible core set of aggregate functions, e.g. \texttt{MIN}, \texttt{MAX}, \texttt{AVG}, \texttt{STDDEV}, \texttt{VAR}, \texttt{SUM}, \texttt{FIRST} and \texttt{LAST}, which operate on the raw logging data. Even offering a lightweight MapReduce integration for a more flexible and user-oriented statistical analysis is imaginable.
-
-\subsection{Lessons learned}
-\fxfatal{Lessons learned}
