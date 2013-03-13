@@ -38,6 +38,8 @@ The challenge in information extraction ccording to \cite{Grishman:2003} is the 
 \subsection{History}
 The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, where  the information from texts  were reduced into a table structure. \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
+\subsubsection{Message Understanding Conferences}
+
 The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. The \gls{DARPA} initiated and financed these conferences to encourage research in the field of \gls{IE} for military and intelligence purposes. Participants of the conferences received test data of a particular domain and a special output format. They then developed IE systems based on these requirements, their performances were compared in terms of unknown documents at the conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
 
 The conferences were held between 1987 and 1998. The following table lists the domains and the number of training and reference documents of the respective conferences \cite{Turmo:2006}\cite{Appelt:1999}\cite{Cunningham:2005}\cite{Linsmayr:2010}:
@@ -64,7 +66,19 @@ The conferences were held between 1987 and 1998. The following table lists the d
 
 The conferences have made a decisive contribution to the development of information extraction, which include the formulation of sub-tasks, metrics and the striving for domain independence and portability of \gls{IE} systems. The meeting of various research groups and the implementation of systems based on the same task offers enormous opportunities to exchange ideas and to overcome theoretical and paradigmatic differences \cite{Cimiano:2003}\cite{Lehnert:1994}.
 
-\fxfatal{ACE}
+\subsubsection{Automatic Content Extraction}
+The program of the \gls{ACE} \footnote{\url{http://www.itl.nist.gov/iad/mig/tests/ace/}}  was launched as a successor to the \gls{MUC} in 1999. \gls{ACE} program attempts to focus the research for automatic processing of natural language texts and the development of necessary systems. The field of \gls{IE} is divided into the following sections \cite{Nist:2008}\cite{Lavelli:2008}\cite{Turmo:2006}\cite{Linsmayr:2010}:
+
+\begin{itemize}
+\item \textbf{\gls{EDR}} \newline
+Identification of entity types and subcategories
+\item \textbf{\gls{RDR}} \newline
+Recognition of relationships between entities
+\item \textbf{\gls{VDR}} \newline
+Extraction of events and scenarios in which entities are involved
+\end{itemize}
+
+The tasks of the \gls{ACE} are more complex, as multiple domains are used and also multiple sources of language translation, or the \gls{OCR} need to be analyzed \cite{Cunningham:2005}.
 
 The results of these conferences will provide the basis of this thesis as described in detail in chapter \ref{sec:evaluation-methodology}.
 
@@ -180,21 +194,6 @@ The method of unsupervised learning requires no annotations and manually generat
 The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other pages, which may also have relevant knowledge. Because of these challenges, investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
 
 A wrapper is a procedure that identifies data from a source in accordance with special extraction rules. The information within HTML pages are converted into a format explicitly stored for further use. A wrapper must coincide with the dynamic content of the web, manage the change of links and formatting errors. Since a wrapper is limited to one source, research in the area of \gls{WG} is initiated \cite{Chang:2006}\cite{Eikvil:1999}. The wrapper generation focuses on the integration of multiple sources and counteracts the heterogeneity of the web by using a wrapper library \cite{Siefkes:2007}\cite{Turmo:2006}.
-
-\fxfatal{Move to history/programs}
-\subsubsection{Automatic Content Extraction}
-The program of the \gls{ACE} (\url{http://www.itl.nist.gov/iad/mig/tests/ace/})  was launched as a successor to the \gls{MUC} in 1999. \gls{ACE} program attempts to focus the research for automatic processing of natural language texts and the development of necessary systems. The field of \gls{IE} is divided into the following sections \cite{Nist:2008}\cite{Lavelli:2008}\cite{Turmo:2006}\cite{Linsmayr:2010}:
-
-\begin{itemize}
-\item \textbf{\gls{EDR}} \newline
-Identification of entity types and subcategories
-\item \textbf{\gls{RDR}} \newline
-Recognition of relationships between entities
-\item \textbf{\gls{VDR}} \newline
-Extraction of events and scenarios in which entities are involved
-\end{itemize}
-
-The tasks of the \gls{ACE} are more complex, as multiple domains are used and also multiple sources of language translation, or the \gls{OCR} need to be analyzed \cite{Cunningham:2005}.
 
 \subsubsection{Ontology-based Information Extraction}
 \fxfatal{Ontologies and Knowledge Base construction}
