@@ -148,7 +148,7 @@ The \textit{Slot Error Rate} (SER) was originally proposed by \citeauthor{Makhou
 \end{figure}
 
 \subsection{Discussion}
-Often only the F-measure is reported as the evaluation measure of an IE system. If the same weighting for recall and precision is used in calculating the F-measure, this gives an indication of which system is the better one. However, often it may be important to know the individual recall and precision scores of a system to be able to fully compare different systems. When one system has a recall of 10\% and a precision of 90\%, this will obtain the same F-measure as a system which obtains a recall of 90\% and a precision of 10\%, even though both systems are very different. Differences on how a system scores with regards to recall and precision will be unnoticed when reporting only F-measure \cite{Sitter:2004}.
+Often only the F-measure is reported as the evaluation measure of an IE system. If the same weighting for recall and precision is used in calculating the F-measure, this gives an indication of which system is the better one. However, often it may be important to know the individual recall and precision scores of a system to be able to fully compare different systems. When one system has a recall of 10\% and a precision of 90\%, this will obtain the same F-measure as a system which obtains a recall of 90\% and a precision of 10\%, even though both systems are very different. Differences on how a system scores with regards to recall and precision will go unnoticed when reporting only F-measure \cite{Sitter:2004}.
 
 For $\alpha = 0.5$, E in \ref{eq:error-measure} reduces to:
 
@@ -160,11 +160,11 @@ For $\alpha = 0.5$, E in \ref{eq:error-measure} reduces to:
 \label{eq:error-measure2}
 \end{figure}
 
-The denominator in figure \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two. If the objective is to count all errors, then there is no a priori reason why one should deweight deletions and insertions in this manner.  \cite{Makhoul:1999} argues that by simply using \textit{F} as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are.
+The denominator in figure \ref{eq:error-measure2} is equal to the average of the number of slots in the reference and in the hypothesis. But the major effect in \ref{eq:error-measure2} is the fact that, in the numerator, the deletion and insertion errors are cut (or deweighted) by a factor of two. If the objective is to count all errors, then there is no a priori reason why one should deweight deletions and insertions in this manner.  \cite{Makhoul:1999} argues that, by simply using \textit{F} as our performance measure, we are implicitly discounting our overall error rate, making our systems look like they are much better than they really are.
 
 A possible solution to the problem described above is provided by the error measure ERR defined by MUC \cite{Chinchor:1995}\cite{Makhoul:1999} as shown in figure \ref{eq:error-per-response-fill}.
 
-ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has a problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite figure \ref{eq:error-per-response-fill} as \cite{Makhoul:1999}:
+ERR removes the deweighting of D and I by simply removing the $\alpha$ weights in \ref{eq:error-measure}. The definition of ERR, however, still has the problem in that it implicitly deweights insertion errors relative to deletions and substitutions. This fact becomes more obvious when we rewrite figure \ref{eq:error-per-response-fill} as \cite{Makhoul:1999}:
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -174,20 +174,20 @@ ERR removes the deweighting of D and I by simply removing the $\alpha$ weights i
 \label{eq:error-per-response-fill2}
 \end{figure}
 
-ERR, the error measure defined by MUC, does have one esthetic advantage in that it is guaranteed to be between 0 and 1, while SER, the slot error rate, can become greater than 1 under certain high error conditions \cite{Makhoul:1999}.
+ERR, the error measure defined by MUC, does have one aesthetic advantage in that it is guaranteed to be between 0 and 1, while SER, the slot error rate, can become greater than 1 under certain high error conditions \cite{Makhoul:1999}.
 
 \newpage
 \subsection{Runtime performance measures}
 After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
 \subsubsection{CPU time}
-An important metric to measure the runtime performance of a program is the process CPU time which determines how much time in the CPU a process spent during its execution. CPU time is usually more comparable than pure execution time as it isn't influenced by other processes in a multitask environment. A lower CPU time means a program or an algorithm requires less time to execute which is usually preferable.
+An important metric to measure the runtime performance of a program is the process CPU time, which determines how much time  a process spent in the CPU during its execution. CPU time is usually more comparable than pure execution time as it isn't influenced by other processes in a multitask environment. A lower CPU time means a program or an algorithm requires less time to execute, which is usually more preferable.
 
 \subsubsection{Memory consumption}
-But measuring the process CPU time is not enough. To compare two different program's runtime performance one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. A lower memory footprint is usually preferable, but trading CPU time for memory might lead in better results in certain scenarios. Assessing those memory tradeoffs usually differs from use case to use case. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
+But measuring the process CPU time is not enough. To compare the runtime performances of two different programs one needs to take the memory consumption into account, because different programs might use different time-memory tradeoffs. A lower memory footprint is usually more preferable, but trading CPU time for memory might lead to better results in certain scenarios. Assessing those memory tradeoffs usually differs from use case to use case. Memory consumption is usually measured in absolute dimension, e.g. Kilobytes, as opposed to a relative value based on the total memory size.
 
 Memory consumption can be measured as an average value, but ocassionally the peak value might be of a certain interest as well.
 
 \newpage
 \subsection{Summary}
-This chapter presented and discussed the most widely used extraction and runtime performance values used to measure the overall system performance of extractors and how they relate to each other. Those values included performance measures, by name precision, recall, F-measure, error measure, error per response fill and slot error rate, as well as the runtime performance measures: CPU time and memory consumption. All of these performance measures will be integrated in the framework whose architecture, design and implementation details will be discussed in chapter \ref{sec:design} (see pp. \pageref{sec:design}ff.).
+This chapter presented and discussed the most widely used extraction and runtime performance values used to measure the overall system performance of extractors and how they relate to each other. Those values included performance measures, by name precision, recall, F-measure, error measure, error per response fill and slot error rate, as well as the runtime performance measures: CPU time and memory consumption. All of these performance measures will be integrated into the framework whose architecture, design and implementation details will be discussed in chapter \ref{sec:design} (see pp. \pageref{sec:design}ff.).

@@ -4,7 +4,7 @@
 Information extraction is a part of the \gls{NLP}, which focuses its research on the mechanical analysis, processing and generation of natural language. Due to the large amount of information on the internet research in this area is increasingly important to provide access to knowledge and to manage and reproduce the information \cite{Weinhofer:2010}\cite{Linsmayr:2010}.
 
 \subsection{Definition}
-For a better understanding of what \gls{IE} really is, we sould take a look at the following definitions:
+For a better understanding of what \gls{IE} really is, we should take a look at the following definitions:
 
 \begin{quote}
 Information Extraction is a technology that is futuristic from the user's point of view in the current information-driven world. Rather than indicating which documents need to be read by a user, it extracts pieces of information that are salient to the user's needs. Links between the extracted information and the original documents are maintained to allow the user to reference context. The kinds of information that systems extract vary in detail and reliability.
@@ -36,7 +36,7 @@ The challenge in information extraction ccording to \cite{Grishman:2003} is the 
 
 \newpage
 \subsection{History}
-The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, were  the information from texts  were reduced into a table structure. \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
+The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, where  the information from texts  were reduced into a table structure. \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
 The increase in research in the field of IE forced the \gls{DARPA} in the late 1980s to initiate an operation. Thus, the \gls{MUC} have been launched, aimed at competing implementation and evaluation of IE systems. The \gls{DARPA} initiated and financed these conferences to encourage research in the field of \gls{IE} for military and intelligence purposes. Participants of the conferences received test data of a particular domain and a special output format. They then developed IE systems based on these requirements, their performances were compared in terms of unknown documents at the conferences. Manually created templates were used as reference data \cite{Grishman:1996}\cite{Grishman:1997}.
 
@@ -164,7 +164,7 @@ The process is usually implemented iteratively. At first one needs to define gra
 This approach focuses on the extraction based on specific learning processes. It can be made between these methods to the degree of supervision \cite{Carstensen:2010}\cite{Schramm:2008}:
 
 \paragraph{Supervised learning}
-This is based on a manually annotated corpus, which contains posititive and negative examples of entities. The static feature combinations are used for the extraction of entities and relations. Here, the probability is calculated that it is the extracted data is the desired entities. This range includes learning methods like \gls{HMM} 
+This is based on a manually annotated corpus, which contains positive and negative examples of entities. The static feature combinations are used for the extraction of entities and relations. Here, the probability is calculated that it is the extracted data is the desired entities. This range includes learning methods like \gls{HMM} 
 \fxfatal{Probalistic modelling, statistical method} and \gls{SVM} \cite{Schramm:2008}\cite{Siefkes:2005}\cite{Carstensen:2010}.
 
 \paragraph{Semi-supervised learning}
@@ -175,9 +175,9 @@ In this method, a corpus is supplied with a small amount of annotations (seeds).
 % see paper from Akbik
 The method of unsupervised learning requires no annotations and manually generated training data. The system will only be given a set of entities whose properties are analyzed. The knowledge gained is the basis for the localization of entities \cite{Carstensen:2010}\cite{Schramm:2008}.
 
-\subsubsection{Wrapper Generation}
+\subsubsection{Wrapper generation}
 \fxfatal{Web information extraction}
-The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other sites, which may also have relevant knowledge. Because of these challenges investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
+The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other pages, which may also have relevant knowledge. Because of these challenges, investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
 
 A wrapper is a procedure that identifies data from a source in accordance with special extraction rules. The information within HTML pages are converted into a format explicitly stored for further use. A wrapper must coincide with the dynamic content of the web, manage the change of links and formatting errors. Since a wrapper is limited to one source, research in the area of \gls{WG} is initiated \cite{Chang:2006}\cite{Eikvil:1999}. The wrapper generation focuses on the integration of multiple sources and counteracts the heterogeneity of the web by using a wrapper library \cite{Siefkes:2007}\cite{Turmo:2006}.
 
@@ -215,12 +215,12 @@ The advantage over traditional IE is the linking to an ontology which allows a m
 
 \newpage
 \subsection{Related fields}
-\gls{IE} focuses on the identification and filtering of information relevant to specific domain. Since \gls{IE} is a sub-field of \gls{NLP}, we need to separate it from related fields also concerned with the automatic processing of natural languages.
+\gls{IE} focuses on the identification and filtering of information relevant to specific a domain. Since \gls{IE} is a sub-field of \gls{NLP}, we need to separate it from related fields also concerned with the automatic processing of natural languages.
 
 \subsubsection{Information Retrieval}
 In principle, information storage and retrieval is simple. Suppose there is a store of documents and a person (user of the store) formulates a question (request or query) to which the answer is a set of documents satisfying the information need expressed by his question. He can obtain the set by reading all the documents in the store, retaining the relevant documents and discarding all the others. In a sense, this constitutes 'perfect' retrieval. This solution is obviously impracticable. A user either does not have the time or does not wish to spend the time reading the entire document collection, apart from the fact that it may be physically impossible for him to do so \cite{Rijsbergen:1979}.
 
-Information Extraction is not Information Retrieval: Information Extraction differs from traditional techniques in that it does not recover from a collection a subset of documents which are hopefully relevant to a query, based on key-word searching (perhaps augmented by a thesaurus). Instead, the goal is to extract from the documents (which may be in a variety of languages) salient facts about prespecified types of events, entities or relationships. These facts are then usually entered automatically into a database, which may then be used to analyse the data for trends, to give a natural language summary, or simply to serve for on-line access. \cite{GATE:IE}
+Information Extraction is not Information Retrieval: Information Extraction differs from traditional techniques in that it does not recover a subset of documents from a collection which are hopefully relevant to a query, based on key-word searching (perhaps augmented by a thesaurus). Instead, the goal is to extract from the documents (which may be in a variety of languages) salient facts about prespecified types of events, entities or relationships. These facts are then usually entered automatically into a database, which may then be used to analyse the data for trends, to give a natural language summary, or simply to serve for on-line access. \cite{GATE:IE}
 
 \subsubsection{Automatic summarization}
 Automatic summarization involves reducing a text document or a larger corpus of multiple documents into a short set of words or paragraphs that convey the main meaning of the text.
@@ -237,10 +237,10 @@ Document classification is known under a number of synonyms such as document/tex
 Applications are e.g. filtering of news articles for knowledge workers, routing of customer email in a customer service department or detection and identification of criminal activities for the police or the military \cite{Knorz:2000}.
 
 \subsubsection{Data Mining}
-Data Mining, also popularly known as \gls{KDD}, refers to the nontrivial extraction of implicit, previously unknown and potentially useful information from data in databases. While data mining and knowledge discovery in databases (or KDD) are frequently treated as synonyms, data mining is actually just one part of the knowledge discovery process, which essentially tries to automatically generate metadata by searching larger volumes of data with the help of certain patterns \cite{Zaiane:1999}. 
+Data Mining, also popularly known as \gls{KDD}, refers to the nontrivial extraction of implicit, previously unknown and potentially useful information from data in databases. While data mining and \gls{KDD} are frequently treated as synonyms, data mining is actually just one part of the knowledge discovery process, which essentially tries to automatically generate metadata by searching larger volumes of data with the help of certain patterns \cite{Zaiane:1999}. 
 
 \subsubsection{Question answering}
-Question Answering is a specialised form of information retrieval. Given a collection of documents, a Question Answering system attempts to retrieve correct answers to questions posed in natural language. Open-domain question answering requires question answering systems to be able to answer questions about any conceivable topic. Such systems cannot, therefore, rely on hand crafted domain specific knowledge to find and extract the correct answers \cite{Lampert:2004}.
+Question answering is a specialised form of information retrieval. Given a collection of documents, a Question answering system attempts to retrieve correct answers to questions posed in natural language. Open-domain question answering requires question answering systems to be able to answer questions about any conceivable topic. Such systems cannot, therefore, rely on hand crafted domain specific knowledge to find and extract the correct answers \cite{Lampert:2004}.
 
 \subsection{Summary}
 This chapter tried to give a small overview of the field of \gls{IE} by defining the term \textit{information extraction} and giving a small discourse about its history, a more or less complete list of the most typical tasks and some information about common approaches, current developments and related fields. Knowing the underlying ideas and concepts of \gls{IE} is required to gain a better understanding of how the programs work which will be evaluated later.
