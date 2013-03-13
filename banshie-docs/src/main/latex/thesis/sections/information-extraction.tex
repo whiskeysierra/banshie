@@ -64,6 +64,8 @@ The conferences were held between 1987 and 1998. The following table lists the d
 
 The conferences have made a decisive contribution to the development of information extraction, which include the formulation of sub-tasks, metrics and the striving for domain independence and portability of \gls{IE} systems. The meeting of various research groups and the implementation of systems based on the same task offers enormous opportunities to exchange ideas and to overcome theoretical and paradigmatic differences \cite{Cimiano:2003}\cite{Lehnert:1994}.
 
+\fxfatal{ACE}
+
 The results of these conferences will provide the basis of this thesis as described in detail in chapter \ref{sec:evaluation-methodology}.
 
 \newpage
@@ -144,11 +146,9 @@ The extraction of relationships differs from the extraction of entities in one s
 
 Regarding the given example document, \gls{ST} discovers that there was a rocket launching event on tuesday in which the various entities were involved \cite{Cunningham:2005}.
 
-\subsubsection{Restoring information structure such as Lists, Tables and Ontologies}
-The scope of extraction systems has now expanded to include the extraction of not such atomic entities and flat records but also richer structures such as tables, lists, and trees from various types of documents \cite{Sarawagi:2008}.
-
 \newpage
-\subsection{Development and progress}
+\subsection{Development and methods of \gls{IE}}
+\fxfatal{It's text analysis, not only HTML pages}
 This chapter describes different approaches for the construction of an IE system as well as the current research in the field of information extraction.
 
 There are different approaches for the construction of an IE system which are divided into methods of knowledge engineering and machine learning. It should be noted that an exact categorization is usually not possible because many procedures are a combination of both approaches \cite{Schramm:2008}.
@@ -164,19 +164,24 @@ The process is usually implemented iteratively. At first one needs to define gra
 This approach focuses on the extraction based on specific learning processes. It can be made between these methods to the degree of supervision \cite{Carstensen:2010}\cite{Schramm:2008}:
 
 \paragraph{Supervised learning}
-This is based on a manually annotated corpus, which contains posititive and negative examples of entities. The static feature combinations are used for the extraction of entities and relations. Here, the probability is calculated that it is the extracted data is the desired entities. This range includes learning methods like \gls{HMM} and \gls{SVM} \cite{Schramm:2008}\cite{Siefkes:2005}\cite{Carstensen:2010}.
+This is based on a manually annotated corpus, which contains posititive and negative examples of entities. The static feature combinations are used for the extraction of entities and relations. Here, the probability is calculated that it is the extracted data is the desired entities. This range includes learning methods like \gls{HMM} 
+\fxfatal{Probalistic modelling, statistical method} and \gls{SVM} \cite{Schramm:2008}\cite{Siefkes:2005}\cite{Carstensen:2010}.
 
 \paragraph{Semi-supervised learning}
 In this method, a corpus is supplied with a small amount of annotations (seeds). During the application phase the seeds with the best combination of features for customizing existing rules and creating new ones are located and used. This approach is referred to as bootstrapping \cite{Carstensen:2010}\cite{Chang:2006}.
 
 \paragraph{Unsupervised learning}
+\fxfatal{Purpose for IE, clustering for unsupervised relation extraction}
+% see paper from Akbik
 The method of unsupervised learning requires no annotations and manually generated training data. The system will only be given a set of entities whose properties are analyzed. The knowledge gained is the basis for the localization of entities \cite{Carstensen:2010}\cite{Schramm:2008}.
 
 \subsubsection{Wrapper Generation}
+\fxfatal{Web information extraction}
 The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other sites, which may also have relevant knowledge. Because of these challenges investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
 
 A wrapper is a procedure that identifies data from a source in accordance with special extraction rules. The information within HTML pages are converted into a format explicitly stored for further use. A wrapper must coincide with the dynamic content of the web, manage the change of links and formatting errors. Since a wrapper is limited to one source, research in the area of \gls{WG} is initiated \cite{Chang:2006}\cite{Eikvil:1999}. The wrapper generation focuses on the integration of multiple sources and counteracts the heterogeneity of the web by using a wrapper library \cite{Siefkes:2007}\cite{Turmo:2006}.
 
+\fxfatal{Move to history/programs}
 \subsubsection{Automatic Content Extraction}
 The program of the \gls{ACE} (\url{http://www.itl.nist.gov/iad/mig/tests/ace/})  was launched as a successor to the \gls{MUC} in 1999. \gls{ACE} program attempts to focus the research for automatic processing of natural language texts and the development of necessary systems. The field of \gls{IE} is divided into the following sections \cite{Nist:2008}\cite{Lavelli:2008}\cite{Turmo:2006}\cite{Linsmayr:2010}:
 
@@ -192,6 +197,9 @@ Extraction of events and scenarios in which entities are involved
 The tasks of the \gls{ACE} are more complex, as multiple domains are used and also multiple sources of language translation, or the \gls{OCR} need to be analyzed \cite{Cunningham:2005}.
 
 \subsubsection{Ontology-based Information Extraction}
+\fxfatal{Ontologies and Knowledge Base construction}
+% more content, about 1 page!
+% consists of entity resolution and slot filling
 The idea of the Semantic Web is an extension of traditional content with annotations. The realization requires the creation of annotations, the linking of websites with ontologies and the establishment and management of ontologies. An ontology is a knowledge model that represents concepts and terms, and their relationships. In this context, studies have been started in the field of \gls{OBIE} which serves the automation of these processes. Unlike traditional information extraction the focus is not alone on the extraction of an entity, but also on the image of an ontology \cite{Cunningham:2005}\cite{Maynard:2005}\cite{Weinhofer:2010}\cite{Linsmayr:2010}.
 
 \gls{OBIE} faces the following challenges:
