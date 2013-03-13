@@ -167,7 +167,7 @@ This chapter describes different approaches for the construction of an IE system
 
 There are different approaches for the construction of an IE system which are divided into methods of knowledge engineering and machine learning. It should be noted that an exact categorization is usually not possible because many procedures are a combination of both approaches \cite{Schramm:2008}.
 
-The current research in the field of information extraction relates mainly to the extraction of information from HTML pages and the automatic addition of annotations with the aid of ontologies \cite{Linsmayr:2010}.
+The current research in the field of information extraction relates mainly to the extraction of information from text documents and the automatic addition of annotations with the aid of ontologies \cite{Linsmayr:2010}.
 
 \subsubsection{Knowledge Engineering}
 The method of Knowledge Engineering is the manual creation of a grammar by a human expert. Domain knowledge, which is not always available, is necessary to specify extraction rules in which case the method of knowledge engineering can not be applied. Experts must find patterns by inspecting the corpus and produce guidelines according to these patterns \cite{Schramm:2008}\cite{Turmo:2006}.
@@ -189,8 +189,7 @@ In this method, a corpus is supplied with a small amount of annotations (seeds).
 % see paper from Akbik
 The method of unsupervised learning requires no annotations and manually generated training data. The system will only be given a set of entities whose properties are analyzed. The knowledge gained is the basis for the localization of entities \cite{Carstensen:2010}\cite{Schramm:2008}.
 
-\subsubsection{Wrapper generation}
-\fxfatal{Web information extraction}
+\subsubsection{Web information extraction}
 The rise of the textual sources on the Internet brings an adaptation of existing approaches to extraction. HTML pages are different from text documents, because they contain formatting tags and descriptions. These can, in addition to the page content, contain relevant data. Furthermore, HTML documents contain links to other pages, which may also have relevant knowledge. Because of these challenges, investigations regarding wrappers were launched  \cite{Eikvil:1999}\cite{Freitag:2000}\cite{Linsmayr:2010}.
 
 A wrapper is a procedure that identifies data from a source in accordance with special extraction rules. The information within HTML pages are converted into a format explicitly stored for further use. A wrapper must coincide with the dynamic content of the web, manage the change of links and formatting errors. Since a wrapper is limited to one source, research in the area of \gls{WG} is initiated \cite{Chang:2006}\cite{Eikvil:1999}. The wrapper generation focuses on the integration of multiple sources and counteracts the heterogeneity of the web by using a wrapper library \cite{Siefkes:2007}\cite{Turmo:2006}.
