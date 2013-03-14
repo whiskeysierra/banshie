@@ -1,24 +1,22 @@
 \pagenumbering{arabic}
 \section{Introduction}
 
-\fxfatal{Problem description}
-% Why do we need IE?
-% Why is IE hard?
-% Why are extractors hard to evaluate? (different interfaces/output)
-% Whch measurements are available?
-% Which measures are the best for IE?
-
-\subsection{Background and motivation}
+\subsection{Background}
 Within the age of the Internet and social media sites there is a vast amount of mainly unstructured data being produced on a daily basis. Way too much to handle it in a manual fashion. A lot of research has been done to define, develop and test techniques to extract information from unstructured or semi-structured data sources and transform them into a representation better suited for further analysis. This scientific subfield of Computer Science is called \gls{IE}.
 
-Since the beginning of \gls{IE} evaluating the quality of an extractor was always an important factor. But \gls{IE} is missing two things: a set of comprehensive, standard evaluation measures and a well-designed, extensible evaluation framework. Most of the evaluation measures used in current tools are lent from \textit{Information Retrieval}, which usually don't really grasp the inexact nature of \gls{IE}.
+Since the beginning of \gls{IE} evaluating the quality of an extractor was always an important factor. It's crucial to have reliable indicators to ensure a continuous improvement in system performances.
 
-The biggest motivator for this thesis is the \gls{DIMA}\footnote{\url{http://www.dima.tu-berlin.de/}} group at the TU Berlin, which is currently developing a cloud-based Marketplace for Information and Analytics: \textit{MIA}\footnote{\url{http://www.mia-marktplatz.de/}}. The MIA marketplace platform requires such a framework for several of its components, such as extractor ranking and automatic extractor improvements.
+\subsection{Challenges}
+\gls{IE} is missing a set of comprehensive, standard evaluation measures, which makes comparison between different IE algorithms very difficult \cite{Sitter:2004}. Most of the evaluation measures used in current tools are lent from \textit{Information Retrieval}, which usually don't really grasp the inexact nature of \gls{IE}. Do provide a better way to evaluate \gls{IE} tools, we need to find out which measurements are available and best suited for \gls{IE}.
+
+Another challenge faced when evaluating information extractors is that, due to the lack of a proper standards, nearly every available tool defines its own interface and input/output formats. An evaluation tool must therefore define a new format which existing and future systems can be adapted to.
 
 The available evaluation tools for \gls{IE} tools support usually most of the better known metrics, but they don't support the evaluation of the runtime performance of extractors under testing. The concept of combining the execution and evaluation of information extraction systems into a single platform to measure extraction quality and runtime performance simultaneously is a unique approach. The author did not find any similar approach for information extraction evaluation while conducting research for this thesis.
 
-\subsection{Objective}
+\subsection{Objectives}
 The goal of this thesis is a formal discussion of known and used performance measures for IE and a working prototype of a highly modular benchmark framework for Java-based platforms to run and test information extraction systems in isolation to measure IE-related performance values, e.g. \textit{precision}, \textit{recall} and \textit{F-Measure}, as well as runtime performance measures, e.g. CPU time and memory consumption. The resulting framework will take external extractors, perform an execution, collect the results, perform the evaluation and return those evaluation results.
+
+The biggest motivator for this thesis is the \gls{DIMA}\footnote{\url{http://www.dima.tu-berlin.de/}} group at the TU Berlin, which is currently developing a cloud-based Marketplace for Information and Analytics: \textit{MIA}\footnote{\url{http://www.mia-marktplatz.de/}}. The MIA marketplace platform requires such a framework for several of its components, such as extractor ranking and automatic extractor improvements.
 
 Since the framework is planned to be used in a bigger research and development project it has to meet several technical and organizational criteria: The framework has to be developed in an Open Source fashion and released under a business-friendly Open Source license to allow a broad spectrum of researchers and developers to use, modify and improve the framework. To minimize the future development efforts for other researchers and developers, the framework needs to be portable, maintainable and flexible. Portability can be ensured by reyling on the Java programming language and the Java platform in general.
 
