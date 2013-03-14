@@ -4,9 +4,26 @@
 
 In the previous chapter the field of information extraction was presented. The process of IE does not only require the extraction itself, but also needs to evaluate the relevance of localized facts for the respective domain. Thus, a quality assessment is required, which focuses on the advancement of development and the juxtaposition of approaches. The evaluation is the formulation of new problems which have to be integrated into the development \cite{Linsmayr:2010}. The methodology of the evaluation is described in this chapter.
 
-Evaluation has always been an important part in designing, implementing, testing and developing \gls{IE} systems. It's crucial to have reliable indicators to ensure a continuous improvement in system performances. This chapter aims to provide an overview of the most important and well discussed performance metrics which will be implemented in the framework. For information about the implementation details of the scoring metrics please consult chapter \ref{sec:design} (pp. \pageref{sec:design}ff.).
+Evaluation has always been an important part in designing, implementing, testing and developing \gls{IE} systems. It's crucial to have reliable indicators to ensure a continuous improvement in system performances. This chapter aims to provide definitions for the most frequently used \gls{IE} approaches, \enquote{All Occurences} and \enquote{One Best per Document} and an overview of the most important and well discussed performance metrics which will be implemented in the framework. For information about the implementation details of the scoring metrics please consult chapter \ref{sec:design} (pp. \pageref{sec:design}ff.).
 
+\subsection{\gls{IE} approaches}
 \fxfatal{Formal definition, description, ...}
+Depending on the intended use case of the IE system, different approaches to information extraction may be useful. A first possibility is the \enquote{OBD} approach. In this case, we see the \textit{IE} task as filling a given template structure. This is for example useful if the goal of the extractor is to fill a database in order to be able to query the information contained in the documents. \cite{Sitter:2004}.
+
+\begin{table}[H]
+\centering
+\begin{tabular*}{\textwidth}{ll}
+	\toprule
+	\texttt{title} & Chief Business Officer \\
+	\texttt{salary} & 80,000 USD \\
+	\texttt{company} & Acme Corporation \\
+	\texttt{start} & February 5, 2013 \\
+	\bottomrule
+\end{tabular*}
+\caption{Example template for the \gls{OBD} approach}
+\end{table}
+
+\fxfatal{AO approach}
 
 \subsection{Performance measures}
 A typical way to evaluate an IE system is by using a confusion matrix. This is a well-known
@@ -38,17 +55,21 @@ Another way to calculate performance measures is based on the notation proposed 
 	\toprule
 	\textbf{Symbol} & \textbf{Meaning} \\
 	\midrule
-	N & total number of slots in the reference \\
-	M & total number of slots in the hypothesis \\
-	C & number of correct slots \\
-	S & number of substitutions (incorrect slots) \\
-	D & number of deletions (missing slots or false rejections) \\
-	I & number of insertions (spurious slots or false acceptances) \\
+	$N$ & total number of slots in the reference \\
+	$M$ & total number of slots in the hypothesis \\
+	$C$ & number of correct slots \\
+	$S$ & number of substitutions (incorrect slots) \\
+	$D$ & number of deletions (missing slots or false rejections) \\
+	$I$ & number of insertions (spurious slots or false acceptances) \\
 	\bottomrule
 \end{tabular*}
 \end{table}
 
 \gls{IE} has been, according to \cite{Chinchor:1998}, traditionally defined as the extraction of information from a text in the form of text strings and processed text strings which are placed into slots labeled to indicate the kind of information that can fill them. To summarize: Slots, in this context, can be understood as the extraction target for entities.
+
+\fxfatal{Rules}
+% exact, contain, overlap
+% quote D. Freitag (Freitag:1998)
 
 The most used evaluation measures in \gls{IE} are recall, precision and F-measure. Some additional ones, like Error per response fill and  Slot error rate, were proposed by \cite{Chinchor:1995} and \cite{Makhoul:1999}.
 
