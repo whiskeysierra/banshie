@@ -8,11 +8,11 @@ Several \gls{NLP} tools and suites exist but for the purpose of evaluating Bansh
 \subsubsection{Apache OpenNLP}
 Apache OpenNLP\footnote{\url{http://opennlp.apache.org/}} is a machine learning based toolkit for the processing of natural language text. It supports the most common NLP tasks, such as tokenization, sentence segmentation, part-of-speech tagging, named entity extraction, chunking, parsing, and coreference resolution. \cite{OpenNLP}
 
-The Apache OpenNLP project is written in Java, licensed under the Apache License Version 2.0, available on Maven Central and completed incubation on February 2012 and is now an Apache top level project.
+The Apache OpenNLP project is written in Java, licensed under the Apache License Version 2.0, available on Maven Central, completed incubation on February 2012 and is now an Apache top level project.
 
 \subsubsection{Stanford CoreNLP}
 Stanford CoreNLP
-\footnote{\url{http://nlp.stanford.edu/software/corenlp.shtml}} is an integrated framework, which make it very easy to apply a bunch of language analysis tools to a piece of text. Stanford CoreNLP integrates tools, like the a part-of-speech tagger, a named entity recognizer, a parser, and a coreference resolution system, and provides model files for analysis of English. The goal of the project is to enable people to quickly and painlessly get complete linguistic annotations of natural language texts. It is designed to be highly flexible and extensible. \cite{CoreNLP}
+\footnote{\url{http://nlp.stanford.edu/software/corenlp.shtml}} is an integrated framework, which makes it very easy to apply a bunch of language analysis tools to a piece of text. Stanford CoreNLP integrates tools, like a part-of-speech tagger, a named entity recognizer, a parser, a coreference resolution system, and provides model files for analysis of english text. The goal of the project is to enable people to quickly and painlessly get complete linguistic annotations of natural language texts. It is designed to be highly flexible and extensible. \cite{CoreNLP}
 
 The Stanford CoreNLP code is written in Java, licensed under the GNU General Public License and available on Maven Central.
 
@@ -36,7 +36,7 @@ The example reference output, listing \ref{lst:example-reference}, was created m
 
 \newpage
 \subsubsection{Apache OpenNLP}
-Listing \ref{lst:opennlp-adapter} shows the most relevant part of the adapter implementation for the Apache OpenNLP Name Finder Tool, with omitting the document reading and output writing part of the code. The three most important services provided by OpenNLP are the \texttt{SentenceDetector}, the \texttt{Tokenizer} and the \texttt{NameFinder}. The SentenceDetector and Tokenizer are used to split up the input document into sentences and sentences into tokens respectively. The resulting lists of tokens are than passed on to the NameFinder which finds spans and marks them as persons, organizations or locations accordingly.
+Listing \ref{lst:opennlp-adapter} shows the most relevant part of the adapter implementation for the Apache OpenNLP Name Finder Tool. The document reading and output writing part of the code was ommitted to improve readability. The three most important services provided by OpenNLP are the \texttt{SentenceDetector}, the \texttt{Tokenizer} and the \texttt{NameFinder}. The SentenceDetector and Tokenizer are used to split up the input document into sentences and sentences into tokens respectively. The resulting lists of tokens are then passed on to the NameFinder which finds spans and marks them as persons, organizations or locations accordingly.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -68,7 +68,7 @@ for (Span sentences : detector.sentPosDetect(document)) {
 \label{lst:opennlp-adapter}
 \end{listing}
 
-OpenNLP's \gls{NER} is primarily designed to work with sentences, but since our schema requires character offsets, some additional index counting is requiring.
+OpenNLP's \gls{NER} is primarily designed to work with sentences, but since our schema requires character offsets, some additional index counting is needed.
 
 \newpage
 Listing \ref{lst:opennlp-result} shows the extraction result produced by the adapter implementation.
@@ -79,7 +79,7 @@ Listing \ref{lst:opennlp-result} shows the extraction result produced by the ada
 \label{lst:opennlp-result}
 \end{listing}
 
-The evaluation result of the extraction outcome and the recorded event log produced by the default \texttt{PerformanceEvaluator} and \texttt{QualityEvaluator} implementations, discussed in chapter \ref{sec:design}, is shown in following listing.
+The evaluation result of the extraction outcome and the recorded event log produced by the default \texttt{PerformanceEvaluator} and \texttt{QualityEvaluator} implementations, discussed in chapter \ref{sec:design}, is shown in the following listing.
 
 \begin{listing}[H]
 \inputminted{java}{opennlp.txt}
@@ -87,9 +87,9 @@ The evaluation result of the extraction outcome and the recorded event log produ
 \label{lst:opennlp-eval-result}
 \end{listing}
 
-The discrepancy between CPU time and execution is based on the fact that the process CPU time provided by \texttt{OperatingSystemMXBean} is of nanoseconds precision but not necessarily nanoseconds accuracy\cite{OperatingSystemMXBean} while the system time is in milliseconds. During extremely short startup times, like in this case, it might cause the values to inaccurate.
+The discrepancy between CPU and execution time is based on the fact that the process CPU time provided by \texttt{OperatingSystemMXBean} is of nanoseconds precision but not necessarily nanoseconds accuracy \cite{OperatingSystemMXBean} while the system time is in milliseconds. During extremely short startup times, like in this case, it might cause the values to inaccurate.
 
-As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2.25 seconds CPU time and 35 megabytes of memory to perform the extraction but on the other it only scored a recall of .3 and a F-measure of .5, which means the OpenNLP tagger only found a third of what could have been found, according to our reference output.
+As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2.25 seconds CPU time and 35 megabytes of memory to perform the extraction but on the other hand it only scored a recall of .3 and a F-measure of .5, which means the OpenNLP tagger only found a third of what could have been found, according to our reference output.
 
 \subsubsection{Stanford CoreNLP}
 The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed a pipelines. It's possible to add different annotators to a pipeline which work on any document passed down the pipeline. The most common annotators are \texttt{tokenize} (tokenizing), \texttt{ssplit} (sentence splitting), \texttt{pos} (part-of-speech tagging) and \texttt{ner} (named entity recognition). The results produced by the annotators can then be retrieved by using the corresponding \texttt{get}-methods on sentence or token instances as shown in listing \ref{lst:corenlp-adapter}.
@@ -142,7 +142,7 @@ Listing \ref{lst:corenlp-eval-result} shows the evaluation result of the CoreNLP
 \label{lst:corenlp-eval-result}
 \end{listing}
 
-It quickly becomes apparent, that Stanford CoreNLP produces perfect extraction results, according to our example reference, but does so on the expense of required CPU time and memory consumption. 
+It quickly becomes apparent that Stanford CoreNLP produces perfect extraction results, according to our example reference, but does so on the expense of required CPU time and memory consumption. 
 
 \begin{table}[H]
 \centering
@@ -160,12 +160,12 @@ It quickly becomes apparent, that Stanford CoreNLP produces perfect extraction r
 
 Table \ref{tbl:result-comparison} shows the evaluation results of both extractors in directo comparison.
 
-CoreNLP actually spends a lot of time loading training models, but since OpenNLP also loads model data during startup, comparing the total execution time is still fair. But it should be noted, that on consecutive run, CoreNLP should perform much better. One could even imagine to use different models to trade startup time for extraction quality. Which is exactly the kind of comparison Banshie tries to offer to its clients.
+CoreNLP actually spends a lot of time loading training models, but since OpenNLP also loads model data during startup, comparing the total execution time is still fair. But it should be noted, that on consecutive runs, CoreNLP should perform much better. One could even imagine to use different models to trade startup time for extraction quality, which is exactly the kind of comparison Banshie tries to offer to its clients.
 
 \newpage
 \subsection{Summary}
 Writing adapters for extractors to allow execution and evaluation in the Banshie framework requires some manual work, in case of the example integrations about 100 lines of codes each. Adapting an \gls{API} to the extractor interface specification also differs greatly from extractor to extractor and highly depends on how easy it is to tokenize the input document, run the recognition process, iterate over annotated tokens and produce the desired \gls{XML} output. Especially calculating the UTF-8 character offsets can be errorprone, as listing \ref{lst:opennlp-adapter} illustrated.
 
-Even though the example document and reference output were extremely small, the result is a nice example of a evaluation result one would expect to see a lot: Two different extractors with highly different quality-performance tradeoffs. OpenNLP only used 35 megabytes of memory and finished after about 2 seconds but only scored an F-measure of .5. CoreNLP on the other hand performed a perfect extraction but required more than 16 times the memory and 18 times the CPU time compared to OpenNLP.
+Even though the example document and the reference output were extremely small, the result is a nice example of a evaluation result one would expect to see a lot: Two different extractors with highly different quality-performance tradeoffs. OpenNLP only used 35 megabytes of memory and finished after about 2 seconds but only scored an F-measure of .5. CoreNLP on the other hand performed a perfect extraction but required more than 16 times the memory and 18 times the CPU time compared to OpenNLP.
 
 Comparing and evaluating those results now highly depends on the use case, a fast and mediocre reliable extractor might be the perfect tool for one task, while another might require the best extraction, no matter the resource cost.
