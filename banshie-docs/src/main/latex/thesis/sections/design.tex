@@ -4,7 +4,7 @@
 This chapter presents the implemented framework \textit{Banshie} (Benchmark Framework for Information Extraction). The requirements, architecture, design and concrete implementation details are explained and discussed on the following pages.
 
 \subsection{Analysis and requirements}
-The main goal was to provide a platform to benchmark domain-specific information extraction modules. Since the framework is planned to be used in a bigger platform and by other developers it had to be designed for extension, modularity and embeddability. It should be based on the OSGi infrastructure and build with state-of-the-art patterns, like \gls{DI}, \gls{IoC} and Composition over Inheritence in mind.
+The main goal was to provide a platform to benchmark domain-specific information extraction modules. Since the framework is planned to be used in a bigger platform and by other developers, it had to be designed for extension, modularity and embeddability. It should be based on the OSGi infrastructure and build with state-of-the-art patterns, like \gls{DI}, \gls{IoC} and Composition over Inheritance in mind.
 
 Since Banshie had to be developed in an Open Source fashion to support broader use cases, its whole code base as well as the  documentation is available via
 
@@ -13,7 +13,7 @@ Since Banshie had to be developed in an Open Source fashion to support broader u
 \subsection{Architecture}
 Banshie is completely written in Java and distributed as OSGi bundles. The architecture of the framework was not the result of a \gls{BDUF} but is rather based on a very rough design idea which allows to incrementally build in the design details as the project progresses. \citeauthor{Knoernschild:2012} provides a catalog of architectural patterns for building highly modular systems in his book: \citetitle{Knoernschild:2012} \cite{Knoernschild:2012}
 
-Almost all Banshie's modules are the result of applying these patterns during the development. The following figure shows all relevant modules as well as their dependencies.
+Almost all of Banshie's modules are the result of applying these patterns during the development. The following figure shows all relevant modules as well as their dependencies.
 
 \newpage
 \begin{figure}[H]
@@ -32,7 +32,7 @@ Almost all Banshie's modules are the result of applying these patterns during th
 \paragraph{Guice}
 Guice is a lightweight dependency injection framework for Java \cite{Guice}. It's Open Source and available on \url{https://code.google.com/p/google-guice/}.
 
-The typical code to implement is shown in the following two listings. The first shows a simple \textit{Module}. Modules in Guice are usually used to bind interfaces to concrete classes.
+The typical code to implement Guice is shown in the following two listings. The first shows a simple \textit{Module}. Modules in Guice are usually used to bind interfaces to concrete classes.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -70,7 +70,7 @@ final class DefaultEngine implements Engine {
 Guice has an extensible plug-in mechanism which allows third parties to provide additional functionality. Banshie uses two official Guice extension extensively: Assisted Inject\footnote{\url{https://code.google.com/p/google-guice/wiki/AssistedInject}} and Multibindings\footnote{\url{https://code.google.com/p/google-guice/wiki/Multibinding}}. Assisted Inject allows the combination of Guice-provided dependencies and user-provided parameters on a single injection point. Multibindings supports the binding and injection of Sets and Maps.
 
 \paragraph{Peaberry}
-Guice has no native OSGi support, apart from maybe the OSGi-compatible bundle manifest. To overcome this shortcoming, Peaberry\footnote{\url{https://code.google.com/p/peaberry/}}, a third-party open-source Guice extension offers OSGi-Guice bridge capabilities. It offers \gls{DI} of OSGi dynamic services via Guice's common injection mechanisms and provides a rich and typesafe API to deal with the OSGi service registry and lifecycle events. Listing \ref{lst:peaberry-lifecycle} shows the usage of Peaberry's lifecycle annotations.
+Guice has no native OSGi support, apart from maybe the OSGi-compatible bundle manifest. To overcome this shortcoming, Peaberry\footnote{\url{https://code.google.com/p/peaberry/}}, a third-party open-source Guice extension, offers OSGi-Guice bridge capabilities. It offers \gls{DI} of OSGi dynamic services via Guice's common injection mechanisms and provides a rich and typesafe API to deal with the OSGi service registry and lifecycle events. Listing \ref{lst:peaberry-lifecycle} shows the usage of Peaberry's lifecycle annotations.
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -101,7 +101,7 @@ Peaberry even supports the automatic \gls{DI} context creation upon bundle start
 Peaberry creates one \texttt{Injector} per bundle, any interaction between bundles is based on standard OSGi services, which allows to combine Peaberry-aware bundles and normal ones.
 
 \subsubsection{Persistence}
-Banshie's persistence layer is based on the \gls{JPA} 2.0 Standard. \gls{JPA} allows to build modules without hardcoding for a specific persistence provider or database vendor. Thus allowing to swap implementations later in the development lifecycle without the need to rewrite large portions of the code base. Banshie uses Apache OpenJPA as a \gls{JPA} provider and Apache Derby as the underlying database. Derby is a \gls{RDBMS} written in Java and is distributable as a single Jar file and can be embedded in other applications rather easily.
+Banshie's persistence layer is based on the \gls{JPA} 2.0 Standard. \gls{JPA} allows to build modules without hardcoding for a specific persistence provider or database vendor. Thus allowing to swap implementations later in the development lifecycle without the need to rewrite large portions of the code base. Banshie uses Apache OpenJPA as a \gls{JPA} provider and Apache Derby as the underlying database. Derby is a \gls{RDBMS} written in Java and is distributable as a single Jar file which can be embedded in other applications rather easily.
 
 Using \gls{JPA} in an \gls{OSGi} environment is not a straight forward task. \gls{OSGi} requires bundles to run in different and independent class loaders, while \gls{JPA} heavily relies on classpath scanning and reflection. Both techniques don't work quite well together. Because \gls{JPA}-based persistence is a common requirement, the \citetitle{OSGI:Enterprise} addressed this issue and specifies a standard way to define \textit{Persistence} and \textit{Client bundles} \cite{OSGI:Enterprise}. A persistence bundle is a bundle with the following bundle header:
 
@@ -110,7 +110,7 @@ Using \gls{JPA} in an \gls{OSGi} environment is not a straight forward task. \gl
 \caption{Persistence bundle header}
 \end{listing}
 
-A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} containers delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. To minimize common boilerplate code and manual transaction handling, all \gls{JPA} client bundles use the Guice extension \textit{Guice Persist}. Guice Persist offers AOP-interception for annotated methods as shown in the following listing:
+A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} containers delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in the form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of the \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. To minimize common boilerplate code and manual transaction handling, all \gls{JPA} client bundles use the Guice extension \textit{Guice Persist}. Guice Persist offers AOP-interception for annotated methods as shown in the following listing:
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -133,7 +133,7 @@ class DefaultCorpusRepository implements CorpusRepository {
 
 \subsubsection{Build tools}
 \paragraph{BND Tool and the Maven Bundle Plugin}
-With \gls{OSGi} you are forced to provide additional metadata in the JAR's manifest to verify the consistency of your classpath. This metadata must be closely aligned with the class files in the bundle. Maintaining this metdata is an error prone chore because many aspects are redundant. The core task of the BND Tool is to analyze the class files and find any dependencies. These dependencies are then merged with instructions supplied by the user \cite{BND}. Since Banshie uses Apache Maven for building its independent modules, the natural choice was to use a Maven Plugin for this, which is provided by the Apache Felix Maven Bundle Plugin \footnote{\url{http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html}}. The following listing shows the bare minimum of configuration code to use the Maven Bundle Plugin in a POM file.
+With \gls{OSGi} you are forced to provide additional metadata in the JAR's manifest to verify the consistency of your classpath. This metadata must be closely aligned with the class files in the bundle. Maintaining this metdata is an error prone chore because many aspects are redundant. The core task of the BND Tool is to analyze the class files and find every dependency. These dependencies are then merged with instructions supplied by the user \cite{BND}. Since Banshie uses Apache Maven for building its independent modules, the natural choice was to use a Maven Plugin for this, which is provided by the Apache Felix Maven Bundle Plugin \footnote{\url{http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html}}. The following listing shows the bare minimum of configuration code to use the Maven Bundle Plugin in a POM file.
 
 \begin{listing}[H]
 \begin{minted}{xml}
@@ -153,14 +153,14 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 
 \newpage
 \subsection{API}
-The framework's \gls{API} can be divided into three main components which are described in detail on the following pages.
+The framework's \gls{API} can be divided into three main components, which are described in detail on the following pages.
 
 \paragraph{Domain model and persistence}
 Banshie's domain model has been designed with simplicity and extensibility in mind. The two only entity classes, \texttt{Corpus} and \texttt{Extractor}, are merely containers for file locations and very little meta data, but since the persistence layer is based on \gls{JPA}, which is based on \textit{Plain Old Java Objects}, adding properties is a rather easy task.
 
-An extractor holds the name, version and the path to the executable jar file while a corpus identifies the reference output as well as a related input document.
+An extractor holds the name, version and the path to the executable jar file, while a corpus identifies the reference output as well as a related input document.
 
-For each of the model classes a persistence service interface is provided. Since the framework in it current stage does not require very sophisticated features, the interface of these services is kept to a minimum intentionally.
+For each of the model classes a persistence service interface is provided. Since the framework in it current stage does not require very sophisticated features, the interface of these services is intentionally kept to a minimum.
 
 \begin{figure}[H]
 \centering
@@ -170,7 +170,7 @@ For each of the model classes a persistence service interface is provided. Since
 
 \newpage
 \paragraph{Execution}
-Apart from the domain model and persistence layer, the framework offers two significant features to its clients: execution and evaluation. The execution package contains one major interface for executing extractors: the \texttt{Engine}. The Engine provides a single methods which takes an Extractor-Corpus-pair and performs an execution. The result of the extractor run is than passed back to the caller in form of a \texttt{ExtractorResult} containing references to the extractor's xml output file and the event log file. For more details about the structure of the event log file please consult chapter \ref{sec:implementation}.
+Apart from the domain model and persistence layer, the framework offers two significant features to its clients: execution and evaluation. The execution package contains one major interface for executing extractors: the \texttt{Engine}. The Engine provides a single methods which takes an Extractor-Corpus-pair and performs an execution. The result of the extractor run is then passed back to the caller in the form of an \texttt{ExtractorResult} containing references to the extractor's xml output file and the event log file. For more details about the structure of the event log file please consult chapter \ref{sec:implementation}.
 
 \begin{figure}[H]
 \centering
@@ -180,7 +180,7 @@ Apart from the domain model and persistence layer, the framework offers two sign
 
 \newpage
 \paragraph{Evaluation}
-Evaluation is, next to execution, the other main feature of the framework. Having a two-step phase for execution and evaluation has an advantage. Persisting the extraction results and raw performance logging data allows for a later re-evaluation by other versions or differently configured extractors. Additionally, saving results on the filesystem allows for more memory efficiency.
+Evaluation is, next to the execution, the other main feature of the framework. Having a two-step phase for execution and evaluation has an advantage. Persisting the extraction results and raw performance logging data allows for a later re-evaluation by other versions or differently configured extractors. Additionally, saving results on the filesystem allows for more memory efficiency.
 
 The evaluation packages contains several type definitions as shown in figure \ref{fig:evaluation-api}:
 
@@ -191,7 +191,7 @@ The evaluation packages contains several type definitions as shown in figure \re
 \label{fig:evaluation-api}
 \end{figure}
 
-The two main service types are \texttt{QualityEvaluator} and \texttt{PerformanceEvaluator}. Both have a very similar interface, since they provide a single method to evaluate the execution result. The QualityEvaluator compares the Corpus' reference and the Extractor's hypothesis and calculates quality performance measures like Precision, Recall and F-Measure. The PerformanceEvaluator on the other hand focuses on calculating runtime performance measure, like CPU time, memory consumption and execution time by processing the event log file.
+The two main service types are \texttt{QualityEvaluator} and \texttt{PerformanceEvaluator}. Both have a very similar interface, since they provide a single method to evaluate the execution result. The QualityEvaluator compares the Corpus' reference and the Extractor's hypothesis and calculates quality performance measures like Precision, Recall and F-Measure. The PerformanceEvaluator on the other hand focuses on calculating runtime performance measures, like CPU time, memory consumption and execution time by processing the event log file.
 
 \paragraph{API Usage}
 Listing \ref{lst:usage} shows the simple basic steps required to perform a single extractor execution and evaluation.
@@ -223,9 +223,9 @@ final Map<Dimension, Value> q =
 
 \subsection{Extractor interface specification}
 \label{sec:extractor-specification}
-Since Banshie aims to evaluate the extraction quality as well as the runtime performance of information extraction systems it sets some special requirements for extractors.
+Since Banshie aims to evaluate the extraction quality as well as the runtime performance of information extraction systems, it sets some special requirements for extractors.
 
-Any extractor evaluated by the framework is required to by written in Java and compiled for Java 1.6 or higher as a single executable Jar file. Being packaged as a single file requires the extractor to bundle every external dependency into a single archive. Embedding third-party java libraries can be accomplished by utilizing the \textit{JarJar}\footnote{\url{https://code.google.com/p/jarjar/}} tool. External files like models and training data can packaged as standard classpath resources.
+Any extractor evaluated by the framework is required to be written in Java and compiled as a single executable Jar file for Java 1.6 or higher. Being packaged as a single file requires the extractor to bundle every external dependency into a single archive. Embedding third-party java libraries can be accomplished by utilizing the \textit{JarJar}\footnote{\url{https://code.google.com/p/jarjar/}} tool. External files, like models and training data, can be packaged as standard classpath resources.
 
 For a Jar file to be executable it has to have a manifest file, i.e. META-INF/MANIFEST.MF), and a manifest header as shown in the following listing:
 
@@ -234,11 +234,11 @@ For a Jar file to be executable it has to have a manifest file, i.e. META-INF/MA
 \caption{Extractor manifest header}
 \end{listing}
 
-The extractor can than be started using the following command: \\ \texttt{java -jar extractor.jar}
+The extractor can then be started using the following command: \\ \texttt{java -jar extractor.jar}
 
-Since an extractor under evaluation has a single input, the test document, and a single output, the annotated hypothesis, the natural choice was to utilize standard streams, standard input (\textit{stdin}) and and standard output (\textit{stdout}) respectively. The test document is passed to the extractor as plain text in UTF-8 encoding. Whether the extractor streams the document or reads it into memory as a whole is up the extractor. The output format is \gls{XML} as defined by the schema shown in listing \ref{lst:xml-schema}.
+Since an extractor under evaluation has a single input, the test document, and a single output, the annotated hypothesis, the natural choice was to utilize standard streams, standard input (\textit{stdin}) and standard output (\textit{stdout}) respectively. The test document is passed to the extractor as plain text in UTF-8 encoding. Whether the extractor streams the document or reads it into memory as a whole is up to the extractor. The output format is \gls{XML} as defined by the schema shown in listing \ref{lst:xml-schema}.
 
-It should be explicitly stated, that this approach in its current form only supports single document extraction.
+It should be explicitly stated, that this approach, in its current, form only supports single document extraction.
 
 \begin{listing}[H]
 \inputminted{xml}{../../../../../banshie-api/src/main/resources/schema.xsd}
@@ -256,7 +256,7 @@ As shown in listing \ref{lst:xml-example}, the defined output format is a very s
 
 The span element has three attributes: \texttt{type}, \texttt{start} and \texttt{end}. Type is one of \texttt{person}, \texttt{organization}, \texttt{date} or \texttt{location}, based on the ENAMEX tags developed for the Message Understanding Conference \cite{Grishman:1996}.
 
-The attribtues \texttt{start} and \texttt{end} define the UTF-8 character offset of the span in the original document to support character based association of spans in the reference and the predication.
+The attributes \texttt{start} and \texttt{end} define the UTF-8 character offset of the span in the original document to support character based association of spans in the reference and the predication.
 
 \subsection{Reference-hypothesis association}
 \label{sec:association}
@@ -266,9 +266,9 @@ The attribtues \texttt{start} and \texttt{end} define the UTF-8 character offset
 \label{sec:implementation}
 
 \subsubsection{Engine}
-The \textit{Engine} interface offers a single facade to executing an \texttt{Extractor} against a supplied \texttt{Corpus}. It's the Engine's responibility to provide an independent and isolated execution environment for extractors, to manage process creation and lifecycle and to collect and persist runtime events.
+The \textit{Engine} interface offers a single facade to executing an \texttt{Extractor} against a supplied \texttt{Corpus}. It's the Engine's responsibility to provide an independent and isolated execution environment for extractors, to manage process creation and lifecycle and collect and persist runtime events.
 
-After an initial design draft, it was clear, that the Engine implementation will be too big for a single module. So the engine implementation was split up into multiple smaller, more maintainable modules using the module development patterns defined by \citeauthor{Knoernschild:2012}\cite{Knoernschild:2012} and discussed in chapter \ref{sec:modularity}. The engine's submodules are described in the following chapters.
+After an initial design draft, it was clear, that the Engine implementation will be too big for a single module. So the engine implementation was split up into multiple smaller, more maintainable modules using the module development patterns, defined by \citeauthor{Knoernschild:2012}\cite{Knoernschild:2012} and discussed in chapter \ref{sec:modularity}. The engine's submodules are described in the following chapters.
 
 \begin{figure}[H]
 \centering
@@ -314,7 +314,7 @@ After an extractor has been started in its own environment using the ProcessServ
 \caption{ProcessMonitor implementation}
 \end{figure}
 
-The repeated polling is realized with the JDK's built-in \\ \texttt{ScheduledExecutorService}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ScheduledExecutorService.html}} which schedules a special \texttt{Runnable} to run in a scheduled fashion, like shown in listing \ref{lst:scheduling}
+The repeated polling is realized with the JDK's built-in \\ \texttt{ScheduledExecutorService}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/util/concurrent/ScheduledExecutorService.html}}, which schedules a special \texttt{Runnable} to run in a scheduled fashion, like shown in listing \ref{lst:scheduling}
 
 \begin{listing}[H]
 \begin{minted}{java}
@@ -368,12 +368,12 @@ It's worth mentioning that relying on \gls{JMX} for measuring performance values
 \caption{EventProducer implementation}
 \end{figure}
 
-It's the \texttt{EventProducer}'s responsibility to retrieve runtime performance figures by calling the corresponding \gls{JMX} endpoints, to create and populate the suitable \texttt{Event} instances. The producer creates \gls{JMX} proxies for \texttt{MemoryMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/lang/management/MemoryMXBean.html}} and \texttt{OperatingSystemMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/jre/api/management/extension/com/sun/management/OperatingSystemMXBean.html}}, creates \texttt{CpuTimeEvent}s and \texttt{MemoryUsageEvent}s and delegates their persistence to the \texttt{EventLogger} service.
+It's the \texttt{EventProducer}'s responsibility to retrieve runtime performance figures by calling the corresponding \gls{JMX} endpoints and to create and populate the suitable \texttt{Event} instances. The producer generates \gls{JMX} proxies for the \texttt{MemoryMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/api/java/lang/management/MemoryMXBean.html}} and \texttt{OperatingSystemMXBean}\footnote{\url{http://docs.oracle.com/javase/6/docs/jre/api/management/extension/com/sun/management/OperatingSystemMXBean.html}} classes, creates \texttt{CpuTimeEvent}s and \texttt{MemoryUsageEvent}s and delegates their persistence to the \texttt{EventLogger} service.
 
 \paragraph{Event persistence}
-Once events have been created, they need to be persisted on the file system to allow processing them later on during evaluation. Event persistence in Banshie is provided by the default \texttt{EventLogger} implementation, which creates a single text-oriented log file. \texttt{Event}s are serialized using \gls{JSON} mapping capabilities of the Jackson\footnote{\url{http://jackson.codehaus.org/}} library. The resulting event log file contains one \gls{JSON} entity per line.
+Once events have been created, they need to be persisted on the file system to allow processing them during evaluation later on. Event persistence in Banshie is provided by the default \texttt{EventLogger} implementation, which creates a single text-oriented log file using the \gls{JSON} data format. \texttt{Event}s are serialized using \gls{JSON} mapping capabilities of the Jackson\footnote{\url{http://jackson.codehaus.org/}} library. The resulting event log file contains one \gls{JSON} entity per line.
 
-Using \gls{JPA} for persisting events would have certainly been an option, but using a text-based logfile approach has its advantages. First of all, it's more resource friendly to stream text to a file than it is to go through several layers of abstraction to access a database via \gls{JPA}. Another reason to use \gls{JSON} for serializing is the flexibility it provides; one could easily add more information to events in the future by just a extending the \gls{JSON} structure with additional key-value pairs.
+Using \gls{JPA} for persisting events would have certainly been an option, but using a text-based logfile approach has its advantages. First of all, it's more resource friendly to stream text to a file than it is to go through several layers of abstraction to access a database via \gls{JPA}. Another reason to use \gls{JSON} for serializing is the flexibility it provides; one could easily add more information to events in the future by just extending the \gls{JSON} structure with additional key-value pairs.
 
 \begin{figure}[H]
 \centering
@@ -561,5 +561,5 @@ final class MemoryUsageCalculator implements Calculator {
 \end{listing}
 
 \subsection{Summary}
-This chapter described the development of Banshie, an extensible and modular evaluation framework for information extraction systems and also showed how the findings from chapter \ref{sec:evaluation-methodology} (\nameref{sec:evaluation-methodology}) and \ref{sec:modularity} (\nameref{sec:modularity}) influenced the overall system design and fundamental architecture of the framework. Various design and implementation details have been discussed. Such as the API, the extractor interface specification, the output format definition as well as the reference-hypothesis association algorithm and all relevant modules, including their respective requirements and interfaces.
+This chapter described the development of Banshie, an extensible and modular evaluation framework for information extraction systems and also showed how the findings from chapter \ref{sec:evaluation-methodology} (\nameref{sec:evaluation-methodology}) and \ref{sec:modularity} (\nameref{sec:modularity}) influenced the overall system design and fundamental architecture of the framework. Various design and implementation details have been discussed, such as the API, the extractor interface specification, the output format definition as well as the reference-hypothesis association algorithm and all relevant modules, including their respective requirements and interfaces.
 
