@@ -260,7 +260,8 @@ The attributes \texttt{start} and \texttt{end} define the UTF-8 character offset
 
 \subsection{Reference-hypothesis association}
 \label{sec:association}
-\citeauthor{Douthat:1998} proposed the original version of the \enquote{General Greedy Mapping Algorithm} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication. Evaliex extended this algorithm by basing the matching on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient \cite{Linsmayr:2010}. But since Banshie, in its current version, focuses solely on Named Entity Recognition, a simpler algorithm to associate reference and hypothesis has been used. Pairs are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
+\citeauthor{Douthat:1998} proposed the original version of the \enquote{General Greedy Mapping Algorithm} in 1998 \cite{Douthat:1998}. It's based on finding matching pairs of spans in the reference and the predication. Evaliex extended this algorithm by basing the matching on string or word similarity algorithms like Levenshtein-distance or the Jaccard-coeffecient \cite{Linsmayr:2010}. But since Banshie, in its current version, focuses solely on the \textit{All Occurences} approach of \gls{IE}, a simpler algorithm to associate reference and hypothesis has been used. Pairs are matched based on character offsets calculated from the original document. This way an extractor is required to find exact or partial matches of spans defined in the reference to score in the evaluation metrics.
+\fxfatal{Better reference on chapter 3}
 
 \subsection{Implementation}
 \label{sec:implementation}

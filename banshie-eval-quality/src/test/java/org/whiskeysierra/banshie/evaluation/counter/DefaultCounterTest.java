@@ -20,11 +20,7 @@ public final class DefaultCounterTest {
         return span;
     }
 
-    @Test
-    public void exact() {
-        final Span first = newSpan(10, 20);
-        final Span second = newSpan(10, 20);
-
+    private void test(Span first, Span second) {
         final List<Span> references = Collections.singletonList(first);
         final List<Span> predictions = Collections.singletonList(second);
 
@@ -33,6 +29,30 @@ public final class DefaultCounterTest {
         Assert.assertEquals(1, counts.getTruePositives());
         Assert.assertEquals(0, counts.getFalseNegatives());
         Assert.assertEquals(0, counts.getFalsePositives());
+    }
+
+    @Test
+    public void exact() {
+        final Span first = newSpan(10, 20);
+        final Span second = newSpan(10, 20);
+
+        test(first, second);
+    }
+
+    @Test
+    public void referenceContains() {
+        final Span first = newSpan(10, 20);
+        final Span second = newSpan(12, 17);
+
+        test(first, second);
+    }
+
+    @Test
+    public void predictionContains() {
+        final Span first = newSpan(12, 17);
+        final Span second = newSpan(10, 20);
+
+        test(first, second);
     }
 
     @Test
@@ -40,14 +60,7 @@ public final class DefaultCounterTest {
         final Span first = newSpan(10, 20);
         final Span second = newSpan(15, 25);
 
-        final List<Span> references = Collections.singletonList(first);
-        final List<Span> predictions = Collections.singletonList(second);
-
-        final Counts counts = unit.count(references, predictions);
-
-        Assert.assertEquals(1, counts.getTruePositives());
-        Assert.assertEquals(0, counts.getFalseNegatives());
-        Assert.assertEquals(0, counts.getFalsePositives());
+        test(first, second);
     }
 
     @Test
@@ -55,14 +68,7 @@ public final class DefaultCounterTest {
         final Span first = newSpan(10, 20);
         final Span second = newSpan(5, 15);
 
-        final List<Span> references = Collections.singletonList(first);
-        final List<Span> predictions = Collections.singletonList(second);
-
-        final Counts counts = unit.count(references, predictions);
-
-        Assert.assertEquals(1, counts.getTruePositives());
-        Assert.assertEquals(0, counts.getFalseNegatives());
-        Assert.assertEquals(0, counts.getFalsePositives());
+        test(first, second);
     }
 
     @Test

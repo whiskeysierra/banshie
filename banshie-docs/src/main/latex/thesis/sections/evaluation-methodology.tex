@@ -1,14 +1,15 @@
-\section{Formal \gls{IE} evaluation methodology}
+\section{Formal evaluation methodology}
 \label{sec:evaluation-methodology}
-\fxfatal{More formal approach, see \cite{Sitter:2004}}
 
 In the previous chapter the field of information extraction was presented. The process of IE does not only require the extraction itself, but also needs to evaluate the relevance of localized facts for the respective domain. Thus, a quality assessment is required, which focuses on the advancement of development and the juxtaposition of approaches. The evaluation is the formulation of new problems which have to be integrated into the development \cite{Linsmayr:2010}. The methodology of the evaluation is described in this chapter.
 
 Evaluation has always been an important part in designing, implementing, testing and developing \gls{IE} systems. It's crucial to have reliable indicators to ensure a continuous improvement in system performances. This chapter aims to provide definitions for the most frequently used \gls{IE} approaches, \enquote{All Occurences} and \enquote{One Best per Document} and an overview of the most important and well discussed performance metrics which will be implemented in the framework. For information about the implementation details of the scoring metrics please consult chapter \ref{sec:design} (pp. \pageref{sec:design}ff.).
 
+\newpage
 \subsection{\gls{IE} approaches}
-\fxfatal{Formal definition, description, ...}
-Depending on the intended use case of the IE system, different approaches to information extraction may be useful. A first possibility is the \enquote{OBD} approach. In this case, we see the \textit{IE} task as filling a given template structure. This is for example useful if the goal of the extractor is to fill a database in order to be able to query the information contained in the documents. \cite{Sitter:2004}.
+Depending on the intended use case of the IE system, different approaches to information extraction may be useful. 
+
+\subsubsection{One Best per Document}A first possibility is the \gls{OBD} approach. In this case, we see the \textit{IE} task as filling a given template structure. This is for example useful if the goal of the extractor is to fill a database in order to be able to query the information contained in the documents. \cite{Sitter:2004}. Templates are organized in slots which are filled during extraction time. Table \ref{tbl:example-obd} shows an example template for the job advertisements domain.
 
 \begin{table}[H]
 \centering
@@ -19,14 +20,29 @@ Depending on the intended use case of the IE system, different approaches to inf
 	\texttt{title} & Chief Business Officer \\
 	\texttt{salary} & 80,000 USD \\
 	\texttt{company} & Acme Corporation \\
-	\texttt{start} & February 5, 2013 \\
+	\texttt{due-date} & February 5, 2013 \\
 	\bottomrule
 \end{tabular*}
 \caption{Example template for the \gls{OBD} approach}
+\label{tbl:example-obd}
 \end{table}
 
-\fxfatal{AO approach}
+For evaluating \gls{IE} systems using the \gls{OBD} approach, the exact location of the annotations in the document is not important. \cite{Sitter:2004}
 
+\subsubsection{All Occurences}
+A second possibility is the \gls{AO} apporach. In this case, every occurence of certain items in a document need to be found. This is usually realized by annotating or tagging tokens in the original text. \cite{Sitter:2004}
+
+\begin{figure}[H]
+\verbatiminput{example-ao.txt}
+\caption{Annotated example document for the \gls{AO} approach}
+\label{fig:example-ao}
+\end{figure}
+
+The \gls{AO} \gls{IE} task for the item \enquote*{company} for the document in figure \ref{fig:example-ao} gives the results \textit{Acme Corporation} and \textit{Acme Corporation}, while the task for \enquote*{title} would return \textit{Chief Business Officer} and \textit{Finance Manager}. Note that in the first case (\enquote*{company}) both answers indicate different occurences of the same company. In the second case (\enquote*{title}), both answers indicate a different job title. But since we want to find every occurence of every instance, this doesn't matter in the formal setting \cite{Sitter:2004}.
+
+The framework, developed as part of this thesis, focuses on this approach when evaluating information extraction systems.
+
+\newpage
 \subsection{Performance measures}
 A typical way to evaluate an IE system is by using a confusion matrix. This is a well-known
 technique of counting results. Figure \ref{tab:confusion-matrix} shows a confusion matrix \cite{Sitter:2004}.
@@ -67,13 +83,18 @@ Another way to calculate performance measures is based on the notation proposed 
 \end{tabular*}
 \end{table}
 
-\gls{IE} has been, according to \cite{Chinchor:1998}, traditionally defined as the extraction of information from a text in the form of text strings and processed text strings which are placed into slots labeled to indicate the kind of information that can fill them. To summarize: Slots, in this context, can be understood as the extraction target for entities.
+\subsubsection{Matching rules}
+The way of deciding if an extracted entity (\enquote{prediction}) is correct or not, is crucial in computation of the scores \cite{Sitter:2004}. D. Freitag gives three different possibilities \cite{Freitag:1998}:
 
-\fxfatal{Rules}
-% exact, contain, overlap
-% quote D. Freitag (Freitag:1998)
+\begin{itemize}
+	\item \textit{exact rule}: a prediction is correct, if it's exactly equal to an answer. E.g. if the answer given is \enquote*{Albert Einstein}, \enquote*{Dr. Albert Einstein} would not be correct.
+	\item \textit{contain rule}: a prediction is correct, if it contains an answer and maybe some additional neighboring tokens. E.g. if the answer given is \enquote*{Albert Einstein}, \enquote*{Dr. Albert Einstein} would be correct as well.
+	\item \textit{overlap rule}: a predication is correct, if it contains a part of an answer and maybe some additional neighboring tokens. E.g. if the answer given is \enquote*{Dr. Albert Einstein}, \enquote*{Albert Einstein} would be correct as well.
+\end{itemize}
 
-The most used evaluation measures in \gls{IE} are recall, precision and F-measure. Some additional ones, like Error per response fill and  Slot error rate, were proposed by \cite{Chinchor:1995} and \cite{Makhoul:1999}.
+Which rule is preferable, depends heavily on the use case of the \gls{IE} system. If an \gls{IE} system is filling a database which answers queries, the exact rule might return better results. On the other hand, if someone's tasks is to find all job titles in a set of documents, a system that gives a prediction overlapping with the correct answer will be more useful than one that only returns the exact answer for a smaller share of the documents. \cite{Sitter:2004}
+
+The framework, developed as part of this thesis, will be using mixed approach of the \textit{contain} and \textit{overlap} rule.
 
 \subsubsection{Precision}
 The \textit{precision} (\ensuremath{\pi} or P), also called Sensitivity, is defined as the percentage of correctly retrieved data in the hypothesis \cite{Carstensen:2010}. 
