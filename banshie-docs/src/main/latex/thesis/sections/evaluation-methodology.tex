@@ -7,6 +7,7 @@ Evaluation has always been an important part in designing, implementing, testing
 
 \newpage
 \subsection{\gls{IE} approaches}
+\label{sec:ie-approaches}
 Depending on the intended use case of the IE system, different approaches to information extraction may be useful. 
 
 \subsubsection{One Best per Document}A first possibility is the \gls{OBD} approach. In this case, we see the \textit{IE} task as filling a given template structure. This is for example useful if the goal of the extractor is to fill a database in order to be able to query the information contained in the documents. \cite{Sitter:2004}. Templates are organized in slots which are filled during extraction time. Table \ref{tbl:example-obd} shows an example template for the job advertisements domain.
@@ -84,6 +85,7 @@ Another way to calculate performance measures is based on the notation proposed 
 \end{table}
 
 \subsubsection{Matching rules}
+\label{sec:matching-rules}
 The way of deciding if an extracted entity (\enquote{prediction}) is correct or not, is crucial in computation of the scores \cite{Sitter:2004}. D. Freitag gives three different possibilities \cite{Freitag:1998}:
 
 \begin{itemize}

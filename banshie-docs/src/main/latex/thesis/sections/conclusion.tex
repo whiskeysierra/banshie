@@ -3,15 +3,21 @@
 This chapter attempts to summarize this thesis by reviewing. It also gives an outlook for future work and research that can be done based on the results of this thesis.
 
 \subsection{Review}
-\fxfatal{Review}
-The main objective of this thesis, make an extensible, modular benchmarking framework, has been achieved. So, as a result, we have an Open Source Java-based framework which runs in any \gls{OSGi}-compliant environment or embedded as a library in standalone applications.
+The main objective of this thesis, make an extensible, modular benchmarking framework, has been achieved. So, as a result, we have a prototype Open Source Java-based framework which runs in any \gls{OSGi}-compliant environment or embedded as a library in standalone applications.
 
-% Prototype
-% No Web UI :(
+Additionally I gave an overview over the current state of \gls{IE} , the most common \gls{IE} methods and approaches as well as an introduction to \gls{IE} evaluation methodology. We discussed different matching rules, mapping algorithms, performance and runtime performance measures for evaluating information extraction systems.
+
+The delivered framework prototype currently supports the \textit{All Occurences} \gls{IE} approach and mixed rule approach (\enquote*{contains} and \enquote*{overlap}) for matching reference answers and predictions. It includes, but is not limited to, six different performance (precision, recall, F-Measure, Error measure, Error per response fill and slot error rate) and two runtime performance measures (CPU time and memory consumption). The current version of the software is limited to \gls{JVM}-based extractors, due to the fact that the collecting of the runtime performance measures is realized using \acs{JMX} tools.
+
+The platform was planned to include a web based user interface which provides HTTP uploads for IE programs, monitoring execution progress as well as statistics and scores in form of diagrams. Unfortunately, due to time management issues, this feature has not been realized.
 
 \subsection{Lessons learned}
 \fxfatal{Lessons learned}
-% writing adapters is not easy
+% writing modular software is not easy; an ongoing process (managing dependencies!, split modules, introduce levels of indirection to break up tightly coupled modules, ...), similar to good class/package level design, you get used to it and apply patterns without realizing you are doing s.
+% evaluating extractors is not easy, no general agreement about correct answers of extraction 
+% finding a output format for extractors which is easy enough to adapt to but flexible enough to handle different approaches and tasks is difficult
+% writing adapters not that hard but still necessary, different APIs might be more difficult
+% IO handling and XML writing in pure Java is extremely verbose, see appendix (put full adapters in appendix)
 
 \subsection{Outlook and future work}
 Banshie's architectural design is based on solid, state-of-the-art patterns, but to expand the framework's capabilities beyond prototype character several ideas come to mind. Some of these ideas will be explained and discussed on the following pages.
