@@ -15,23 +15,23 @@ Banshie is completely written in Java and distributed as OSGi bundles. The archi
 
 Almost all of Banshie's modules are the result of applying these patterns during the development. The following figure shows all relevant modules as well as their dependencies.
 
-\fxfatal{Describe module groups}
-% banshie-api (public api, main module)
-% banshie-corpora, banshie-extractors, banshie-execution, banshie-eval-performance, banshie-eval-quality (corresponds to package hierarchy)
-% banshie-execution's dependencies!
-% event modules: internal interface
-% banshie-common, banshie-jpa, banshie-persistence
-
-% no module depends on other *-impl modules
-
 \begin{figure}[H]
 \centering
-\includegraphics[angle=90, width=0.38\textwidth]{module-dependencies.png}
+\includegraphics[angle=90, width=0.31\textwidth]{module-dependencies.png}
 \caption{Module dependencies}
 \label{fig:module-dependencies}
 \end{figure}
 
+The most important module, as shown in figure \ref{fig:module-dependencies} is the \textit{banshie-api} module. It contains the public \gls{API} of the framework which itself is described in chapter \ref{sec:api} (see pp. \pageref{sec:api}ff.). The \gls{API} module is the only module clients or users of the framework should directly depend on. All the other modules form the implementation of the framework's public \gls{API} and are highly implementation specific.
+
+The next most important modules are \textit{banshie-corpora}, \textit{banshie-extractors}, \textit{banshie-execution}, \textit{banshie-eval-performance} and \textit{banshie-eval-quality}. They are based on the package hierarchy of the \gls{API} and provide the default implementation of their corresponding packages.
+
+Since a single implementation module for some of these packages would violate the \textit{Single Responsibility Pattern} (s. chapter \ref{sec:patterns}) they had to be broken up into smaller ones. The results of this process are the following modules: \textit{banshie-process-api}, \textit{banshie-process-impl}, \textit{banshie-monitor-api}, \textit{banshie-monitor-impl},  \textit{banshie-event-api}, \textit{banshie-event-impl}, \textit{banshie-logging-api} and \textit{banshie-logging-impl}. The naming schema indicates that all of these modules have been split up into their own respective \gls{API} and implementation modules, which can be exchanged by alternative versions if desired. The \gls{API} modules form an internal \gls{API} which allows implementation modules to communicate through a well-defined interface, those modules must not be confused with the public \gls{API} module \textit{banshie-api}. The different responsibilities and respective \gls{API}s will be discussed in chapter \ref{sec:api}. It should also be noted, that figure \ref{fig:module-dependencies} nicely demonstrates the result of applying the patterns discussed in chapter \ref{sec:patterns}: Every module only depends on \gls{API} (or library) modules, but never on implementation modules.
+
+Another group of modules contains the \textit{banshie-common}, \textit{banshie-jpa} and \textit{banshie-persistence} modules. The \acl{JPA} module provides persistence-related utility features while the common module just offers more general framework-related features. The persistence module is not so much the result of a pattern-based design approach but rather the consequence of \gls{OSGi}'s bad support for \gls{JPA}. Aggregating domain model and persistence-related classes into one module makes integrating them into an \gls{OSGi} container much easier, since all relevant classes are loaded from a single classloader.
+
 \subsection{API}
+\label{sec:api}
 The framework's \gls{API} can be divided into three main components, which are described in detail on the following pages.
 
 \paragraph{Domain model and persistence}
@@ -431,7 +431,7 @@ final class MemoryUsageCalculator implements Calculator {
 \end{listing}
 
 \subsection{Implementation obstacles}
-\fxfatal{Introduction}
+The next chapter will describe and discuss the obstacles that occured during the implementation and testing phase of the framework and how they problems that arised got solved.
 
 \subsubsection{Persistence}
 Banshie's persistence layer is based on the \gls{JPA} 2.0 Standard. \gls{JPA} allows to build modules without hardcoding for a specific persistence provider or database vendor. Thus allowing to swap implementations later in the development lifecycle without the need to rewrite large portions of the code base. Banshie uses Apache OpenJPA as a \gls{JPA} provider and Apache Derby as the underlying database. Derby is a \gls{RDBMS} written in Java and is distributable as a single Jar file which can be embedded in other applications rather easily.
