@@ -1,5 +1,6 @@
 package org.whiskeysierra.banshie.evaluation.counter;
 
+import com.google.common.base.Objects;
 import com.google.common.collect.Sets;
 import org.whiskeysierra.banshie.evaluation.Span;
 
@@ -17,7 +18,8 @@ final class DefaultCounter implements Counter {
         loop:
         for (Span prediction : predictions) {
             for (Span reference : references) {
-                if (reference.overlap(prediction)) {
+                final boolean equalTypes = Objects.equal(reference.getType(), prediction.getType());
+                if (equalTypes && reference.overlap(prediction)) {
                     truePositives.add(reference);
                     falsePositives.remove(prediction);
                     falseNegatives.remove(reference);

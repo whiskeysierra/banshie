@@ -31,6 +31,8 @@ Since Evaliex uses a different reference-hypothesis association algorithm, offer
 
 The modified version of the \textit{General Greedy Mapping Algorithm} used in \textit{Evaliex} is based on string/word similarity. Future versions of the Banshie platform should support multiple algorithm, e.g. Levenshtein distance and Jaccard coefficient, as well as a plug-in mechanism for those similarity checks.
 
+\fxfatal{Multi-document support}
+
 The current version of the framework only supports \gls{JVM}-based extractors and since different extractors have different requirements, e.g. memory and garbage collector configuration, applying additional custom command line parameters to the external Java process would be handy too.
 
 Another stage of expansion would include alternate \texttt{Engine} implementations to support non \gls{JVM}-based extractors. Different engines would of course require different means to collect runtime events. In other words for different engines one needs to supply a viable \gls{JMX} client alternative.

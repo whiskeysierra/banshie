@@ -15,7 +15,15 @@ Banshie is completely written in Java and distributed as OSGi bundles. The archi
 
 Almost all of Banshie's modules are the result of applying these patterns during the development. The following figure shows all relevant modules as well as their dependencies.
 
-\newpage
+\fxfatal{Describe module groups}
+% banshie-api (public api, main module)
+% banshie-corpora, banshie-extractors, banshie-execution, banshie-eval-performance, banshie-eval-quality (corresponds to package hierarchy)
+% banshie-execution's dependencies!
+% event modules: internal interface
+% banshie-common, banshie-jpa, banshie-persistence
+
+% no module depends on other *-impl modules
+
 \begin{figure}[H]
 \centering
 \includegraphics[angle=90, width=0.38\textwidth]{module-dependencies.png}
@@ -23,8 +31,11 @@ Almost all of Banshie's modules are the result of applying these patterns during
 \label{fig:module-dependencies}
 \end{figure}
 
-\newpage
 \subsection{Technologies and patterns}
+\fxfatal{Move to modularity chapter}
+% "Relevant patterns"
+% Supporting libraries
+% Context, why is it relevant to the system?
 
 \subsubsection{Dependency Injection}
 \gls{DI} is an expression introduced by Martin Fowler in its article \textit{Inversion of Control Containers and the Dependency Injection Pattern} \cite{Fowler:2004}. Dependency Injection specifies the means for obtaining objects in such a way as to maximize reusability, testability and maintainability compared to traditional approaches such as constructors, factories, and service locators \cite{JSR330}. \gls{DI} does this by allowing a class to specify its dependencies and rely on their provision at runtime rather than retrieving them explicitly. This leaves the programmer's code clean, flexible, and relatively free of dependency-related infrastructure \cite{JSR330}.
@@ -151,7 +162,6 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 \caption{Maven Bundle Plugin usage}
 \end{listing}
 
-\newpage
 \subsection{API}
 The framework's \gls{API} can be divided into three main components, which are described in detail on the following pages.
 
@@ -168,7 +178,6 @@ For each of the model classes a persistence service interface is provided. Since
 \caption{Banshie model and persistence API}
 \end{figure}
 
-\newpage
 \paragraph{Execution}
 Apart from the domain model and persistence layer, the framework offers two significant features to its clients: execution and evaluation. The execution package contains one major interface for executing extractors: the \texttt{Engine}. The Engine provides a single methods which takes an Extractor-Corpus-pair and performs an execution. The result of the extractor run is then passed back to the caller in the form of an \texttt{ExtractorResult} containing references to the extractor's xml output file and the event log file. For more details about the structure of the event log file please consult chapter \ref{sec:implementation}.
 
@@ -178,7 +187,6 @@ Apart from the domain model and persistence layer, the framework offers two sign
 \caption{Banshie Execution API}
 \end{figure}
 
-\newpage
 \paragraph{Evaluation}
 Evaluation is, next to the execution, the other main feature of the framework. Having a two-step phase for execution and evaluation has an advantage. Persisting the extraction results and raw performance logging data allows for a later re-evaluation by other versions or differently configured extractors. Additionally, saving results on the filesystem allows for more memory efficiency.
 
@@ -276,7 +284,6 @@ After an initial design draft, it was clear, that the Engine implementation will
 \caption{Engine implementation}
 \end{figure}
 
-\newpage
 \paragraph{Process management}
 The Java Process API is part of the Java Runtime Environment since version 1.0 but it has several  pitfalls, which may lead to deadlocks or zombie processes \cite{Cartmell:2009}. There even has been filed a \gls{JEP} to improve the API for controlling and managing operating system processes. \cite{JEP:102}.
 
@@ -304,7 +311,6 @@ process.await();
 \label{fig:process}
 \end{figure}
 
-\newpage
 \paragraph{Process monitoring}
 After an extractor has been started in its own environment using the ProcessService API, the operating system process needs to be monitored to ensure correct execution and to collect events, like current CPU time and memory consumption, in a periodical way, e.g. every x milliseconds.
 
@@ -324,7 +330,6 @@ executor.scheduleAtFixedRate(runnable, 0L, 1L, TimeUnit.SECONDS);
 \label{lst:scheduling}
 \end{listing}
 
-\newpage
 Collecting events on a separate process can be realized by using \gls{JMX}, which allows managing and monitoring java applications through a well specified and extensible interface. To allow a \gls{JMX} connection, a java process needs to be started with a special set of command line parameters as shown in listing \ref{lst:process-configuring}.
 
 \begin{listing}[H]
@@ -360,7 +365,6 @@ The default implementation of the \texttt{ProcessMonitor} interface delegates th
 
 It's worth mentioning that relying on \gls{JMX} for measuring performance values of an external extraction process is the reason why Banshie is currently limited to JVM-based extractors.
 
-\newpage
 \paragraph{Event production}
 \begin{figure}[H]
 \centering
@@ -404,7 +408,6 @@ Using \gls{JPA} for persisting events would have certainly been an option, but u
 \label{lst:event-log}
 \end{listing}
 
-\newpage
 \subsubsection{Quality evaluation}
 The default \texttt{QualityEvaluator} implementation has serveral tasks. It needs to map the prediction to the reference, count true positives, false positives, false negatives, run configured scoring metrics and collect their results.
 
@@ -475,7 +478,6 @@ final class Recall implements Score {
 \label{lst:recall}
 \end{listing}
 
-\newpage
 \subsubsection{Performance evaluation}
 \begin{figure}[H]
 \centering
@@ -528,7 +530,6 @@ Banshie, in its current version, ships with three different \texttt{Calculators}
 		Calculates the total execution time in milliseconds.
 \end{itemize}
 
-\newpage
 Listing \ref{lst:memory-calculator} demonstrates a common \texttt{Calculator} implementation at the example of the \texttt{MemoryUsageCalculator} which computes the average memory consumption in megabytes.
 
 \begin{listing}[H]

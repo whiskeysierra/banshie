@@ -16,7 +16,6 @@ Stanford CoreNLP
 
 The Stanford CoreNLP code is written in Java, licensed under the GNU General Public License and available on Maven Central.
 
-\newpage
 \subsection{Examples}
 This chapter will show the most relevant parts of the adapter implementations to make the selected \gls{NER} tools compatible to the extractor interface specification described in chapter \ref{sec:extractor-specification}. For the sake of readability of this document and to keep the evaluation process understandable an extremely small test document, shown in listing \ref{lst:example-document}, was chosen.
 
@@ -34,7 +33,6 @@ The example reference output, listing \ref{lst:example-reference}, was created m
 \label{lst:example-reference}
 \end{listing}
 
-\newpage
 \subsubsection{Apache OpenNLP}
 Listing \ref{lst:opennlp-adapter} shows the most relevant part of the adapter implementation for the Apache OpenNLP Name Finder Tool. The document reading and output writing part of the code was ommitted to improve readability. The three most important services provided by OpenNLP are the \texttt{SentenceDetector}, the \texttt{Tokenizer} and the \texttt{NameFinder}. The SentenceDetector and Tokenizer are used to split up the input document into sentences and sentences into tokens respectively. The resulting lists of tokens are then passed on to the NameFinder which finds spans and marks them as persons, organizations or locations accordingly.
 
@@ -123,7 +121,6 @@ for (CoreMap sentence : sentences) {
 \label{lst:corenlp-adapter}
 \end{listing}
 
-\newpage
 The extraction of the CoreNLP adapter is shown in listing \ref{lst:corenlp-result} and it's obvious that it contains much more annotated tokens than the OpenNLP result in listing \ref{lst:opennlp-result}. But since the Stanford \gls{NER} tagger works on tokens, it tags individual words with \gls{NER} types.
 
 \begin{listing}[H]
@@ -132,7 +129,6 @@ The extraction of the CoreNLP adapter is shown in listing \ref{lst:corenlp-resul
 \label{lst:corenlp-result}
 \end{listing}
 
-\newpage
 Listing \ref{lst:corenlp-eval-result} shows the evaluation result of the CoreNLP adapter.
 
 \begin{listing}[H]
@@ -161,10 +157,13 @@ Table \ref{tbl:result-comparison} shows the evaluation results of both extractor
 
 CoreNLP actually spends a lot of time loading training models, but since OpenNLP also loads model data during startup, comparing the total execution time is still fair. But it should be noted, that on consecutive runs, CoreNLP should perform much better. One could even imagine to use different models to trade startup time for extraction quality, which is exactly the kind of comparison Banshie tries to offer to its clients.
 
-\newpage
 \subsection{Summary}
 Writing adapters for extractors to allow execution and evaluation in the Banshie framework requires some manual work, in case of the example integrations about 100 lines of codes each. Adapting an \gls{API} to the extractor interface specification also differs greatly from extractor to extractor and highly depends on how easy it is to tokenize the input document, run the recognition process, iterate over annotated tokens and produce the desired \gls{XML} output. Especially calculating the UTF-8 character offsets can be errorprone, as listing \ref{lst:opennlp-adapter} illustrated.
 
 Even though the example document and the reference output were extremely small, the result is a nice example of a evaluation result one would expect to see a lot: Two different extractors with highly different quality-performance tradeoffs. OpenNLP only used 35 megabytes of memory and finished after about 2 seconds but only scored an F-measure of .5. CoreNLP on the other hand performed a perfect extraction but required more than 16 times the memory and 18 times the CPU time compared to OpenNLP.
 
 Comparing and evaluating those results now highly depends on the use case, a fast and mediocre reliable extractor might be the perfect tool for one task, while another might require the best extraction, no matter the resource cost.
+
+\fxfatal{Bigger documents!}
+% diagrams, bigger result comparison table
+% mention missing multi-document-support

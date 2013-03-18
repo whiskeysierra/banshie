@@ -202,9 +202,21 @@
         </dependency>
         <dependency>
             <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-eval-performance</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
+            <artifactId>banshie-eval-quality</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!--
+        <dependency>
+            <groupId>org.whiskeysierra.banshie</groupId>
             <artifactId>banshie-web</artifactId>
             <version>${project.version}</version>
         </dependency>
+        -->
     </dependencies>
     <build>
         <plugins>

@@ -32,10 +32,9 @@ Information extraction (IE) is the task of automatically extracting structured i
 
 To summarize these definitions one can say that information extraction is concerned with the discovery and therefore the identification of relevant information from large collections of data, and aims to present it in a structured format in order to ensure automatic processing. \cite{Lehnert:1994}\cite{Neumann:2001}\cite{Siefkes:2007}.
 
-The challenge in information extraction ccording to \cite{Grishman:2003} is the specification of the relevant data. It must be very detailed in order to guarantee an accurate identification. The problem lies in the complexity of natural language. The knowledge can be spread over several blocks and be present in different linguistic representation. The latter occurs, for example, through the use of different names, anaphoric expressions, and similar designations. As part of the extraction, therefore, the existence of the same information regardless of the specific formulation are revealed \cite{Cole:1998}\cite{Grishman:2003}\cite{Grishman:2007}\cite{Linsmayr:2010}.
+The challenge in information extraction according to \cite{Grishman:2003} is the specification of the relevant data. It must be very detailed in order to guarantee an accurate identification. The problem lies in the complexity of natural language. The knowledge can be spread over several blocks and be present in different linguistic representation. The latter occurs, for example, through the use of different names, anaphoric expressions, and similar designations. As part of the extraction, therefore, the existence of the same information regardless of the specific formulation are revealed \cite{Cole:1998}\cite{Grishman:2003}\cite{Grishman:2007}\cite{Linsmayr:2010}.
 
-\newpage
-\subsection{History}
+\subsection{History of \acl{IE}}
 The area of text understanding can be considered as the basis for the \gls{IE}. In this regard, researchers studied methods in the field of Artificial Intelligence, which reproduce the contents of a text in exact form \cite{Siefkes:2007}\cite{Eikvil:1999}. The first application of information extraction occurred in the 1950s, where  the information from texts  were reduced into a table structure. \cite{Grishman:1997}\cite{Gaizauskas:1998}\cite{Wilks:1997}.
 
 \subsubsection{Message Understanding Conferences}
@@ -82,7 +81,6 @@ The tasks of the \gls{ACE} are more complex, as multiple domains are used and al
 
 The results of these conferences will provide the basis of this thesis as described in detail in chapter \ref{sec:evaluation-methodology}.
 
-\newpage
 \subsection{Most typical tasks}
 
 The Message Understanding Conferences structured the information extraction into the following sub-tasks due to its complexity \cite{Carstensen:2010}\cite{Lavelli:2008}:
@@ -160,7 +158,6 @@ The extraction of relationships differs from the extraction of entities in one s
 
 Regarding the given example document, \gls{ST} discovers that there was a rocket launching event on tuesday in which the various entities were involved \cite{Cunningham:2005}.
 
-\newpage
 \subsection{Development and methods of \gls{IE}}
 This chapter describes different approaches for the construction of an IE system as well as the current research in the field of information extraction.
 
@@ -190,7 +187,6 @@ The rise of the textual sources on the Internet brings an adaptation of existing
 
 A wrapper is a procedure that identifies data from a source in accordance with special extraction rules. The information within HTML pages are converted into a format explicitly stored for further use. A wrapper must coincide with the dynamic content of the web, manage the change of links and formatting errors. Since a wrapper is limited to one source, research in the area of \gls{WG} is initiated \cite{Chang:2006}\cite{Eikvil:1999}. The wrapper generation focuses on the integration of multiple sources and counteracts the heterogeneity of the web by using a wrapper library \cite{Siefkes:2007}\cite{Turmo:2006}.
 
-\newpage
 \subsection{Related fields}
 \gls{IE} focuses on the identification and filtering of information relevant to specific a domain. Since \gls{IE} is a sub-field of \gls{NLP}, we need to separate it from related fields also concerned with the automatic processing of natural languages.
 
@@ -220,4 +216,6 @@ Data Mining, also popularly known as \gls{KDD}, refers to the nontrivial extract
 Question answering is a specialised form of information retrieval. Given a collection of documents, a Question answering system attempts to retrieve correct answers to questions posed in natural language. Open-domain question answering requires question answering systems to be able to answer questions about any conceivable topic. Such systems cannot, therefore, rely on hand crafted domain specific knowledge to find and extract the correct answers \cite{Lampert:2004}.
 
 \subsection{Summary}
-This chapter tried to give a small overview of the field of \gls{IE} by defining the term \textit{information extraction} and giving a small discourse about its history, a more or less complete list of the most typical tasks and some information about common approaches, current developments and related fields. Knowing the underlying ideas and concepts of \gls{IE} is required to gain a better understanding of how the programs work which will be evaluated later.
+This chapter tried to give an overview of the field of \gls{IE} by defining the term \textit{information extraction} and giving a discourse about its history and programms, a more or less complete list of the most typical tasks and information about common approaches, current developments and related fields. Knowing the underlying ideas and concepts of \gls{IE} is required to gain a better understanding of how the programs work which will be evaluated later.
+
+\fxfatal{More depth and examples}

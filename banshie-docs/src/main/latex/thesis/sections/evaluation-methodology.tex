@@ -5,7 +5,6 @@ In the previous chapter the field of information extraction was presented. The p
 
 Evaluation has always been an important part in designing, implementing, testing and developing \gls{IE} systems. It's crucial to have reliable indicators to ensure a continuous improvement in system performances. This chapter aims to provide definitions for the most frequently used \gls{IE} approaches, \enquote{All Occurences} and \enquote{One Best per Document} and an overview of the most important and well discussed performance metrics which will be implemented in the framework. For information about the implementation details of the scoring metrics please consult chapter \ref{sec:design} (pp. \pageref{sec:design}ff.).
 
-\newpage
 \subsection{\gls{IE} approaches}
 \label{sec:ie-approaches}
 Depending on the intended use case of the IE system, different approaches to information extraction may be useful. 
@@ -43,7 +42,6 @@ The \gls{AO} \gls{IE} task for the item \enquote*{company} for the document in f
 
 The framework, developed as part of this thesis, focuses on this approach when evaluating information extraction systems.
 
-\newpage
 \subsection{Performance measures}
 A typical way to evaluate an IE system is by using a confusion matrix. This is a well-known
 technique of counting results. Figure \ref{tab:confusion-matrix} shows a confusion matrix \cite{Sitter:2004}.
@@ -224,7 +222,6 @@ ERR removes the deweighting of D and I by simply removing the $\alpha$ weights i
 
 ERR, the error measure defined by MUC, does have one aesthetic advantage in that it is guaranteed to be between 0 and 1, while SER, the slot error rate, can become greater than 1 under certain high error conditions \cite{Makhoul:1999}.
 
-\newpage
 \subsection{Runtime performance measures}
 After discussing \gls{IE} related performance measures, this chapter focuses on important factors which allow to measure the runtime performance of a program.
 
@@ -236,6 +233,7 @@ But measuring the process CPU time is not enough. To compare the runtime perform
 
 Memory consumption can be measured as an average value, but ocassionally the peak value might be of a certain interest as well.
 
-\newpage
+\fxfatal{More content? Equations?}
+
 \subsection{Summary}
 This chapter presented and discussed the most widely used extraction and runtime performance values used to measure the overall system performance of extractors and how they relate to each other. Those values included performance measures, by name precision, recall, F-measure, error measure, error per response fill and slot error rate, as well as the runtime performance measures: CPU time and memory consumption. All of these performance measures will be integrated into the framework whose architecture, design and implementation details will be discussed in chapter \ref{sec:design} (see pp. \pageref{sec:design}ff.).
