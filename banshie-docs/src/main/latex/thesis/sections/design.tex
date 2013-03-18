@@ -31,137 +31,6 @@ Almost all of Banshie's modules are the result of applying these patterns during
 \label{fig:module-dependencies}
 \end{figure}
 
-\subsection{Technologies and patterns}
-\fxfatal{Move to modularity chapter}
-% "Relevant patterns"
-% Supporting libraries
-% Context, why is it relevant to the system?
-
-\subsubsection{Dependency Injection}
-\gls{DI} is an expression introduced by Martin Fowler in its article \textit{Inversion of Control Containers and the Dependency Injection Pattern} \cite{Fowler:2004}. Dependency Injection specifies the means for obtaining objects in such a way as to maximize reusability, testability and maintainability compared to traditional approaches such as constructors, factories, and service locators \cite{JSR330}. \gls{DI} does this by allowing a class to specify its dependencies and rely on their provision at runtime rather than retrieving them explicitly. This leaves the programmer's code clean, flexible, and relatively free of dependency-related infrastructure \cite{JSR330}.
-
-\paragraph{Guice}
-Guice is a lightweight dependency injection framework for Java \cite{Guice}. It's Open Source and available on \url{https://code.google.com/p/google-guice/}.
-
-The typical code to implement Guice is shown in the following two listings. The first shows a simple \textit{Module}. Modules in Guice are usually used to bind interfaces to concrete classes.
-
-\begin{listing}[H]
-\begin{minted}{java}
-public final class ProcessModule extends AbstractModule {
-
-    @Override 
-    protected void configure() {
-        bind(ProcessService.class).to(DefaultProcessService.class);
-    }
-
-}
-\end{minted}
-\caption{Guice module}
-\end{listing}
-
-In your classes you usually define a single constructor, annotated with \texttt{@Inject}, and all required dependencies as parameters. The construction of instances and the dependency resolution is done by Guice, no additional boilerplate code is necessary.
-
-\begin{listing}[H]
-\begin{minted}{java}
-final class DefaultEngine implements Engine {
-
-    private final ProcessService service;
-
-    @Inject
-    DefaultEngine(ProcessService service) {
-        this.service = service;
-    }
-
-}
-\end{minted}
-\caption{Constructor injection}
-\end{listing}
-
-\paragraph{Guice Extensions}
-Guice has an extensible plug-in mechanism which allows third parties to provide additional functionality. Banshie uses two official Guice extension extensively: Assisted Inject\footnote{\url{https://code.google.com/p/google-guice/wiki/AssistedInject}} and Multibindings\footnote{\url{https://code.google.com/p/google-guice/wiki/Multibinding}}. Assisted Inject allows the combination of Guice-provided dependencies and user-provided parameters on a single injection point. Multibindings supports the binding and injection of Sets and Maps.
-
-\paragraph{Peaberry}
-Guice has no native OSGi support, apart from maybe the OSGi-compatible bundle manifest. To overcome this shortcoming, Peaberry\footnote{\url{https://code.google.com/p/peaberry/}}, a third-party open-source Guice extension, offers OSGi-Guice bridge capabilities. It offers \gls{DI} of OSGi dynamic services via Guice's common injection mechanisms and provides a rich and typesafe API to deal with the OSGi service registry and lifecycle events. Listing \ref{lst:peaberry-lifecycle} shows the usage of Peaberry's lifecycle annotations.
-
-\begin{listing}[H]
-\begin{minted}{java}
-import org.ops4j.peaberry.activation.Start;
-
-public class DefaultCorpusRepository implements CorpusRepository {
-
-    private File basePath = new File("corpora");
-
-    @Start
-    public void onStart() {
-        basePath.mkdirs();
-    }
-
-}
-\end{minted}
-\caption{Peaberry lifecycle annotation}
-\label{lst:peaberry-lifecycle}
-\end{listing}
-
-Peaberry even supports the automatic \gls{DI} context creation upon bundle start by using an OSGi extender bundle. Bundles just need to provide the following bundle header to trigger an execution:
-
-\begin{listing}[H]
-\texttt{Bundle-Module: org.whiskeysierra.banshie.execution.ExecutionModule}
-\caption{Peaberry bundle header}
-\end{listing}
-
-Peaberry creates one \texttt{Injector} per bundle, any interaction between bundles is based on standard OSGi services, which allows to combine Peaberry-aware bundles and normal ones.
-
-\subsubsection{Persistence}
-Banshie's persistence layer is based on the \gls{JPA} 2.0 Standard. \gls{JPA} allows to build modules without hardcoding for a specific persistence provider or database vendor. Thus allowing to swap implementations later in the development lifecycle without the need to rewrite large portions of the code base. Banshie uses Apache OpenJPA as a \gls{JPA} provider and Apache Derby as the underlying database. Derby is a \gls{RDBMS} written in Java and is distributable as a single Jar file which can be embedded in other applications rather easily.
-
-Using \gls{JPA} in an \gls{OSGi} environment is not a straight forward task. \gls{OSGi} requires bundles to run in different and independent class loaders, while \gls{JPA} heavily relies on classpath scanning and reflection. Both techniques don't work quite well together. Because \gls{JPA}-based persistence is a common requirement, the \citetitle{OSGI:Enterprise} addressed this issue and specifies a standard way to define \textit{Persistence} and \textit{Client bundles} \cite{OSGI:Enterprise}. A persistence bundle is a bundle with the following bundle header:
-
-\begin{listing}[H]
-\texttt{Meta-Persistence: META-INF/persistence.xml}
-\caption{Persistence bundle header}
-\end{listing}
-
-A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} containers delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in the form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of the \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. To minimize common boilerplate code and manual transaction handling, all \gls{JPA} client bundles use the Guice extension \textit{Guice Persist}. Guice Persist offers AOP-interception for annotated methods as shown in the following listing:
-
-\begin{listing}[H]
-\begin{minted}{java}
-class DefaultCorpusRepository implements CorpusRepository {
-
-    private EntityManager manager() {
-        return provider.get();
-    }
-
-    @Transactional
-    @Override
-    public Corpus get(UUID uuid) {
-        return manager().find(CorpusEntity.class, uuid);
-    }
-
-}
-\end{minted}
-\caption{Guice Persist annotation}
-\end{listing}
-
-\subsubsection{Build tools}
-\paragraph{BND Tool and the Maven Bundle Plugin}
-With \gls{OSGi} you are forced to provide additional metadata in the JAR's manifest to verify the consistency of your classpath. This metadata must be closely aligned with the class files in the bundle. Maintaining this metdata is an error prone chore because many aspects are redundant. The core task of the BND Tool is to analyze the class files and find every dependency. These dependencies are then merged with instructions supplied by the user \cite{BND}. Since Banshie uses Apache Maven for building its independent modules, the natural choice was to use a Maven Plugin for this, which is provided by the Apache Felix Maven Bundle Plugin \footnote{\url{http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html}}. The following listing shows the bare minimum of configuration code to use the Maven Bundle Plugin in a POM file.
-
-\begin{listing}[H]
-\begin{minted}{xml}
-<packaging>bundle</packaging>
-...
-<build>
-    <plugins>
-        <plugin>
-            <groupId>org.apache.felix</groupId>
-            <artifactId>maven-bundle-plugin</artifactId>
-        </plugin>
-    </plugins>
-</build>
-\end{minted}
-\caption{Maven Bundle Plugin usage}
-\end{listing}
-
 \subsection{API}
 The framework's \gls{API} can be divided into three main components, which are described in detail on the following pages.
 
@@ -561,6 +430,20 @@ final class MemoryUsageCalculator implements Calculator {
 \label{lst:memory-calculator}
 \end{listing}
 
+\subsection{Implementation obstacles}
+\fxfatal{Introduction}
+
+\subsubsection{Persistence}
+Banshie's persistence layer is based on the \gls{JPA} 2.0 Standard. \gls{JPA} allows to build modules without hardcoding for a specific persistence provider or database vendor. Thus allowing to swap implementations later in the development lifecycle without the need to rewrite large portions of the code base. Banshie uses Apache OpenJPA as a \gls{JPA} provider and Apache Derby as the underlying database. Derby is a \gls{RDBMS} written in Java and is distributable as a single Jar file which can be embedded in other applications rather easily.
+
+Using \gls{JPA} in an \gls{OSGi} environment is not a straight forward task. \gls{OSGi} requires bundles to run in different and independent class loaders, while \gls{JPA} heavily relies on classpath scanning and reflection. Both techniques don't work quite well together. Because \gls{JPA}-based persistence is a common requirement, the \citetitle{OSGI:Enterprise} addressed this issue and specifies a standard way to define \textit{Persistence} and \textit{Client bundles} \cite{OSGI:Enterprise}. A persistence bundle is a bundle with the following bundle header:
+
+\begin{listing}[H]
+\texttt{Meta-Persistence: META-INF/persistence.xml}
+\caption{Persistence bundle header}
+\end{listing}
+
+A client bundle is just a bundle that makes use of the \texttt{EntityManagerFactory} provided by the corresponding persistence unit. Most \gls{OSGi} containers delegate this part of the \gls{OSGi} specification to third-party libraries and bundles. Apache Aries aims to provide portable implementations in the form of standard \gls{OSGi} bundles for those parts of the \gls{OSGi} specification. Banshie uses the JPA module of Apache Aries consisting of the \textit{Aries JPA API bundle} and the \textit{Aries JPA container bundle}. 
+
 \subsection{Summary}
 This chapter described the development of Banshie, an extensible and modular evaluation framework for information extraction systems and also showed how the findings from chapter \ref{sec:evaluation-methodology} (\nameref{sec:evaluation-methodology}) and \ref{sec:modularity} (\nameref{sec:modularity}) influenced the overall system design and fundamental architecture of the framework. Various design and implementation details have been discussed, such as the API, the extractor interface specification, the output format definition as well as the reference-hypothesis association algorithm and all relevant modules, including their respective requirements and interfaces.
-

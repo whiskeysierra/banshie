@@ -74,6 +74,114 @@ The \gls{OSGi} technology is a set of specifications that define a dynamic compo
 
 The developed framework uses Apache Felix for bundle testing purposes but aims to be \gls{OSGi} compliant and implementation independence. Apache Felix was chosen for its easy configuration and small memory footprint.
 
+\subsection{Relevant patterns}
+\subsubsection{Dependency Injection}
+\gls{DI} is an expression introduced by Martin Fowler in its article \textit{Inversion of Control Containers and the Dependency Injection Pattern} \cite{Fowler:2004}. Dependency Injection specifies the means for obtaining objects in such a way as to maximize reusability, testability and maintainability compared to traditional approaches such as constructors, factories, and service locators \cite{JSR330}. \gls{DI} does this by allowing a class to specify its dependencies and rely on their provision at runtime rather than retrieving them explicitly. This leaves the programmer's code clean, flexible, and relatively free of dependency-related infrastructure \cite{JSR330}.
+
+\fxfatal{Put into context with modularity}
+% Modularity is very concerned with dependency management, DI is a good way to embrace it
+
+\subsubsection{Single Responsibility Principle}
+\fxfatal{Content and context}
+
+\subsubsection{Dependency Inversion Principle}
+\fxfatal{Content and context}
+
+\subsection{Supporting libraries and tools}
+\fxfatal{Introduction}
+% Relation to modularity and my work!
+
+\subsubsection{Guice}
+Guice is a lightweight dependency injection framework for Java \cite{Guice}. It's Open Source and available on \url{https://code.google.com/p/google-guice/}.
+
+The typical code to implement Guice is shown in the following two listings. The first shows a simple \textit{Module}. Modules in Guice are usually used to bind interfaces to concrete classes.
+
+\begin{listing}[H]
+\begin{minted}{java}
+public final class ProcessModule extends AbstractModule {
+
+    @Override 
+    protected void configure() {
+        bind(ProcessService.class).to(DefaultProcessService.class);
+    }
+
+}
+\end{minted}
+\caption{Guice module}
+\end{listing}
+
+In your classes you usually define a single constructor, annotated with \texttt{@Inject}, and all required dependencies as parameters. The construction of instances and the dependency resolution is done by Guice, no additional boilerplate code is necessary.
+
+\begin{listing}[H]
+\begin{minted}{java}
+final class DefaultEngine implements Engine {
+
+    private final ProcessService service;
+
+    @Inject
+    DefaultEngine(ProcessService service) {
+        this.service = service;
+    }
+
+}
+\end{minted}
+\caption{Constructor injection}
+\end{listing}
+
+\subsubsection{Guice Extensions}
+Guice has an extensible plug-in mechanism which allows third parties to provide additional functionality. Banshie uses two official Guice extension extensively: Assisted Inject\footnote{\url{https://code.google.com/p/google-guice/wiki/AssistedInject}} and Multibindings\footnote{\url{https://code.google.com/p/google-guice/wiki/Multibinding}}. Assisted Inject allows the combination of Guice-provided dependencies and user-provided parameters on a single injection point. Multibindings supports the binding and injection of Sets and Maps.
+
+\paragraph{Peaberry}
+Guice has no native OSGi support, apart from maybe the OSGi-compatible bundle manifest. To overcome this shortcoming, Peaberry\footnote{\url{https://code.google.com/p/peaberry/}}, a third-party open-source Guice extension, offers OSGi-Guice bridge capabilities. It offers \gls{DI} of OSGi dynamic services via Guice's common injection mechanisms and provides a rich and typesafe API to deal with the OSGi service registry and lifecycle events. Listing \ref{lst:peaberry-lifecycle} shows the usage of Peaberry's lifecycle annotations.
+
+\begin{listing}[H]
+\begin{minted}{java}
+import org.ops4j.peaberry.activation.Start;
+
+public class DefaultCorpusRepository implements CorpusRepository {
+
+    private File basePath = new File("corpora");
+
+    @Start
+    public void onStart() {
+        basePath.mkdirs();
+    }
+
+}
+\end{minted}
+\caption{Peaberry lifecycle annotation}
+\label{lst:peaberry-lifecycle}
+\end{listing}
+
+Peaberry even supports the automatic \gls{DI} context creation upon bundle start by using an OSGi extender bundle. Bundles just need to provide the following bundle header to trigger an execution:
+
+\begin{listing}[H]
+\texttt{Bundle-Module: org.whiskeysierra.banshie.execution.ExecutionModule}
+\caption{Peaberry bundle header}
+\end{listing}
+
+Peaberry creates one \texttt{Injector} per bundle, any interaction between bundles is based on standard OSGi services, which allows to combine Peaberry-aware bundles and normal ones.
+
+\subsubsection{BND Tool and the Maven Bundle Plugin}
+With \gls{OSGi} you are forced to provide additional metadata in the JAR's manifest to verify the consistency of your classpath. This metadata must be closely aligned with the class files in the bundle. Maintaining this metdata is an error prone chore because many aspects are redundant. The core task of the BND Tool is to analyze the class files and find every dependency. These dependencies are then merged with instructions supplied by the user \cite{BND}. Since Banshie uses Apache Maven for building its independent modules, the natural choice was to use a Maven Plugin for this, which is provided by the Apache Felix Maven Bundle Plugin \footnote{\url{http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html}}. The following listing shows the bare minimum of configuration code to use the Maven Bundle Plugin in a POM file.
+
+\begin{listing}[H]
+\begin{minted}{xml}
+<packaging>bundle</packaging>
+...
+<build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.felix</groupId>
+            <artifactId>maven-bundle-plugin</artifactId>
+        </plugin>
+    </plugins>
+</build>
+\end{minted}
+\caption{Maven Bundle Plugin usage}
+\end{listing}
+
+
 \subsection{Summary}
 \gls{OSGi} is considered to be the most advanced module system for the Java platform. It supports all aspects of modularity, such as deployability, manageability, reusability and composability. Since modularity and its benefits and advantages, such as maintainability, is one of the main requirement of this work, \gls{OSGi} is the best choice as a foundation for the framework.
 
