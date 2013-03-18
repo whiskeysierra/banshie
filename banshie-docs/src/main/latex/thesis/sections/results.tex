@@ -70,7 +70,6 @@ for (Span sentences : detector.sentPosDetect(document)) {
 
 OpenNLP's \gls{NER} is primarily designed to work with sentences, but since our schema requires character offsets, some additional index counting is needed.
 
-\newpage
 Listing \ref{lst:opennlp-result} shows the extraction result produced by the adapter implementation.
 
 \begin{listing}[H]
@@ -148,7 +147,7 @@ It quickly becomes apparent that Stanford CoreNLP produces perfect extraction re
 \centering
 \begin{tabular*}{\textwidth}{rccccccccc}
 	\toprule
-	Name & $t_{cpu}$ & $m$ & $t$ & $\pi$ & $\rho$ & $F$ & $E$ & $ERR$ & $SE$ \\
+	Name & $t_{cpu}$ & $m$ & $t$ & $\pi$ & $\rho$ & $F$ & $E$ & $ERR$ & $SER$ \\
 	\midrule
 	OpenNLP & 2250.0 & 35.0 & 2001.0 & 1.0 & 0.33 & 0.5 & 0.5 & 0.66 & 0.66 \\ 
 	CoreNLP & 40990.0 & 575.0 & 44943.0 & 1.0 & 1.0 & 1.0 & 0.0 & 0.0 & 0.0 \\
