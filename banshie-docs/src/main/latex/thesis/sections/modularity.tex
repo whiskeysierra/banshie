@@ -74,22 +74,25 @@ The \gls{OSGi} technology is a set of specifications that define a dynamic compo
 
 The developed framework uses Apache Felix for bundle testing purposes but aims to be \gls{OSGi} compliant and implementation independence. Apache Felix was chosen for its easy configuration and small memory footprint.
 
-\subsection{Relevant patterns}
-\subsubsection{Dependency Injection}
-\gls{DI} is an expression introduced by Martin Fowler in its article \textit{Inversion of Control Containers and the Dependency Injection Pattern} \cite{Fowler:2004}. Dependency Injection specifies the means for obtaining objects in such a way as to maximize reusability, testability and maintainability compared to traditional approaches such as constructors, factories, and service locators \cite{JSR330}. \gls{DI} does this by allowing a class to specify its dependencies and rely on their provision at runtime rather than retrieving them explicitly. This leaves the programmer's code clean, flexible, and relatively free of dependency-related infrastructure \cite{JSR330}.
+\gls{OSGi} is considered to be the most advanced module system for the Java platform. It supports all aspects of modularity, such as deployability, manageability, reusability and composability. Since modularity and its benefits and advantages, such as maintainability, is one of the main requirement of this work, \gls{OSGi} is the best choice as a foundation for the framework. 
 
-\fxfatal{Put into context with modularity}
-% Modularity is very concerned with dependency management, DI is a good way to embrace it
+\subsection{Relevant principles and design patterns}
+Some of the most important aspects of modular software design, in the form of principles and design patterns, will be discussed on the following pages.
 
 \subsubsection{Single Responsibility Principle}
-\fxfatal{Content and context}
+The term \textit{Single Responsibility Principle} was first introduced by Robert C. Martin in his book \citetitle{Martin:2002} \cite{Martin:2002}. It states that every class should have one, and only one, responsibility. The principle is originally coined for \gls{OOD} but can easily be adapted to module design. The reason for keeping a class or module focused on a single concern is that it makes the class or module more robust, since changing a class increases the danger of other parts of it to break. Applied to concrete module design one could say that if a module is concerned with two aspects of a problem it should be separated into two different modules.
 
 \subsubsection{Dependency Inversion Principle}
-\fxfatal{Content and context}
+The \textit{Dependency Inversion Principle} again was postulated by Robert C. Martin and states that High-level modules should not depend on low-level modules. Both should depend on abstractions \cite{Martin:2002}. The problem with the traditional approach, higher-level components depending on lower-level components, limits the higher-level components reusability because the modules are too tightly coupled. The dependency inversion principle allows to increase the reusability of higher-level modules by allowing to choose from different lower-level implementations. In the context of module design it's important to depend on modules with a well-defined interface. The best way to enforce the replaceability of lower-level modules is to introduce interface modules which solely contain the \gls{API} for a component. Implementors of this interface can then be swapped during runtime. In concrete systems this usually results in \gls{API} and implementation modules. Modules should then only depend on \gls{API} modules but never on implementation modules.
+
+\subsubsection{Dependency Injection}
+\gls{DI} is way too solve the problem described by the \textit{Dependency Inversion Principle}.
+\gls{DI} is an expression introduced by Martin Fowler in its article \textit{Inversion of Control Containers and the Dependency Injection Pattern} \cite{Fowler:2004}. Dependency Injection specifies the means for obtaining objects in such a way as to maximize reusability, testability and maintainability compared to traditional approaches such as constructors, factories, and service locators \cite{JSR330}. \gls{DI} does this by allowing a class to specify its dependencies and rely on their provision at runtime rather than retrieving them explicitly. This leaves the programmer's code clean, flexible, and relatively free of dependency-related infrastructure \cite{JSR330}.
+
+The main reason why \gls{DI} works well with modularity is the fact, that it main purpose is dependency management which is also very important when designing and implementing modular systems. \gls{DI} forces clients to be honest about their dependencies instead of hiding them in implementation details, which allows clients using modules to quickly get a realistic view of what the module is supposed to do and what dependencies it requires to do so.
 
 \subsection{Supporting libraries and tools}
-\fxfatal{Introduction}
-% Relation to modularity and my work!
+There are several freely available Java libraries and build tools that solve some of the problems when designing modular software in general and for the \gls{OSGi} platform in particular. All of the libraries and tools described in this chapter will be used in the design and implementation of the framework.
 
 \subsubsection{Guice}
 Guice is a lightweight dependency injection framework for Java \cite{Guice}. It's Open Source and available on \url{https://code.google.com/p/google-guice/}.
@@ -181,8 +184,5 @@ With \gls{OSGi} you are forced to provide additional metadata in the JAR's manif
 \caption{Maven Bundle Plugin usage}
 \end{listing}
 
-
 \subsection{Summary}
-\gls{OSGi} is considered to be the most advanced module system for the Java platform. It supports all aspects of modularity, such as deployability, manageability, reusability and composability. Since modularity and its benefits and advantages, such as maintainability, is one of the main requirement of this work, \gls{OSGi} is the best choice as a foundation for the framework.
-
-\fxfatal{Relates to my work how?}
+This chapter focused on the modularity aspect of this thesis. We discussed the concept of modularity, how it relates to module design and why \gls{OSGi} is the best available module system for the Java platform at the moment. Additionally some relevant patterns, principles and libraries, which are closely related to modular software design and implementation, were described and discussed. 
