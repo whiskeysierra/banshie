@@ -1,6 +1,7 @@
 package org.whiskeysierra.banshie.example.stanford.corenlp;
 
 import com.google.common.base.Charsets;
+import com.google.common.collect.Sets;
 import com.google.common.io.CharStreams;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetBeginAnnotation;
 import edu.stanford.nlp.ling.CoreAnnotations.CharacterOffsetEndAnnotation;
@@ -19,15 +20,19 @@ import javax.xml.stream.XMLStreamWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Set;
 
 public final class Main {
 
     public static void main(String[] args) throws IOException, XMLStreamException {
         final InputStreamReader reader = new InputStreamReader(System.in, Charsets.UTF_8);
         final String document = CharStreams.toString(reader);
+
+        final Set<String> types = Sets.newHashSet("person", "organization", "date", "location");
 
         final Annotation annotation = new Annotation(document);
 
@@ -40,9 +45,10 @@ public final class Main {
         final List<CoreMap> sentences = annotation.get(SentencesAnnotation.class);
 
         final XMLOutputFactory factory = XMLOutputFactory.newInstance();
-        final XMLStreamWriter writer = factory.createXMLStreamWriter(new OutputStreamWriter(System.out, Charsets.UTF_8));
-        writer.writeStartDocument("UTF-8", "1.0");
-        writer.writeStartElement("document");
+        final Writer writer = new OutputStreamWriter(System.out, Charsets.UTF_8);
+        final XMLStreamWriter xml = factory.createXMLStreamWriter(writer);
+        xml.writeStartDocument("UTF-8", "1.0");
+        xml.writeStartElement("document");
 
         for (CoreMap sentence : sentences) {
             for (CoreLabel token : sentence.get(TokensAnnotation.class)) {
@@ -51,24 +57,24 @@ public final class Main {
                 final int start = token.get(CharacterOffsetBeginAnnotation.class);
                 final int end = token.get(CharacterOffsetEndAnnotation.class);
 
-                writer.writeCharacters(" ");
+                xml.writeCharacters(" ");
 
-                if ("o".equals(type)) {
-                    writer.writeCharacters(word);
+                if (types.contains(type)) {
+                    xml.writeStartElement("span");
+                    xml.writeAttribute("type", type);
+                    xml.writeAttribute("start", String.valueOf(start));
+                    xml.writeAttribute("end", String.valueOf(end));
+                    xml.writeCharacters(word);
+                    xml.writeEndElement();
                 } else {
-                    writer.writeStartElement("span");
-                    writer.writeAttribute("type", type);
-                    writer.writeAttribute("start", String.valueOf(start));
-                    writer.writeAttribute("end", String.valueOf(end));
-                    writer.writeCharacters(word);
-                    writer.writeEndElement();
+                    xml.writeCharacters(word);
                 }
             }
         }
 
-        writer.writeEndElement();
-        writer.writeEndDocument();
-        writer.close();
+        xml.writeEndElement();
+        xml.writeEndDocument();
+        xml.close();
     }
 
 }

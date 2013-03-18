@@ -10,12 +10,12 @@ import java.util.Map;
 
 public final class DefaultQualityEvaluatorTest {
 
-    private void run(String name) {
+    private void run(String name, String referenceName) {
         final Injector injector = Guice.createInjector(new QualityEvaluationModule());
         final QualityEvaluator unit = injector.getInstance(QualityEvaluator.class);
 
         final File resources = new File("src/test/resources");
-        final File reference = new File(resources, "reference.xml");
+        final File reference = new File(resources, referenceName);
         final File prediction = new File(resources, name);
 
         final Map<Dimension, Value> values = unit.evaluate(reference, prediction);
@@ -33,6 +33,10 @@ public final class DefaultQualityEvaluatorTest {
         System.out.println();
     }
 
+    private void run(String name) {
+        run(name, "reference.xml");
+    }
+
     @Test
     public void opennlp() {
         System.out.println("Apache OpenNLP");
@@ -43,6 +47,18 @@ public final class DefaultQualityEvaluatorTest {
     public void corenlp() {
         System.out.println("Stanford CoreNLP");
         run("corenlp.xml");
+    }
+
+    @Test
+    public void versus() {
+        System.out.println("Apache OpenNLP vs. Stanford CoreNLP");
+        run("opennlp-email.xml", "corenlp-email.xml");
+    }
+
+    @Test
+    public void versus2() {
+        System.out.println("Stanford CoreNLP vs. Apache OpenNLP");
+        run("corenlp-email.xml", "opennlp-email.xml");
     }
 
 }

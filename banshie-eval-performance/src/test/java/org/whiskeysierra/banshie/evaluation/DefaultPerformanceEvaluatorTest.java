@@ -48,4 +48,17 @@ public final class DefaultPerformanceEvaluatorTest {
         run("corenlp.log");
     }
 
+    @Test
+    public void opennlpEmail() {
+        System.out.println("Apache OpenNLP: Email corpus");
+        run("opennlp-email.log");
+    }
+
+    @Test
+    public void corenlpEmail() {
+        System.out.println("Stanford CoreNLP: Email corpus");
+        run("corenlp-email.log");
+    }
+
+
 }

@@ -20,7 +20,7 @@ import java.util.UUID;
 
 public final class DefaultEngineTest {
 
-    private void run(String path) {
+    private void run(String path, String input) {
         final Injector injector = Guice.createInjector(
             new LoggingModule(),
             new EventModule(InstallMode.STANDALONE),
@@ -38,19 +38,20 @@ public final class DefaultEngineTest {
         EasyMock.expect(extractor.getPath()).andReturn(new File(path)).anyTimes();
 
         EasyMock.expect(corpus.getUuid()).andReturn(UUID.randomUUID()).anyTimes();
-        EasyMock.expect(corpus.getInput()).andReturn(new File("src/test/resources/input.txt")).anyTimes();
+        EasyMock.expect(corpus.getInput()).andReturn(new File(input)).anyTimes();
 
         EasyMock.replay(extractor, corpus);
 
-        final ExecutionResult result = unit.execute(extractor, corpus);
-
-        // TODO run assertions
+        unit.execute(extractor, corpus);
 
         EasyMock.verify(extractor, corpus);
     }
 
+    private void run(String path) {
+        run(path, "src/test/resources/input.txt");
+    }
+
     @Test
-    @Ignore
     public void echo() {
         run("src/test/resources/echo.jar");
     }
@@ -58,12 +59,15 @@ public final class DefaultEngineTest {
     @Test
     @Ignore
     public void opennlp() {
-        run("../banshie-example-opennlp/target/banshie-example-opennlp-1.0-SNAPSHOT-jar-with-dependencies.jar");
+        run("../banshie-example-opennlp/target/banshie-example-opennlp-1.0-SNAPSHOT-jar-with-dependencies.jar",
+            "../banshie-eval-quality/src/test/resources/email.txt");
     }
 
     @Test
+    @Ignore
     public void corenlp() {
-        run("../banshie-example-stanford-corenlp/target/banshie-example-stanford-corenlp-1.0-SNAPSHOT-jar-with-dependencies.jar");
+        run("../banshie-example-stanford-corenlp/target/banshie-example-stanford-corenlp-1.0-SNAPSHOT-jar-with-dependencies.jar",
+            "../banshie-eval-quality/src/test/resources/email.txt");
     }
 
 }

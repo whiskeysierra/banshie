@@ -2,6 +2,7 @@ package org.whiskeysierra.banshie.example.opennlp;
 
 import com.google.common.base.Charsets;
 import com.google.common.base.Joiner;
+import com.google.common.collect.Sets;
 import com.google.common.io.CharStreams;
 import com.google.common.io.Resources;
 import opennlp.tools.namefind.NameFinderME;
@@ -22,8 +23,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.io.Writer;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Set;
 
 public final class Main {
 
@@ -66,15 +69,18 @@ public final class Main {
         final InputStreamReader reader = new InputStreamReader(System.in, Charsets.UTF_8);
         final String document = CharStreams.toString(reader);
 
+        final Set<String> types = Sets.newHashSet("person", "organization", "date", "location");
+
         final SentenceDetector detector = getSentenceDetector();
         final Tokenizer tokenizer = getTokenizer();
         final TokenNameFinder finder = getNameFinder();
 
         final Joiner joiner = Joiner.on(' ');
         final XMLOutputFactory factory = XMLOutputFactory.newInstance();
-        final XMLStreamWriter writer = factory.createXMLStreamWriter(new OutputStreamWriter(System.out, Charsets.UTF_8));
-        writer.writeStartDocument("UTF-8", "1.0");
-        writer.writeStartElement("document");
+        final Writer writer = new OutputStreamWriter(System.out, Charsets.UTF_8);
+        final XMLStreamWriter xml = factory.createXMLStreamWriter(writer);
+        xml.writeStartDocument("UTF-8", "1.0");
+        xml.writeStartElement("document");
 
         for (Span sentences : detector.sentPosDetect(document)) {
             final String sentence = sentences.getCoveredText(document).toString();
@@ -83,7 +89,7 @@ public final class Main {
             final Span[] spans = finder.find(tokens);
 
             if (spans.length == 0) {
-                writer.writeCharacters(sentence);
+                xml.writeCharacters(sentence);
             } else {
                 final List<String> words = Arrays.asList(tokens);
 
@@ -93,29 +99,33 @@ public final class Main {
                     final String word = joiner.join(words.subList(span.getStart(), span.getEnd()));
                     final String type = span.getType();
                     final int start = sentences.getStart() + indices[span.getStart()].getStart();
-                    final int end = sentences.getStart() + indices[span.getEnd()].getEnd() - 1;
+                    final int end = sentences.getStart() + indices[span.getEnd() - 1].getEnd();
 
                     // between the end of the last and the start of this span
-                    writer.writeCharacters(joiner.join(words.subList(last, span.getStart())));
+                    xml.writeCharacters(joiner.join(words.subList(last, span.getStart())));
 
-                    writer.writeStartElement("span");
-                    writer.writeAttribute("type", type);
-                    writer.writeAttribute("start", String.valueOf(start));
-                    writer.writeAttribute("end", String.valueOf(end));
-                    writer.writeCharacters(word);
-                    writer.writeEndElement();
+                    if (types.contains(type)) {
+                        xml.writeStartElement("span");
+                        xml.writeAttribute("type", type);
+                        xml.writeAttribute("start", String.valueOf(start));
+                        xml.writeAttribute("end", String.valueOf(end));
+                        xml.writeCharacters(word);
+                        xml.writeEndElement();
+                    } else {
+                        xml.writeCharacters(word);
+                    }
 
                     last = span.getEnd();
                 }
 
                 // rest of the sentence
-                writer.writeCharacters(joiner.join(words.subList(last, words.size())));
+                xml.writeCharacters(joiner.join(words.subList(last, words.size())));
             }
         }
 
-        writer.writeEndElement();
-        writer.writeEndDocument();
-        writer.close();
+        xml.writeEndElement();
+        xml.writeEndDocument();
+        xml.close();
 
         finder.clearAdaptiveData();
     }
