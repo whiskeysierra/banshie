@@ -1,7 +1,7 @@
 JOB OPPORTUNITY
 
 The <company>Acme Corporation</company> requires the service
-of a qualified young persons to fill up the position
+of qualified young persons to fill up the following positions
 
 - <title>Chief Business Officer<title>
 - <title>Finance Manager<title>
@@ -14,7 +14,7 @@ Experience
 or in the rank of Assistent in an organization of repute.
 
 Age
-Between 24 and 35 years with excellent health
+Between 24 and 35 years with excellent health.
 
 Salary
 The <company>Acme Corporation</company> offers 80,000 per annum.

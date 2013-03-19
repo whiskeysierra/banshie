@@ -36,6 +36,8 @@ A software module is a deployable, manageable, natively reusable, composable, st
 \hfill \citeauthor{Knoernschild:2012} \cite{Knoernschild:2012}
 \end{quote}
 
+Figure \ref{fig:module} illustrates this defnition and all the individual aspects of a module \cite{Knoernschild:2012}.
+
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{module.jpeg}
@@ -43,10 +45,8 @@ A software module is a deployable, manageable, natively reusable, composable, st
 \label{fig:module}
 \end{figure}
 
-Figure \ref{fig:module} illustrates this defnition and all the individual aspects of a module \cite{Knoernschild:2012}:
-
 \subsection{OSGi}
-\gls{OSGi} is the most widely used and highly developed module system and service platform for the Java environment. This chapter aims to show why \gls{OSGi} is the best choice for building highly modular Java-based software systems as it supports all requirements of modularity defined by \citeauthor{Knoernschild:2012}\cite{Knoernschild:2012}.
+\gls{OSGi} is the most widely used and highly developed module system and service platform for the Java environment. This chapter aims to show why \gls{OSGi} is the best choice for building highly modular Java-based software systems as it supports all requirements of modularity defined by \citeauthor{Knoernschild:2012} \cite{Knoernschild:2012}.
 
 The \gls{OSGi} technology is a set of specifications that define a dynamic component system for Java. These specifications enable a development model where applications are dynamically composed of many different reusable components. The \gls{OSGi} specifications enable modules to hide their implementations from other modules while communicating through services, which are objects that are specifically shared between modules. This surprisingly simple model has far reaching effects for almost any aspect of the software development process \cite{OSGi}. In \gls{OSGi} parlance, a module is known as a bundle. \gls{OSGi} provides a framework for managing bundles that are packaged as regular Java JAR files with an accompanying manifest. The manifest contains important metadata that describes the bundles and its dependencies to the \gls{OSGi} framework \cite{Knoernschild:2012}. Figure \ref{fig:layering-osgi} shows the layered model architecture of the \gls{OSGi} service platform.
 
@@ -78,7 +78,7 @@ The developed framework uses Apache Felix for bundle testing purposes but aims t
 
 \subsection{Relevant principles and design patterns}
 \label{sec:patterns}
-Some of the most important aspects of modular software design, in the form of principles and design patterns, will be discussed on the following pages. The findings derived from these patterns influenced the way the framework was designed and implemented.
+Some of the most important aspects of modular software design, in the form of principles and design patterns, will be discussed on the following pages. The findings derived from these patterns influenced the way the framework was designed and implemented, as shown in chapter \ref{sec:design} (pp. \pageref{sec:design}ff).
 
 \subsubsection{Single Responsibility Principle}
 The term \textit{Single Responsibility Principle} was first introduced by Robert C. Martin in his book \citetitle{Martin:2002} \cite{Martin:2002}. It states that every class should have one, and only one, responsibility. The principle is originally coined for \gls{OOD} but can easily be adapted to module design. The reason for keeping a class or module focused on a single concern is that it makes the class or module more robust, since changing a class increases the danger of other parts of it to break. Applied to concrete module design one could say that if a module is concerned with two aspects of a problem it should be separated into two different modules. 

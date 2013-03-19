@@ -1,4 +1,4 @@
-\section{Formal evaluation methodology}
+f\section{Formal evaluation methodology}
 \label{sec:evaluation-methodology}
 
 In the previous chapter the field of information extraction was presented. The process of IE does not only require the extraction itself, but also needs to evaluate the relevance of localized facts for the respective domain. Thus, a quality assessment is required, which focuses on the advancement of development and the juxtaposition of approaches. The evaluation is the formulation of new problems which have to be integrated into the development \cite{Linsmayr:2010}. The methodology of the evaluation is described in this chapter.
@@ -139,7 +139,7 @@ The \textit{F-measure} (F), or  balanced F-score or $\textit{F}_\textit{1}$ scor
 \caption{F-measure formula}
 \end{figure}
 
-Figure \ref{fig:fbeta-score} shows the more general formula of $\textit{F}_\beta$-score, which contains a parameter $\beta$ to control the balance between \textit{precision} and \textit{recall}. When $\beta$ = 1, $\textit{F}_\textit{1}$ comes to be equivalent to the harmonic mean of $\pi$ and $\rho$. If $\beta$ > 1, F becomes more recall-oriented and if $\beta$ < 1, it becomes more precisionoriented \cite{Sasaki:2007}.
+Figure \ref{fig:fbeta-score} shows the more general formula of $F_\beta$-score, which contains a parameter $\beta$ to control the balance between \textit{precision} and \textit{recall}. When $\beta$ = 1, $F_1$ comes to be equivalent to the harmonic mean of $\pi$ and $\rho$. If $\beta > 1$, $F$ becomes more recall-oriented and if $\beta < 1$, it becomes more precision-oriented \cite{Sasaki:2007}.
 
 \begin{figure}[H]
 \begin{displaymath}
@@ -151,7 +151,7 @@ Figure \ref{fig:fbeta-score} shows the more general formula of $\textit{F}_\beta
 
 $\textit{F}_\beta$ measures the effectiveness of retrieval with respect to a user who attaches $\beta$ times as much importance to recall as precision \cite{Rijsbergen:1979}.
 
-Another commonly used formula for the F-measure is shown in \ref{fig:falpha-score}. In contrast to Rijsbergen's formula, the balance parameter $\alpha$ is balanced when it's set to 0.5.
+Another commonly used formula for the F-measure is shown in figure \ref{fig:falpha-score}. In contrast to Rijsbergen's $F_\beta$-score formula, the balance parameter $\alpha$ is balanced when it's set to 0.5.
 
 \begin{figure}[H]
 \begin{displaymath}

@@ -115,7 +115,7 @@ The extractor can then be started using the following command: \\ \texttt{java -
 
 Since an extractor under evaluation has a single input, the test document, and a single output, the annotated hypothesis, the natural choice was to utilize standard streams, standard input (\textit{stdin}) and standard output (\textit{stdout}) respectively. The test document is passed to the extractor as plain text in UTF-8 encoding. Whether the extractor streams the document or reads it into memory as a whole is up to the extractor. The output format is \gls{XML} as defined by the schema shown in listing \ref{lst:xml-schema}.
 
-It should be explicitly stated, that this approach, in its current, form only supports single document extraction.
+It should be explicitly stated, that this approach, in its current form, only supports single document extraction.
 
 \begin{listing}[H]
 \inputminted{xml}{../../../../../banshie-api/src/main/resources/schema.xsd}
@@ -145,7 +145,7 @@ The attributes \texttt{start} and \texttt{end} define the UTF-8 character offset
 \subsubsection{Engine}
 The \textit{Engine} interface offers a single facade to executing an \texttt{Extractor} against a supplied \texttt{Corpus}. It's the Engine's responsibility to provide an independent and isolated execution environment for extractors, to manage process creation and lifecycle and collect and persist runtime events.
 
-After an initial design draft, it was clear, that the Engine implementation will be too big for a single module. So the engine implementation was split up into multiple smaller, more maintainable modules using the module development patterns, defined by \citeauthor{Knoernschild:2012}\cite{Knoernschild:2012} and discussed in chapter \ref{sec:modularity}. The engine's submodules are described in the following chapters.
+After an initial design draft, it was clear, that the Engine implementation will be too big for a single module. So the engine implementation was split up into multiple smaller, more maintainable modules using the module development patterns, defined by \citeauthor{Knoernschild:2012} \cite{Knoernschild:2012} and discussed in chapter \ref{sec:modularity}. The engine's submodules are described in the following chapters.
 
 \begin{figure}[H]
 \centering

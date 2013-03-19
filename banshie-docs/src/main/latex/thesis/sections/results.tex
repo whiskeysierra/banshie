@@ -89,7 +89,7 @@ The discrepancy between CPU and execution time is based on the fact that there i
 As shown in listing \ref{lst:opennlp-eval-result}, OpenNLP only required about 2.25 seconds CPU time and 35 megabytes of memory to perform the extraction but on the other hand it only scored a recall of .3 and a F-measure of .5, which means the OpenNLP tagger only found a third of what could have been found, according to our reference output.
 
 \subsubsection{Stanford CoreNLP}
-The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed a pipelines. It's possible to add different annotators to a pipeline which work on any document passed down the pipeline. The most common annotators are \texttt{tokenize} (tokenizing), \texttt{ssplit} (sentence splitting), \texttt{pos} (part-of-speech tagging) and \texttt{ner} (named entity recognition). The results produced by the annotators can then be retrieved by using the corresponding \texttt{get}-methods on sentence or token instances as shown in listing \ref{lst:corenlp-adapter}.
+The \gls{API} provided by Stanford CoreNLP is different from Apache OpenNLP as it is designed around a pipeline. It's possible to add different annotators to a pipeline which work on any document passed down the pipeline. The most common annotators are \texttt{tokenize} (tokenizing), \texttt{ssplit} (sentence splitting), \texttt{pos} (part-of-speech tagging) and \texttt{ner} (named entity recognition). The results produced by the annotators can then be retrieved by using the corresponding \texttt{get}-methods on sentence or token instances as shown in listing \ref{lst:corenlp-adapter}.
 
 \begin{listing}[H]
 \begin{minted}{java}
