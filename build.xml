@@ -27,22 +27,22 @@
             <param name="bundle" value="banshie-echo"/>
         </antcall>
         <antcall target="build">
+            <param name="bundle" value="banshie-event-api"/>
+        </antcall>
+        <antcall target="build">
             <param name="bundle" value="banshie-eval-performance"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-eval-quality"/>
         </antcall>
         <antcall target="build">
-            <param name="bundle" value="banshie-event-api"/>
-        </antcall>
-        <antcall target="build">
             <param name="bundle" value="banshie-logging-api"/>
         </antcall>
         <antcall target="build">
-            <param name="bundle" value="banshie-event-impl"/>
+            <param name="bundle" value="banshie-logging-impl"/>
         </antcall>
         <antcall target="build">
-            <param name="bundle" value="banshie-logging-impl"/>
+            <param name="bundle" value="banshie-event-impl"/>
         </antcall>
         <antcall target="build">
             <param name="bundle" value="banshie-monitor-api"/>

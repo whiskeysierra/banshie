@@ -4,6 +4,7 @@ import com.google.common.collect.ImmutableMap;
 import com.google.inject.util.Providers;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.File;
@@ -36,24 +37,28 @@ public final class DefaultPerformanceEvaluatorTest {
         System.out.println();
     }
 
+    @Ignore
     @Test
     public void opennlp() {
         System.out.println("Apache OpenNLP");
         run("opennlp.log");
     }
 
+    @Ignore
     @Test
     public void corenlp() {
         System.out.println("Stanford CoreNLP");
         run("corenlp.log");
     }
 
+    @Ignore
     @Test
     public void opennlpEmail() {
         System.out.println("Apache OpenNLP: Email corpus");
         run("opennlp-email.log");
     }
 
+    @Ignore
     @Test
     public void corenlpEmail() {
         System.out.println("Stanford CoreNLP: Email corpus");
