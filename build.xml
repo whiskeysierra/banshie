@@ -68,9 +68,11 @@
         <antcall target="build">
             <param name="bundle" value="banshie-main"/>
         </antcall>
+        <!-- disabled until available in central
         <antcall target="build">
             <param name="bundle" value="banshie-example-lingpipe"/>
         </antcall>
+        -->
         <antcall target="build">
             <param name="bundle" value="banshie-example-opennlp"/>
         </antcall>
